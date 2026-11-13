@@ -1,0 +1,32 @@
+// Cloudflare Worker config. Docs: https://developers.cloudflare.com/workers/wrangler/configuration/
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  // Worker name in the Cloudflare dashboard.
+  "name": "mhdgc-org",
+  // Pins Workers runtime behaviour to this date. Bump deliberately, not automatically.
+  "compatibility_date": "2026-11-12",
+  // Handles /api/*, then hands anything else that isn't a static file to React Router.
+  "main": "./worker/index.ts",
+  "upload_source_maps": true,
+  // Static assets: the Vite client build, including every prerendered page. The
+  // Cloudflare Vite plugin fills in the directory at build time.
+  "assets": {
+    // Prerendered pages are written as about/index.html. Serve them at /about,
+    // and redirect /about/ there, so each page has one URL without a trailing slash.
+    "html_handling": "drop-trailing-slash",
+    // Paths that match a file are served without running the Worker (free and fast).
+    // Paths that match nothing go to the Worker, which renders the 404 page with a 404 status.
+    "not_found_handling": "none",
+    // API paths always run the Worker first.
+    "run_worker_first": ["/api/*"],
+  },
+  // Request logs and metrics in the dashboard (Workers > mhdgc-org > Observability).
+  "observability": { "enabled": true },
+  // No public workers.dev URL. Custom domains are added at launch (#23, #24).
+  "workers_dev": false,
+  // Non-secret config, available on `env` in the Worker. Secrets go in .dev.vars
+  // locally and `wrangler secret put` in production.
+  "vars": {
+    "APP_ENV": "production",
+  },
+}
