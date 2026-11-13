@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+*.local
+
+# Build output
+build/
+.react-router/
+
+# Wrangler / Cloudflare local state
+.wrangler/
+
+# Local secrets. Never commit these. The .example files are the committed templates.
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
