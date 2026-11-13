@@ -18,7 +18,7 @@
     "lint": "bun run typegen && eslint .",
     "test": "vitest run",
     "storybook": "storybook dev -p 6006",
-    "prepare": "lefthook install"
+    "prepare": "if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then lefthook install; fi"
   },
   "dependencies": {
     "isbot": "^5.2.3",
