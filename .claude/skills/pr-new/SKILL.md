@@ -9,7 +9,7 @@ Open a pull request for the current branch. Arguments: `$ARGUMENTS` (optional). 
 ## Steps
 
 1. **Check the branch.** If on `main`, stop and ask which branch to create. Invoking this skill authorizes committing work relevant to the current task on a feature branch (including an issue-specific branch), without asking again. Inspect all staged, unstaged and untracked changes first. If unrelated changes are present, show them and ask what to do with them before committing. Never commit directly on `main`.
-2. **Check it builds.** Run `bun run format:check`, `bun run lint`, `bun run typecheck` and `bun run test` (skip any script `package.json` doesn't have yet, and say so). If one fails, report the failure and ask before opening the PR anyway.
+2. **Check it builds.** Run `bun run format:check`, `bun run lint`, `bun run typecheck` and `bun run test`. If one fails, report the failure and ask before opening the PR anyway.
 3. **Push.** `git fetch origin <base>`, then `git push -u origin HEAD`.
 4. **Write the title and body** from `git log origin/<base>..HEAD` and `git diff origin/<base>...HEAD`:
    - Title: one imperative sentence, sentence case, no trailing period (e.g. "Cache bun install in CI and time out a hung install").

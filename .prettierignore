@@ -1,0 +1,8 @@
+# Generated files and local state
+bun.lock
+worker-configuration.d.ts
+build/
+.react-router/
+.wrangler/
+storybook-static/
+.claude/worktrees/

@@ -52,24 +52,29 @@ bun run dev
 
 Open http://localhost:5173. `vite dev` runs the Worker in **workerd**, the same runtime as production, so pages, the 404 and `/api/health` all work on one port.
 
-| Script               | What it does                                                                   |
-| -------------------- | ------------------------------------------------------------------------------ |
-| `bun run dev`        | Dev server with HMR, running the Worker in workerd                             |
-| `bun run build`      | Build the client and the Worker, then prerender every page into `build/client` |
-| `bun run preview`    | Build, then serve the production output locally in workerd (port 4173)         |
-| `bun run deploy`     | Build, then `wrangler deploy`                                                  |
-| `bun run typecheck`  | Generate Worker and route types, then `tsc -b`                                 |
-| `bun run cf-typegen` | Regenerate `worker-configuration.d.ts` after changing `wrangler.jsonc`         |
+| Script                 | What it does                                                                   |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `bun run dev`          | Dev server with HMR, running the Worker in workerd                             |
+| `bun run build`        | Build the client and the Worker, then prerender every page into `build/client` |
+| `bun run preview`      | Build, then serve the production output locally in workerd (port 4173)         |
+| `bun run deploy`       | Build, then `wrangler deploy`                                                  |
+| `bun run format`       | Format supported files with Prettier                                           |
+| `bun run format:check` | Check Prettier formatting                                                      |
+| `bun run lint`         | Generate types and run ESLint                                                  |
+| `bun run test`         | Run Node and jsdom tests with Vitest                                           |
+| `bun run storybook`    | Run component stories locally (port 6006)                                      |
+| `bun run typecheck`    | Generate Worker and route types, then `tsc -b`                                 |
+| `bun run cf-typegen`   | Regenerate `worker-configuration.d.ts` after changing `wrangler.jsonc`         |
 
 To check what would be uploaded without deploying, run `bun run build && bunx wrangler deploy --dry-run`.
 
 ## Environment variables and secrets
 
-| Kind                               | Where it lives                                                    | Committed?      |
-| ---------------------------------- | ----------------------------------------------------------------- | --------------- |
-| Non-secret Worker config           | `vars` in `wrangler.jsonc`                                        | Yes             |
-| Worker secrets (production)        | `bunx wrangler secret put NAME`, or the dashboard (type _Secret_) | No              |
-| Worker vars and secrets (local)    | `.dev.vars` (copy from `.dev.vars.example`)                       | No (gitignored) |
+| Kind                            | Where it lives                                                    | Committed?      |
+| ------------------------------- | ----------------------------------------------------------------- | --------------- |
+| Non-secret Worker config        | `vars` in `wrangler.jsonc`                                        | Yes             |
+| Worker secrets (production)     | `bunx wrangler secret put NAME`, or the dashboard (type _Secret_) | No              |
+| Worker vars and secrets (local) | `.dev.vars` (copy from `.dev.vars.example`)                       | No (gitignored) |
 
 - The Worker reads them from the `env` argument to `fetch` (see `worker/api.ts`). After adding one, run `bun run cf-typegen` so `Env` gets the new key. Give a secret a placeholder in `.dev.vars.example` too.
 - Locally, `.dev.vars` overrides `vars`. That's why `/api/health` shows `"env": "development"` locally and `"production"` once deployed. `wrangler deploy` never uploads `.dev.vars`.
