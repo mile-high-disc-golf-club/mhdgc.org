@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   checks:
     name: CI checks
@@ -21,6 +25,8 @@ jobs:
         with:
           node-version-file: .nvmrc
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
       - uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
