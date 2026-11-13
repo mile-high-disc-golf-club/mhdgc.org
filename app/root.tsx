@@ -54,7 +54,9 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  const heading = isRouteErrorResponse(error) ? `${error.status} ${error.statusText}` : 'Something went wrong'
+  const heading = isRouteErrorResponse(error)
+    ? `${error.status} ${error.statusText}`
+    : 'Something went wrong'
   return (
     <>
       <title>{pageTitle('Error')}</title>

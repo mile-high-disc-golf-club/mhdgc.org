@@ -4,7 +4,7 @@ type Handler = (request: Request, env: Env) => Response
 
 // GET handlers also answer HEAD: the runtime drops the body, and uptime
 // monitors often send HEAD.
-const routes: Record<string, { GET: Handler }> = {
+const routes: Partial<Record<string, { GET: Handler }>> = {
   '/api/health': {
     GET: (_request, env) => {
       const body: HealthResponse = {

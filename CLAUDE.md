@@ -15,16 +15,19 @@ The Mile High Disc Golf Club website: a React Router app on Cloudflare Workers, 
 
 ## Code style
 
-Tooling arrives in #2, which expands this section to match dgtags. Until then:
+Prettier and ESLint enforce most of this. Lefthook fixes and restages linted and formatted files before each commit.
 
 - Named exports only, except where a tool needs a default (route modules, `root.tsx`, config files).
-- In `app/`: `./` for the same folder, `~/` for anything further.
+- In `app/`, use `./` in the same folder and `~/` to reach elsewhere in the app. Import `components/`, `lib/`, `.server/` and `design-system/` through their `index.ts`. Inside those folders, import the file directly to avoid cycles. List re-exports by name.
 - Routes in `app/routes` keep the `loader`, `meta` and router hooks. Their markup goes in `app/pages`, which takes data as props, so stories can render it.
-- Tests sit beside the code as `*.test.ts`, or `*.test.tsx` for components.
+- Keep `app/design-system` independent of the router and other app modules. Pass data and behavior through props.
+- Use design-system color tokens and the `Text` component for type size and weight. ESLint bans palette classes and `dark:` variants in the app and raw typography classes in pages and components.
+- Put tests beside the code as `*.test.ts` for Node or `*.test.tsx` for jsdom. Render component stories with `composeStories`.
+- Put `*.stories.tsx` beside components and pages, with one story per meaningful state. Run them with `bun run storybook`.
 
 ## Before finishing
 
-Run each of these that `package.json` has:
+Run these checks:
 
 ```bash
 bun run format:check

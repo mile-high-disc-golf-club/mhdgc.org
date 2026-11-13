@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    lint:
+      priority: 1
+      glob: '*.{ts,tsx,mjs}'
+      run: bun run typegen && bun run eslint --fix --no-warn-ignored {staged_files}
+      stage_fixed: true
+    format:
+      priority: 2
+      run: bun run prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true

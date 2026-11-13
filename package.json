@@ -12,7 +12,13 @@
     "deploy": "bun run build && wrangler deploy",
     "typegen": "wrangler types && react-router typegen",
     "typecheck": "bun run typegen && tsc -b",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "bun run typegen && eslint .",
+    "test": "vitest run",
+    "storybook": "storybook dev -p 6006",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "isbot": "^5.2.3",
@@ -22,12 +28,31 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.69.1",
+    "@eslint/js": "^9",
     "@react-router/dev": "^8.5.1",
+    "@storybook/react-vite": "^10.6.5",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^24",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "eslint": "^9",
+    "eslint-import-resolver-typescript": "^4.4.5",
+    "eslint-plugin-import-x": "^4.17.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-simple-import-sort": "^14.0.0",
+    "jsdom": "^30.1.3",
+    "lefthook": "2.2.2",
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "storybook": "^10.6.5",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.72.1",
     "vite": "^8.3.8",
+    "vitest": "^5.1.0",
     "wrangler": "^4.162.0"
   }
 }

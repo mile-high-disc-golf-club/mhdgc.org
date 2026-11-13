@@ -4,6 +4,7 @@ node_modules/
 
 # Build output
 build/
+storybook-static/
 .react-router/
 
 # Wrangler / Cloudflare local state
