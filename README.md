@@ -1,6 +1,6 @@
 # mhdgc.org
 
-The Mile High Disc Golf Club website, replacing the club's Google Site. It's a React Router app on Cloudflare Workers, with every page prerendered to static HTML. Work is tracked in [GitHub issues](../../issues), with [a milestone for each phase](../../milestones).
+The Mile High Disc Golf Club website, replacing the club's Google Site. It's a React Router app on Cloudflare Workers, with every page prerendered to static HTML. Work is tracked in [GitHub issues](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues), with [a milestone for each phase](https://github.com/mile-high-disc-golf-club/mhdgc.org/milestones).
 
 ## How a request is handled
 
@@ -78,14 +78,14 @@ To check what would be uploaded without deploying, run `bun run build && bunx wr
 
 ## Deploying
 
-Deploys will run from GitHub Actions (#4). Until then, deploy by hand:
+Deploys will run from GitHub Actions ([#4](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/4)). Until then, deploy by hand:
 
 ```bash
 bunx wrangler login     # one time; opens a browser
 bun run deploy
 ```
 
-`workers_dev` is off, so the Worker has no public URL until a custom domain is added: `new.mhdgc.org` for board review (#23), then `www.mhdgc.org` at cutover (#24).
+`workers_dev` is off, so the Worker has no public URL until a custom domain is added: `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
 
 ## Why it's built this way
 
@@ -93,13 +93,13 @@ bun run deploy
 
 - **Workers with static assets, not Pages.** Cloudflare's React Router guide uses Workers with the Cloudflare Vite plugin, and new platform features ship there first. It runs on the free plan.
 - **React Router framework mode, prerendered.** The site is content that changes when someone edits it, not per visitor, so every page is rendered to HTML at build time. Crawlers and link previews get real content, and page views never run the Worker. The same routing, loaders and `meta` as dgtags carry over.
-- **SSR stays on (`ssr: true`) rather than `ssr: false`.** With a static-only build, unknown paths would get the SPA fallback with a 200, or need a hand-built `404.html`. Keeping the server build lets the Worker render the 404 with a real status. It also leaves room for pages that can't be prerendered, such as event detail pages with their own link previews (#27), without changing the setup. The cost is a larger Worker upload (about 160 KB gzipped), which only runs for 404s and the API.
+- **SSR stays on (`ssr: true`) rather than `ssr: false`.** With a static-only build, unknown paths would get the SPA fallback with a 200, or need a hand-built `404.html`. Keeping the server build lets the Worker render the 404 with a real status. It also leaves room for pages that can't be prerendered, such as event detail pages with their own link previews ([#27](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/27)), without changing the setup. The cost is a larger Worker upload (about 160 KB gzipped), which only runs for 404s and the API.
 
 ### Decisions recorded from planning
 
-- **Content lives in the repo** as Markdown and data files, changed by pull request and read at build time (#9).
-- **Events come from the club's Google Calendars.** The board keeps editing in Google Calendar, and `/api/events` reads the public ICS feeds and caches them (#16, #18).
-- **Design system copied from dgtags**, light theme only (#5, #6).
-- **The contact form stays a Google Form** for the MVP (#13), and moves to our own form later (#25).
-- **Tooling matches dgtags:** Bun, ESLint, Prettier, Vitest, Storybook and lefthook (#2).
-- **Launch is staged:** first on `new.mhdgc.org` for board review, then `www` moves over from the Google Site (#23, #24).
+- **Content lives in the repo** as Markdown and data files, changed by pull request and read at build time ([#9](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/9)).
+- **Events come from the club's Google Calendars.** The board keeps editing in Google Calendar, and `/api/events` reads the public ICS feeds and caches them ([#16](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/16), [#18](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/18)).
+- **Design system copied from dgtags**, light theme only ([#5](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/5), [#6](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/6)).
+- **The contact form stays a Google Form** for the MVP ([#13](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/13)), and moves to our own form later ([#25](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/25)).
+- **Tooling matches dgtags:** Bun, ESLint, Prettier, Vitest, Storybook and lefthook ([#2](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/2)).
+- **Launch is staged:** first on `new.mhdgc.org` for board review, then `www` moves over from the Google Site ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23), [#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
