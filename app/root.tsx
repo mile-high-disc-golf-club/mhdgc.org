@@ -59,6 +59,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     <>
       <title>{pageTitle('Error')}</title>
       <h1>{heading}</h1>
+      {/* A plain <a>, not <Link>: the router may be what broke, so a full page load is the safe way home. */}
       <p>
         Try again, or go back to the <a href="/">home page</a>.
       </p>
