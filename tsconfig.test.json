@@ -3,6 +3,13 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo"
   },
-  "include": ["app", "shared", ".react-router/types/**/*", ".storybook/vitest.setup.ts"],
+  "include": [
+    "app",
+    "shared",
+    ".react-router/types/**/*",
+    ".storybook/vitest.setup.ts",
+    ".storybook/preview.tsx",
+    ".storybook/router-decorator.tsx"
+  ],
   "exclude": [".react-router/types/+server-build.d.ts"]
 }
