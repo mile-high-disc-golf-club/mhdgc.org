@@ -12,9 +12,16 @@ const handleDocument = createRequestHandler(
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
-    if (url.pathname === '/api' || url.pathname.startsWith('/api/')) {
-      return handleApi(request, env)
+    const response =
+      url.pathname === '/api' || url.pathname.startsWith('/api/')
+        ? handleApi(request, env)
+        : await handleDocument(request)
+
+    if (url.hostname.endsWith('.workers.dev')) {
+      const previewResponse = new Response(response.body, response)
+      previewResponse.headers.set('X-Robots-Tag', 'noindex')
+      return previewResponse
     }
-    return handleDocument(request)
+    return response
   },
 } satisfies ExportedHandler<Env>

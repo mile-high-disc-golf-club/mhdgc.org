@@ -83,14 +83,14 @@ To check what would be uploaded without deploying, run `bun run build && bunx wr
 
 ## Deploying
 
-Deploys will run from GitHub Actions ([#4](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/4)). Until then, deploy by hand:
+GitHub Actions deploys pushes to `main` after CI passes, one production deploy at a time. For pull requests from this repository, it uploads a Worker version to the stable `pr-<number>` alias and updates the PR comment with the preview URL. Fork PRs run CI. To preview a fork contribution, a maintainer can review it and open a PR from a branch in this repository.
 
-```bash
-bunx wrangler login     # one time; opens a browser
-bun run deploy
-```
+Set up the [repository's Actions secrets](https://github.com/mile-high-disc-golf-club/mhdgc.org/settings/secrets/actions) before deploying:
 
-`workers_dev` is off, so the Worker has no public URL until a custom domain is added: `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
+- `CLOUDFLARE_API_TOKEN` uses **Workers Scripts → Edit** scoped to the club's Cloudflare account. To rotate it, create a replacement with the same scope, update the GitHub secret, verify a deployment, then revoke the old token. [Cloudflare API tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
+- `CLOUDFLARE_ACCOUNT_ID` holds the club's Cloudflare account ID. Update this secret and replace the token together if the Worker moves to a different account. [Find the Cloudflare account ID](https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/)
+
+Before the first PR preview, the account needs a `workers.dev` subdomain and the Worker needs a deployment with `preview_urls: true` applied. Preview responses include `X-Robots-Tag: noindex`. The production `workers.dev` route stays off. Production uses `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
 
 ## Why it's built this way
 
