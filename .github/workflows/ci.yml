@@ -20,10 +20,55 @@ jobs:
     name: CI checks
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    outputs:
+      preview: ${{ steps.preview.outputs.preview }}
     steps:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+          # A PR checks out its merge commit. Its first parent is the base branch.
+          fetch-depth: 2
+      - name: Decide on a preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        run: |
+          # `[skip deploy]` in the PR's latest commit message skips the preview for that push only.
+          # Any case, either word order, and a space, hyphen or underscore all work.
+          # HEAD^2 is the PR's head commit.
+          message=$(git log -1 --format=%B HEAD^2)
+          skip_tag='\[(skip[ _-]deploy|deploy[ _-]skip)\]'
+          shopt -s nocasematch
+          if [[ "$message" =~ $skip_tag ]]; then
+            printf 'Skipping the preview: the latest commit says %s.\n' "${BASH_REMATCH[0]}"
+            printf 'preview=false\n' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          shopt -u nocasematch
+
+          # The PR's whole diff, so a preview stays current once any commit changes the site.
+          # Without rename detection, a file moved out of the app counts by its old path too.
+          files=$(git diff --name-only --no-renames HEAD^1 HEAD)
+          site_changed=false
+          while IFS= read -r file; do
+            [[ -n "$file" ]] || continue
+            case "$file" in
+              # These never change the deployed site. Anything else does, including files added later.
+              README.md | CLAUDE.md | AGENTS.md | .claude/* | .agents/*) ;;
+              .github/workflows/ci.yml) site_changed=true ;;
+              .github/*) ;;
+              .storybook/* | *.stories.tsx | *.test.ts | *.test.tsx) ;;
+              .prettierrc.json | .prettierignore | eslint.config.mjs | lefthook.yml) ;;
+              *) site_changed=true ;;
+            esac
+            if [[ "$site_changed" == true ]]; then
+              printf 'Deploying a preview because of %s.\n' "$file"
+              break
+            fi
+          done <<< "$files"
+          if [[ "$site_changed" == false ]]; then
+            echo 'Skipping the preview: no changed file affects the site.'
+          fi
+          printf 'preview=%s\n' "$site_changed" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
@@ -59,7 +104,8 @@ jobs:
     needs: checks
     if: >-
       github.event_name == 'push' ||
-      (github.event.pull_request.head.repo.full_name == github.repository &&
+      (needs.checks.outputs.preview == 'true' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
       github.event.pull_request.user.login != 'dependabot[bot]' &&
       github.actor != 'dependabot[bot]')
     runs-on: ubuntu-latest
