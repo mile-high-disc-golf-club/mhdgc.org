@@ -23,6 +23,7 @@
   "dependencies": {
     "@fontsource-variable/oswald": "^5.3.0",
     "@fontsource-variable/outfit": "^5.3.0",
+    "@tabler/icons-react": "^3.50.0",
     "isbot": "^5.2.3",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -32,6 +33,7 @@
     "@cloudflare/vite-plugin": "^1.69.1",
     "@eslint/js": "^9",
     "@react-router/dev": "^8.5.1",
+    "@storybook/addon-a11y": "^10.6.5",
     "@storybook/react-vite": "^10.6.5",
     "@tailwindcss/vite": "^4.3.5",
     "@testing-library/dom": "^10.4.2",
@@ -52,6 +54,7 @@
     "prettier": "3.9.10",
     "prettier-plugin-tailwindcss": "0.8.1",
     "storybook": "^10.6.5",
+    "storybook-addon-pseudo-states": "10.6.5",
     "tailwindcss": "^4.3.5",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.72.1",
