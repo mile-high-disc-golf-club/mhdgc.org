@@ -21,6 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["app", "shared", ".react-router/types/**/*"],
+  "include": ["app", "shared", ".react-router/types/**/*", ".storybook/preview.tsx"],
   "exclude": [".react-router/types/+server-build.d.ts", "app/**/*.test.ts", "app/**/*.test.tsx"]
 }

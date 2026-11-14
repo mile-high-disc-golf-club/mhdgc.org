@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+/* Browsers only download a font that's used on the page. */
+@import '@fontsource-variable/outfit/wght.css';
+@import '@fontsource-variable/oswald/wght.css';
+
+/* Words in stories and tests would otherwise add classes to the production CSS. */
+@source not './**/*.{stories,test}.tsx';
+
+@plugin './design-system/theme/plugin.ts';
+
+@theme {
+  /* Colors come only from design-system/theme/colors.ts, so palette classes like bg-gray-500 don't exist. */
+  --color-*: initial;
+
+  --font-sans:
+    'Outfit Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  /* Condensed and tall, like the logo's lettering. For headings only. */
+  --font-display: 'Oswald Variable', ui-sans-serif, system-ui, sans-serif;
+}
