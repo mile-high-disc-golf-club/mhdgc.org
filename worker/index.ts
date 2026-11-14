@@ -17,6 +17,7 @@ export default {
         ? handleApi(request, env)
         : await handleDocument(request)
 
+    // The production workers.dev route is disabled, so Workers hostnames are version URLs.
     if (url.hostname.endsWith('.workers.dev')) {
       const previewResponse = new Response(response.body, response)
       previewResponse.headers.set('X-Robots-Tag', 'noindex')

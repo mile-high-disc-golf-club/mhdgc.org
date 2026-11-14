@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  BUN_VERSION: '1.4.4'
+
 concurrency:
   group: ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -26,7 +29,7 @@ jobs:
           node-version-file: .nvmrc
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: '1.4.4'
+          bun-version: ${{ env.BUN_VERSION }}
       - uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
@@ -54,7 +57,11 @@ jobs:
   deploy:
     name: Deploy to Cloudflare
     needs: checks
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    if: >-
+      github.event_name == 'push' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      github.actor != 'dependabot[bot]')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     concurrency:
@@ -71,7 +78,7 @@ jobs:
           node-version-file: .nvmrc
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: '1.4.4'
+          bun-version: ${{ env.BUN_VERSION }}
       - uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
@@ -94,9 +101,11 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler-preview.jsonl
         run: |
+          # Static assets bypass the Worker. Apply this rule only to the preview build.
           printf '\n/*\n  X-Robots-Tag: noindex\n' >> build/client/_headers
           bun run wrangler versions upload --preview-alias "pr-$PR_NUMBER"
           url=$(jq -ser '[.[] | select(.type == "version-upload") | .preview_alias_url] | last | select(type == "string" and startswith("https://"))' "$WRANGLER_OUTPUT_FILE_PATH")
+          printf 'Checking preview URL %s\n' "$url"
           curl --fail --silent --show-error --retry 5 --retry-all-errors --max-time 10 \
             --dump-header "$RUNNER_TEMP/preview-headers.txt" --output /dev/null "$url/"
           grep -qi '^x-robots-tag:.*noindex' "$RUNNER_TEMP/preview-headers.txt"
