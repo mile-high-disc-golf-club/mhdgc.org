@@ -6,8 +6,9 @@ import { Icon, Text, textLinkClasses } from '~/design-system'
 /**
  * A text link: `link` colored, medium weight and underlined, all set by the design
  * system. In a sentence, `<TextLink to="/events">see the events</TextLink>`. On its own
- * line, add `standalone` for a 44px tap target. `newTab` opens another site in a new
- * tab, and says so with an icon that screen readers read as "opens in a new tab".
+ * line, add `standalone` for a 44px tap target. `newTab` is for a link to another site,
+ * such as the club's Facebook page: it opens in a new tab and says so with an icon that
+ * screen readers read as "opens in a new tab". Links within the site leave it off.
  * Links styled as buttons, cards or rows keep their own styles.
  */
 export function TextLink({
