@@ -18,5 +18,3 @@
   /* Condensed and tall, like the logo's lettering. For headings only. */
   --font-display: 'Oswald Variable', ui-sans-serif, system-ui, sans-serif;
 }
-
-@custom-variant desktop (@media (width >= 64rem) and (pointer: fine));

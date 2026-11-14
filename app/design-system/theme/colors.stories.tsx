@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { type ColorToken, palette, themes } from './colors'
+import { luminance } from './contrast'
 
 // Black or white, whichever reads better on the color.
-function readableOn(hex: string): string {
-  const [r = 0, g = 0, b = 0] = [1, 3, 5]
-    .map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
-    .map((c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4))
-  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.18 ? '#000000' : '#ffffff'
-}
+const readableOn = (hex: string) => (luminance(hex) > 0.18 ? '#000000' : '#ffffff')
 
 const family = (name: string) =>
   [name, `${name}-hover`, `on-${name}`, `${name}-soft`, `${name}-ink`] as ColorToken[]
