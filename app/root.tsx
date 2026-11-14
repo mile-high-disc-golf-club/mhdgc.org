@@ -1,3 +1,5 @@
+import './app.css'
+
 import type { ReactNode } from 'react'
 import {
   isRouteErrorResponse,
@@ -21,7 +23,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-canvas text-ink">
         {/* Placeholder shell. The real header, nav and footer come in #8. */}
         <header>
           <a href="#main">Skip to content</a>

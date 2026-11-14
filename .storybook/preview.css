@@ -1,0 +1,4 @@
+@import '../app/app.css';
+
+/* app.css leaves stories out of the production CSS, but Storybook needs their classes. */
+@source '../app/**/*.stories.tsx';
