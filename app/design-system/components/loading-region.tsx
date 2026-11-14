@@ -35,9 +35,11 @@ export function LoadingRegion({
         className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-ink-muted"
       >
         {/* Centered in the content, but sticky to the middle of the screen, so on a
-            long, scrolled list it never leaves the view. 3rem is half its height. */}
+            long, scrolled list it never leaves the view. The offsets are half its
+            height: the lg Spinner (2.5rem), gap-3 (0.75rem) and one line of
+            Text.Body (1.5rem). Change them with any of those. */}
         {busy && (
-          <div className="sticky top-[calc(50dvh-3rem)] bottom-[calc(50dvh-3rem)] flex flex-col items-center gap-3">
+          <div className="sticky top-[calc(50dvh-2.375rem)] bottom-[calc(50dvh-2.375rem)] flex flex-col items-center gap-3">
             <Spinner size="lg" />
             <Text.Body>{label}</Text.Body>
           </div>
