@@ -24,6 +24,8 @@
   "observability": { "enabled": true },
   // No public workers.dev URL. Custom domains are added at launch (#23, #24).
   "workers_dev": false,
+  // Explicitly enable version preview URLs while the production route is off.
+  "preview_urls": true,
   // Non-secret config, available on `env` in the Worker. Secrets go in .dev.vars
   // locally and `wrangler secret put` in production.
   "vars": {

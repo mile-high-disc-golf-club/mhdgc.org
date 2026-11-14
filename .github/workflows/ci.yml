@@ -8,6 +8,9 @@ on:
 permissions:
   contents: read
 
+env:
+  BUN_VERSION: '1.4.4'
+
 concurrency:
   group: ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -26,7 +29,7 @@ jobs:
           node-version-file: .nvmrc
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: '1.4.4'
+          bun-version: ${{ env.BUN_VERSION }}
       - uses: actions/cache@v5
         with:
           path: ~/.bun/install/cache
@@ -50,3 +53,86 @@ jobs:
         run: bun run test
       - name: Build
         run: bun run build
+
+  deploy:
+    name: Deploy to Cloudflare
+    needs: checks
+    if: >-
+      github.event_name == 'push' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      github.actor != 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: cloudflare-${{ github.event.pull_request.number || 'production' }}
+      cancel-in-progress: false
+    outputs:
+      preview-url: ${{ steps.preview.outputs.url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-${{ runner.arch }}-bun-
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - name: Deploy production
+        if: github.event_name == 'push'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: bun run wrangler deploy
+      - name: Upload preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler-preview.jsonl
+        run: |
+          # Static assets bypass the Worker. Apply this rule only to the preview build.
+          printf '\n/*\n  X-Robots-Tag: noindex\n' >> build/client/_headers
+          bun run wrangler versions upload --preview-alias "pr-$PR_NUMBER"
+          url=$(jq -ser '[.[] | select(.type == "version-upload") | .preview_alias_url] | last | select(type == "string" and startswith("https://"))' "$WRANGLER_OUTPUT_FILE_PATH")
+          printf 'Checking preview URL %s\n' "$url"
+          curl --fail --silent --show-error --retry 5 --retry-all-errors --max-time 10 \
+            --dump-header "$RUNNER_TEMP/preview-headers.txt" --output /dev/null "$url/"
+          grep -qi '^x-robots-tag:.*noindex' "$RUNNER_TEMP/preview-headers.txt"
+          printf 'url=%s\n' "$url" >> "$GITHUB_OUTPUT"
+
+  preview-comment:
+    name: Update preview link
+    needs: deploy
+    if: github.event_name == 'pull_request' && needs.deploy.outputs.preview-url != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Update PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PREVIEW_URL: ${{ needs.deploy.outputs.preview-url }}
+        run: |
+          marker='<!-- cloudflare-preview -->'
+          body=$(printf '%s\n[Cloudflare preview](%s)' "$marker" "$PREVIEW_URL")
+          comment_id=$(gh api --paginate "repos/$GH_REPO/issues/$PR_NUMBER/comments" \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("<!-- cloudflare-preview -->"))) | .id' | head -n 1)
+          if [[ -n "$comment_id" ]]; then
+            gh api --method PATCH "repos/$GH_REPO/issues/comments/$comment_id" -f body="$body"
+          else
+            gh pr comment "$PR_NUMBER" --body "$body"
+          fi
