@@ -14,8 +14,10 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const menuId = useId()
   const menuButton = useRef<HTMLButtonElement>(null)
+  const nav = useRef<HTMLElement>(null)
 
   // While the menu is open, Escape closes it and puts focus back on its button.
+  // A click or tap outside the nav closes it, leaving focus where it lands.
   // Widening the window to tablet width closes it too, so narrowing it again
   // doesn't bring back a panel that's already open.
   useEffect(() => {
@@ -25,15 +27,22 @@ export function SiteHeader() {
       setOpen(false)
       menuButton.current?.focus()
     }
+    function onPointerDown(event: PointerEvent) {
+      // The menu button is inside the nav, so its own click still toggles the menu.
+      if (event.target instanceof Node && nav.current?.contains(event.target)) return
+      setOpen(false)
+    }
     // Tailwind's `md` breakpoint, where the links move into the header.
     const tablet = window.matchMedia('(min-width: 48rem)')
     function onResize() {
       if (tablet.matches) setOpen(false)
     }
     document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('pointerdown', onPointerDown)
     tablet.addEventListener('change', onResize)
     return () => {
       document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('pointerdown', onPointerDown)
       tablet.removeEventListener('change', onResize)
     }
   }, [open])
@@ -48,7 +57,7 @@ export function SiteHeader() {
             Mile High Disc Golf
           </Text>
         </Link>
-        <nav aria-label="Main">
+        <nav ref={nav} aria-label="Main">
           <div className="md:hidden">
             <IconButton
               ref={menuButton}

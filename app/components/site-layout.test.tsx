@@ -112,6 +112,21 @@ it('closes the menu on Escape and returns focus to its button', () => {
   expect(button).toHaveFocus()
 })
 
+it('closes the menu on a click outside the nav, and not on one inside it', () => {
+  render(<Desktop />)
+  const button = screen.getByRole('button', { name: 'Menu' })
+  fireEvent.click(button)
+
+  const nav = screen.getByRole('navigation', { name: 'Main' })
+  fireEvent.pointerDown(within(nav).getByRole('list'))
+  expect(button).toHaveAttribute('aria-expanded', 'true')
+
+  fireEvent.pointerDown(screen.getByRole('main'))
+  expect(button).toHaveAttribute('aria-expanded', 'false')
+  // Focus stays where the click put it, rather than jumping back to the button.
+  expect(button).not.toHaveFocus()
+})
+
 it('closes the menu when the window widens to tablet width', () => {
   render(<Desktop />)
   const button = screen.getByRole('button', { name: 'Menu' })
