@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import type { ContentImage } from '~/content'
 import { Icon, Text } from '~/design-system'
@@ -20,12 +20,20 @@ export function YouTubeEmbed({
   sizes?: string
 }) {
   const [playingId, setPlayingId] = useState<string | null>(null)
+  const playing = playingId === id
+  const playerRef = useRef<HTMLIFrameElement>(null)
+
+  // The play button disappears on click, so hand keyboard focus to the player.
+  useEffect(() => {
+    if (playing) playerRef.current?.focus()
+  }, [playing])
 
   return (
     <figure className="space-y-2">
       <div className="relative aspect-video overflow-hidden rounded-lg bg-surface">
-        {playingId === id ? (
+        {playing ? (
           <iframe
+            ref={playerRef}
             className="absolute inset-0 h-full w-full border-0"
             src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1`}
             title={title}
@@ -37,7 +45,7 @@ export function YouTubeEmbed({
           <button
             type="button"
             aria-label={`Play: ${title}`}
-            className="absolute inset-0 block min-h-11 w-full outline-offset-[-4px]"
+            className="group absolute inset-0 block min-h-11 w-full outline-offset-[-4px]"
             onClick={() => setPlayingId(id)}
           >
             <ResponsiveImage
@@ -47,7 +55,7 @@ export function YouTubeEmbed({
               className="aspect-video w-full object-cover"
             />
             <span className="absolute inset-0 flex items-center justify-center">
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-on-primary">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-on-primary group-hover:bg-primary-hover">
                 <Icon name="play" filled size="xl" />
               </span>
             </span>

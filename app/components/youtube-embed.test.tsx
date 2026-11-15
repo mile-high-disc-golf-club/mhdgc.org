@@ -25,6 +25,7 @@ test('loads only a local thumbnail before activation, then a titled privacy-enha
     'https://www.youtube-nocookie.com/embed/BYpfS7tfhNI?autoplay=1',
   )
   expect(player).toHaveAttribute('allowfullscreen')
+  expect(player).toHaveFocus()
   expect(screen.queryByRole('button')).not.toBeInTheDocument()
   expect(container.querySelector('img')).toBeNull()
   expect(screen.getByText('Mile High Classic')).toBeVisible()
