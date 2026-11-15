@@ -1,10 +1,42 @@
 import { composeStories } from '@storybook/react-vite'
-import { fireEvent, render, screen, within } from '@testing-library/react'
-import { expect, it } from 'vitest'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
+import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 
 import * as stories from './site-layout.stories'
 
 const { Desktop, HomePage, MobileMenuOpen, PrerenderedPath } = composeStories(stories)
+
+// jsdom has no matchMedia. This one starts at phone width, and `resizeTo` crosses the
+// tablet breakpoint the way widening the window would.
+let isTablet = false
+let mediaListeners: (() => void)[] = []
+function resizeTo(width: 'phone' | 'tablet') {
+  isTablet = width === 'tablet'
+  act(() => {
+    for (const listener of mediaListeners) listener()
+  })
+}
+
+beforeEach(() => {
+  isTablet = false
+  mediaListeners = []
+  vi.stubGlobal('matchMedia', (query: string) => ({
+    media: query,
+    get matches() {
+      return isTablet
+    },
+    addEventListener: (_type: string, listener: () => void) => {
+      mediaListeners.push(listener)
+    },
+    removeEventListener: (_type: string, listener: () => void) => {
+      mediaListeners = mediaListeners.filter((other) => other !== listener)
+    },
+  }))
+})
+
+afterEach(() => {
+  vi.unstubAllGlobals()
+})
 
 it('has one header, labeled main nav, main and footer', () => {
   render(<Desktop />)
@@ -78,6 +110,20 @@ it('closes the menu on Escape and returns focus to its button', () => {
   fireEvent.keyDown(document, { key: 'Escape' })
   expect(button).toHaveAttribute('aria-expanded', 'false')
   expect(button).toHaveFocus()
+})
+
+it('closes the menu when the window widens to tablet width', () => {
+  render(<Desktop />)
+  const button = screen.getByRole('button', { name: 'Menu' })
+  fireEvent.click(button)
+  expect(button).toHaveAttribute('aria-expanded', 'true')
+
+  resizeTo('tablet')
+  expect(button).toHaveAttribute('aria-expanded', 'false')
+  // Its listeners go once it's closed, so narrowing the window again leaves it closed.
+  expect(mediaListeners).toHaveLength(0)
+  resizeTo('phone')
+  expect(button).toHaveAttribute('aria-expanded', 'false')
 })
 
 it('closes the menu when a link is chosen', () => {

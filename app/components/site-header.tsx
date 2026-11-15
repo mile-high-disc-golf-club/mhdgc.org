@@ -15,7 +15,9 @@ export function SiteHeader() {
   const menuId = useId()
   const menuButton = useRef<HTMLButtonElement>(null)
 
-  // Escape closes the open menu and puts focus back on its button.
+  // While the menu is open, Escape closes it and puts focus back on its button.
+  // Widening the window to tablet width closes it too, so narrowing it again
+  // doesn't bring back a panel that's already open.
   useEffect(() => {
     if (!open) return
     function onKeyDown(event: KeyboardEvent) {
@@ -23,9 +25,16 @@ export function SiteHeader() {
       setOpen(false)
       menuButton.current?.focus()
     }
+    // Tailwind's `md` breakpoint, where the links move into the header.
+    const tablet = window.matchMedia('(min-width: 48rem)')
+    function onResize() {
+      if (tablet.matches) setOpen(false)
+    }
     document.addEventListener('keydown', onKeyDown)
+    tablet.addEventListener('change', onResize)
     return () => {
       document.removeEventListener('keydown', onKeyDown)
+      tablet.removeEventListener('change', onResize)
     }
   }, [open])
 
