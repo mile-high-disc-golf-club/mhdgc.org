@@ -18,7 +18,7 @@ The Mile High Disc Golf Club website: a React Router app on Cloudflare Workers, 
 Prettier and ESLint enforce most of this. Lefthook fixes and restages linted and formatted files before each commit.
 
 - Named exports only, except where a tool needs a default (route modules, `root.tsx`, config files).
-- In `app/`, use `./` in the same folder and `~/` to reach elsewhere in the app. Import `components/`, `lib/`, `.server/` and `design-system/` through their `index.ts`. Inside those folders, import the file directly to avoid cycles. List re-exports by name.
+- In `app/`, use `./` in the same folder and `~/` to reach elsewhere in the app. Import `brand/`, `components/`, `lib/`, `.server/` and `design-system/` through their `index.ts`. Inside those folders, import the file directly to avoid cycles. List re-exports by name.
 - Routes in `app/routes` keep the `loader`, `meta` and router hooks. Their markup goes in `app/pages`, which takes data as props, so stories can render it.
 - Keep `app/design-system` independent of the router and other app modules. Pass data and behavior through props.
 - Use design-system color tokens and the `Text` component for type size and weight. ESLint bans palette classes and `dark:` variants in the app and raw typography classes in pages and components.
