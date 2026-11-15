@@ -17,6 +17,7 @@ All of this is configured in [`wrangler.jsonc`](wrangler.jsonc):
 - **Pages are static files.** `prerender: true` in [`react-router.config.ts`](react-router.config.ts) renders every route without a parameter to HTML at build time. Static asset requests are free and unlimited, and don't run the Worker.
 - **The Worker runs only for `/api/*` and for paths that match no file.** `run_worker_first: ["/api/*"]` sends API paths to it. Anything else that matches no file (`not_found_handling: "none"`) also reaches it, and React Router's catch-all route renders the 404 page with a real 404 status.
 - **One URL per page.** `html_handling: "drop-trailing-slash"` serves `about/index.html` at `/about` and redirects `/about/` there.
+- **Old home links redirect.** `public/_redirects` sends `/home` to `/` with status 301. `/membership`, `/about` and `/events` retain their Google Sites paths. Canonical URLs (#15) must use `/` for home and no trailing slash for other pages. Facebook, Instagram, UDisc and Disc Golf Scene have not been audited for other old links.
 - **Navigating between pages doesn't run the Worker either.** `routeDiscovery: { mode: "initial" }` puts the route manifest in the page, so the browser never fetches `/__manifest`. The exception is a link to a path that doesn't exist: the catch-all route has a `loader`, so the browser fetches its `.data` file, which the Worker answers with the 404.
 
 ## Layout

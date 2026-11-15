@@ -1,5 +1,6 @@
-import { data, Link } from 'react-router'
+import { data } from 'react-router'
 
+import { NotFoundPage } from '~/pages/not-found'
 import { pageTitle } from '~/site'
 
 import type { Route } from './+types/not-found'
@@ -14,14 +15,4 @@ export function meta(): Route.MetaDescriptors {
   return [{ title: pageTitle('Page not found') }, { name: 'robots', content: 'noindex' }]
 }
 
-// The full 404 page comes in #14.
-export default function NotFoundPage() {
-  return (
-    <>
-      <h1>Page not found</h1>
-      <p>
-        That page doesn&apos;t exist. Go to the <Link to="/">home page</Link>.
-      </p>
-    </>
-  )
-}
+export default NotFoundPage
