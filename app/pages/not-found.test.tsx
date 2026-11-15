@@ -8,6 +8,7 @@ const { Default } = composeStories(stories)
 
 test('helps visitors recover from a missing page', () => {
   render(<Default />)
+  expect(screen.getByRole('list', { name: 'Main pages' })).toBeInTheDocument()
   expect(screen.getByRole('heading', { level: 1, name: 'Page not found' })).toBeInTheDocument()
   for (const [name, href] of Object.entries({
     Home: '/',
