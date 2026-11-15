@@ -15,9 +15,9 @@ request ──► Cloudflare edge
 All of this is configured in [`wrangler.jsonc`](wrangler.jsonc):
 
 - **Pages are static files.** `prerender: true` in [`react-router.config.ts`](react-router.config.ts) renders every route without a parameter to HTML at build time. Static asset requests are free and unlimited, and don't run the Worker.
-- **The Worker runs only for `/api/*` and for paths that match no file.** `run_worker_first: ["/api/*"]` sends API paths to it. Anything else that matches no file (`not_found_handling: "none"`) also reaches it, and React Router's catch-all route renders the 404 page with a real 404 status.
+- **The Worker runs only for `/api/*` and for paths that match no file (including `/robots.txt`).** `run_worker_first: ["/api/*"]` sends API paths to it. Anything else that matches no file (`not_found_handling: "none"`) also reaches it, and React Router's catch-all route renders the 404 page with a real 404 status.
 - **One URL per page.** `html_handling: "drop-trailing-slash"` serves `about/index.html` at `/about` and redirects `/about/` there.
-- **Old home links redirect.** `public/_redirects` sends `/home` and `/home/` to `/` with status 301. `/membership`, `/about` and `/events` retain their Google Sites paths. Canonical URLs (#15) must use `/` for home and no trailing slash for other pages. Facebook, Instagram, UDisc and Disc Golf Scene have not been audited for other old links.
+- **Old home links redirect.** `public/_redirects` sends `/home` and `/home/` to `/` with status 301. `/membership`, `/about` and `/events` retain their Google Sites paths. Canonical URLs use `/` for home and no trailing slash for other pages. Facebook, Instagram, UDisc and Disc Golf Scene have not been audited for other old links.
 - **Navigating between pages doesn't run the Worker either.** `routeDiscovery: { mode: "initial" }` puts the route manifest in the page, so the browser never fetches `/__manifest`. The exception is a link to a path that doesn't exist: the catch-all route has a `loader`, so the browser fetches its `.data` file, which the Worker answers with the 404.
 
 ## Layout
@@ -95,7 +95,7 @@ Set up the [repository's Actions secrets](https://github.com/mile-high-disc-golf
 
 Before the first PR preview, set up the account's `workers.dev` subdomain in Cloudflare's Workers & Pages dashboard and deploy the Worker once with `preview_urls: true`. The first successful deploy from `main` creates the Worker. PR preview uploads fail until that deployment exists. [Deployment setup tracking issue](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/4)
 
-Preview responses include `X-Robots-Tag: noindex`. The production `workers.dev` route stays off, and no domain points at the Worker yet, so a production deploy has no public URL until launch. It keeps the Worker's active version in step with `main`, and PR previews need it. Production uses `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
+Preview responses on `*.workers.dev` and `new.mhdgc.org` include `X-Robots-Tag: noindex`: `public/_headers` covers static assets and the Worker covers API and 404 responses. `/robots.txt` runs in the Worker and disallows crawling on those hosts; production allows crawling and links to `/sitemap.xml`. The sitemap is generated after prerendering from the HTML pages in the build, excluding redirects and the runtime 404. Route metadata uses content descriptions and optional `ogImage` overrides, with `/og-image.png` as the default. The production `workers.dev` route stays off, and no domain points at the Worker yet, so a production deploy has no public URL until launch. It keeps the Worker's active version in step with `main`, and PR previews need it. Production uses `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
 
 ## Editing content
 

@@ -1,0 +1,5 @@
+https://:version.:subdomain.workers.dev/*
+  X-Robots-Tag: noindex
+
+https://new.mhdgc.org/*
+  X-Robots-Tag: noindex

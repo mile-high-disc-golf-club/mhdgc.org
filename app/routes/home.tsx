@@ -1,6 +1,6 @@
 import { readImage, readPage } from '~/.server'
 import { HomePage } from '~/pages/home'
-import { pageTitle } from '~/site'
+import { pageMeta } from '~/seo'
 
 import type { Route } from './+types/home'
 
@@ -16,7 +16,7 @@ export function loader() {
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
-  return [{ title: pageTitle() }, { name: 'description', content: loaderData.welcome.description }]
+  return pageMeta('/', loaderData.welcome)
 }
 
 export default function HomeRoute({ loaderData }: Route.ComponentProps) {

@@ -1,9 +1,14 @@
-import { pageTitle } from '~/site'
+import { readPage } from '~/.server'
+import { pageMeta } from '~/seo'
 
 import type { Route } from './+types/events'
 
-export function meta(): Route.MetaDescriptors {
-  return [{ title: pageTitle('Events') }]
+export function loader() {
+  return readPage('events')
+}
+
+export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
+  return pageMeta('/events', loaderData)
 }
 
 // Placeholder. The real page comes in #19.
