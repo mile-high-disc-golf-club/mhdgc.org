@@ -106,3 +106,13 @@ These tools were chosen because Marked produces plain HTML without a client
 runtime, Zod catches malformed JSON/YAML and misspelled fields before deployment,
 and Sharp supports explicit image dimensions, orientation and both modern formats
 without a third-party service. Validate changes with the checks in `AGENTS.md`.
+
+## Video thumbnails
+
+The committed `content/images/videos/bypfs7tfhni.jpg` and
+`content/images/videos/f2dkiwxatsy.jpg` thumbnails were downloaded once from YouTube's
+`maxresdefault.jpg` endpoint for `BYpfS7tfhNI` and `F2DkIwXATsY` respectively
+(issue #10). Builds process them locally; visitors make no YouTube request until play.
+For the home page, pass `readImage('videos/bypfs7tfhni.jpg')` or
+`readImage('videos/f2dkiwxatsy.jpg')` from the loader to `YouTubeEmbed` as `thumbnail`,
+with the original case-sensitive video ID, title and caption from #10.
