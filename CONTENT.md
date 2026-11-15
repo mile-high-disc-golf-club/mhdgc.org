@@ -11,9 +11,10 @@ web editor, without installing software.
 2. Keep the `---` lines at the top. Between them, edit `title` (the page heading)
    and `description` (the search description). Quote values containing a colon,
    for example `title: "About: our club"`. Optional `ogImage` is the path of an
-   image inside `content/images/`, such as `board/jane-doe.jpg`. It will set the
-   page's link-preview image once issue #15 adds link previews; until then it has
-   no visible effect, but a wrong path still fails the checks.
+   image inside `content/images/`, such as `board/jane-doe.jpg`. It sets the
+   page's link-preview image, the picture shown when the page is shared on
+   Facebook, Slack or in a text message. Without it, the club's default image is
+   used. A wrong path fails the checks.
 3. Below the second `---`, write the page copy in Markdown. Use blank lines
    between paragraphs, `##` for sections, `###` for subsections, `**bold**`,
    `-` for list items, and `[link text](https://www.mhdgc.org)` for links.
