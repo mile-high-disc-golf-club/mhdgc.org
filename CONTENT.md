@@ -11,7 +11,9 @@ web editor, without installing software.
 2. Keep the `---` lines at the top. Between them, edit `title` (the page heading)
    and `description` (the search description). Quote values containing a colon,
    for example `title: "About: our club"`. Optional `ogImage` is the path of an
-   image inside `content/images/`, such as `board/jane-doe.jpg`, for link previews.
+   image inside `content/images/`, such as `board/jane-doe.jpg`. It will set the
+   page's link-preview image once issue #15 adds link previews; until then it has
+   no visible effect, but a wrong path still fails the checks.
 3. Below the second `---`, write the page copy in Markdown. Use blank lines
    between paragraphs, `##` for sections, `###` for subsections, `**bold**`,
    `-` for list items, and `[link text](https://www.mhdgc.org)` for links.
@@ -55,7 +57,9 @@ every build.
 
 1. Open `content/images/` on GitHub (or a folder in it, such as `board/` for
    board photos) and choose **Add file → Upload files**.
-2. Upload a JPEG, PNG, WebP or AVIF original with a simple descriptive filename.
+2. Upload a JPEG, PNG, WebP or AVIF original. Name it in lowercase with hyphens
+   instead of spaces, such as `jane-doe.jpg`: the path you write elsewhere must
+   match it exactly, capitals included.
    Keep originals here, rather than uploading pre-sized variants. Use photos the
    club has permission to publish; don't link to an external image host.
 3. Commit to the same branch as your content changes. Refer to the photo by its
