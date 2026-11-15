@@ -2,7 +2,7 @@ import { ResponsiveImage } from '~/components'
 import type { BoardMember, ContentImage } from '~/content'
 import { Prose, Text } from '~/design-system'
 
-interface AboutPageProps {
+export interface AboutPageProps {
   title: string
   html: string
   board: (Omit<BoardMember, 'photo'> & { photo?: ContentImage })[]
@@ -31,7 +31,7 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
               />
             ) : (
               <div
-                className="flex aspect-square items-center justify-center bg-primary-soft text-primary-ink"
+                className="flex aspect-square items-center justify-center bg-primary-soft"
                 aria-hidden="true"
               >
                 <Text.H1 as="span" color="primary">
@@ -43,7 +43,8 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
               </div>
             )}
             <div className="flex flex-col gap-2 p-5">
-              <Text.H2>{member.name}</Text.H2>
+              {/* An h2 under the page's h1, sized down so Contact Us stays the larger heading. */}
+              <Text.H3 as="h2">{member.name}</Text.H3>
               {member.roles.map((role) => (
                 <Text.Body key={role} color="muted">
                   {role}
