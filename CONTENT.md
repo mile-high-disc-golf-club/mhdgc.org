@@ -25,7 +25,8 @@ web editor, without installing software.
 
 The Home page reads `home.md` for its welcome, `home-activities.md` for the
 What We Do cards, and `home-involved.md` for Get Involved. Keep the activities
-as a list, with each activity name in bold. The About page also reads its Markdown;
+as a list, with each activity name in bold and its description on the next line,
+indented by two spaces; each becomes a card. The About page also reads its Markdown;
 its full copy and board display come in issue #13.
 Other placeholder routes have not yet been connected to Markdown. Adding a file
 alone doesn't create a URL: a developer must connect the page's route loader.
