@@ -1,4 +1,4 @@
-import { ResponsiveImage } from '~/components'
+import { ResponsiveImage, TextLink } from '~/components'
 import type { BoardMember, ContentImage } from '~/content'
 import { Prose, Text } from '~/design-system'
 
@@ -61,16 +61,9 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
       </ul>
       <section aria-labelledby="contact-us" className="flex flex-col gap-4">
         <Text.H2 id="contact-us">Contact Us</Text.H2>
-        <Text.Body>
-          <a
-            href={contactForm}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center"
-          >
-            <Text.Link>Open the contact form in a new tab</Text.Link>
-          </a>
-        </Text.Body>
+        <TextLink to={contactForm} standalone newTab>
+          Open the contact form
+        </TextLink>
         <iframe
           src={`${contactForm}?embedded=true`}
           title="Contact Us: Name, Email and Comment"

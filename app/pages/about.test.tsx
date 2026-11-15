@@ -16,7 +16,7 @@ test('renders the approved board in order with a placeholder for Jason', () => {
   expect(within(cards[5]).queryByRole('img')).not.toBeInTheDocument()
   expect(within(cards[10]).getByText("Member At-Large '26–Present")).toBeInTheDocument()
   expect(within(cards[10]).getByText("Board Member '14–'25")).toBeInTheDocument()
-  expect(screen.getAllByRole('img')).toHaveLength(10)
+  expect(within(screen.getByRole('list')).getAllByRole('img')).toHaveLength(10)
   expect(screen.getAllByText('Tag Master')).toHaveLength(2)
 })
 
@@ -25,7 +25,7 @@ test('provides a lazy contact embed and an accessible fallback link', () => {
   expect(screen.getByRole('heading', { name: 'Contact Us' })).toHaveAttribute('id', 'contact-us')
   const form = screen.getByTitle('Contact Us: Name, Email and Comment')
   expect(form).toHaveAttribute('loading', 'lazy')
-  const fallback = screen.getByRole('link', { name: 'Open the contact form in a new tab' })
+  const fallback = screen.getByRole('link', { name: 'Open the contact form opens in a new tab' })
   expect(fallback).toHaveAttribute('target', '_blank')
   expect(form.getAttribute('src')).toBe(`${fallback.getAttribute('href')}?embedded=true`)
 })
