@@ -19,6 +19,8 @@ export function YouTubeEmbed({
   thumbnail: ContentImage
   sizes?: string
 }) {
+  // Holds the id that was played, not a boolean, so a new `id` shows its thumbnail
+  // again instead of autoplaying a video nobody clicked.
   const [playingId, setPlayingId] = useState<string | null>(null)
   const playing = playingId === id
   const playerRef = useRef<HTMLIFrameElement>(null)
@@ -45,7 +47,7 @@ export function YouTubeEmbed({
           <button
             type="button"
             aria-label={`Play: ${title}`}
-            className="group absolute inset-0 block min-h-11 w-full outline-offset-[-4px]"
+            className="group absolute inset-0 block w-full outline-offset-[-4px]"
             onClick={() => setPlayingId(id)}
           >
             <ResponsiveImage
