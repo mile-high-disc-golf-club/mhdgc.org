@@ -7,9 +7,11 @@ import * as stories from './text.stories'
 
 const { AsElement, Danger, Heading, Lines, Numeric, UndefinedColor } = composeStories(stories)
 
-it('renders a heading preset as its heading level, in the display face', () => {
+it('renders a heading preset as its heading level, in the one font the site uses', () => {
   render(<Heading />)
-  expect(screen.getByRole('heading', { level: 1 })).toHaveClass('font-display', 'text-3xl')
+  const heading = screen.getByRole('heading', { level: 1 })
+  expect(heading).toHaveClass('text-3xl', 'font-bold')
+  expect(heading.className).not.toMatch(/\bfont-(display|serif|mono)\b/)
 })
 
 it('renders a preset as the element passed in `as`', () => {

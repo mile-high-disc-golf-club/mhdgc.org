@@ -8,8 +8,8 @@ export const proseElements = {
   // Text.Body, for paragraphs and list items.
   body: 'text-base font-normal text-ink',
   // Text.H2 and Text.H3, with room above to start a section.
-  h2: '[&_h2]:mt-4 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-ink',
-  h3: '[&_h3]:mt-2 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-ink',
+  h2: '[&_h2]:mt-4 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-ink',
+  h3: '[&_h3]:mt-2 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-ink',
   // Text.Link.
   a: '[&_a]:text-base [&_a]:font-medium [&_a]:text-link [&_a]:underline',
   strong: '[&_strong]:font-semibold',

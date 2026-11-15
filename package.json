@@ -21,7 +21,6 @@
     "prepare": "if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then lefthook install; fi"
   },
   "dependencies": {
-    "@fontsource-variable/oswald": "^5.3.0",
     "@fontsource-variable/outfit": "^5.3.0",
     "@tabler/icons-react": "^3.50.0",
     "isbot": "^5.2.3",

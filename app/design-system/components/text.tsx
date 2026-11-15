@@ -58,9 +58,6 @@ type PresetProps = {
 
 type TextProps = PresetProps & { size?: TextSize; weight?: TextWeight }
 
-// Headings use the display face, which is condensed and tall like the logo's lettering.
-const display = 'font-display'
-
 function render(
   {
     as: Element = 'p',
@@ -106,30 +103,33 @@ export function Text(props: TextProps) {
 // gets the preset's default. Prose copies these classes for rendered Markdown,
 // and prose.test.ts keeps them in step.
 Text.H1 = function H1(props: PresetProps) {
-  return render(
-    { ...props, as: props.as ?? 'h1', color: props.color ?? 'ink', size: '3xl', weight: 'bold' },
-    display,
-  )
+  return render({
+    ...props,
+    as: props.as ?? 'h1',
+    color: props.color ?? 'ink',
+    size: '3xl',
+    weight: 'bold',
+  })
 }
 
 Text.H2 = function H2(props: PresetProps) {
-  return render(
-    {
-      ...props,
-      as: props.as ?? 'h2',
-      color: props.color ?? 'ink',
-      size: '2xl',
-      weight: 'semibold',
-    },
-    display,
-  )
+  return render({
+    ...props,
+    as: props.as ?? 'h2',
+    color: props.color ?? 'ink',
+    size: '2xl',
+    weight: 'semibold',
+  })
 }
 
 Text.H3 = function H3(props: PresetProps) {
-  return render(
-    { ...props, as: props.as ?? 'h3', color: props.color ?? 'ink', size: 'xl', weight: 'semibold' },
-    display,
-  )
+  return render({
+    ...props,
+    as: props.as ?? 'h3',
+    color: props.color ?? 'ink',
+    size: 'xl',
+    weight: 'semibold',
+  })
 }
 
 Text.Body = function Body(props: PresetProps) {

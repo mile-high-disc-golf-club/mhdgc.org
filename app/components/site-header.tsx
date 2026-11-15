@@ -44,11 +44,9 @@ export function SiteHeader() {
         <Link to="/" className="flex min-h-11 items-center gap-3 rounded-lg">
           {/* The name beside it says what the link is, so the badge is decorative here. */}
           <img src={badgeUrl} alt="" width={48} height={48} className="size-12" />
-          <span className="font-display">
-            <Text as="span" size="xl" weight="semibold" color="ink">
-              Mile High Disc Golf
-            </Text>
-          </span>
+          <Text as="span" size="xl" weight="semibold" color="ink">
+            Mile High Disc Golf
+          </Text>
         </Link>
         <nav aria-label="Main">
           <div className="md:hidden">
