@@ -30,7 +30,8 @@ indented by two spaces; each becomes a card. The About page also reads its Markd
 its full copy and board display come in issue #13.
 Membership reads `membership.md` for the bag tag explainer and pools,
 `membership-join.md` for the How to Join card, and `membership-matches.md` for
-the ordered match steps and scoring note. Keep the steps as an ordered list.
+the ordered match steps and scoring note. Keep the steps as an ordered list, and
+start each step with its name in bold; the page shows that name on its own line.
 Other placeholder routes have not yet been connected to Markdown. Adding a file
 alone doesn't create a URL: a developer must connect the page's route loader.
 
