@@ -23,6 +23,8 @@ const meta = {
       ...member,
       ...(photo
         ? {
+            // The board photos are square, so one square size stands in for each.
+            // Real sizes and AVIF/WebP sources come from the build's image pipeline.
             photo: {
               src: photoSource(photo),
               width: 640,
