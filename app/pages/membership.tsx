@@ -25,7 +25,7 @@ export function MembershipPage({ membership, join, matches, tags }: MembershipPa
       <div className="grid items-start gap-6 md:grid-cols-2">
         <ResponsiveImage
           image={tags}
-          alt="Mile High Disc Golf Club numbered bag tags in different colors"
+          alt="Numbered Mile High Disc Golf Club bag tags: purple Ladies tags and green tags"
           sizes="(min-width: 768px) 480px, 100vw"
           loading="eager"
           className="rounded-lg"
@@ -34,7 +34,10 @@ export function MembershipPage({ membership, join, matches, tags }: MembershipPa
       </div>
       <section aria-labelledby="how-tag-matches-work" className="flex flex-col gap-4">
         <Text.H2 id="how-tag-matches-work">{matches.title}</Text.H2>
-        <Prose html={matches.html} />
+        {/* Puts each step's bold title on its own line, above its description. */}
+        <div className="[&_ol>li>strong:first-child]:block">
+          <Prose html={matches.html} />
+        </div>
       </section>
     </div>
   )

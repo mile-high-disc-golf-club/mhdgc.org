@@ -41,5 +41,5 @@ test('shows ordered match steps and the approved division scoring note', () => {
   expect(screen.getByText('Grand Masters Tags')).toBeInTheDocument()
   expect(screen.queryByText(/Senior/)).not.toBeInTheDocument()
   expect(screen.queryByRole('link', { name: 'UDisc' })).not.toBeInTheDocument()
-  expect(screen.getByRole('img', { name: /numbered bag tags/ })).toHaveAttribute('width', '1152')
+  expect(screen.getByRole('img', { name: /bag tags/ })).toHaveAttribute('width', '1152')
 })
