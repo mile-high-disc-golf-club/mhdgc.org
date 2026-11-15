@@ -1,0 +1,72 @@
+import { useEffect, useRef, useState } from 'react'
+
+import type { ContentImage } from '~/content'
+import { Icon, Text } from '~/design-system'
+
+import { ResponsiveImage } from './responsive-image'
+
+/** Pass a locally compiled thumbnail from readImage; no YouTube request until play. */
+export function YouTubeEmbed({
+  id,
+  title,
+  caption,
+  thumbnail,
+  sizes = '100vw',
+}: {
+  id: string
+  title: string
+  caption: string
+  thumbnail: ContentImage
+  sizes?: string
+}) {
+  // Holds the id that was played, not a boolean, so a new `id` shows its thumbnail
+  // again instead of autoplaying a video nobody clicked.
+  const [playingId, setPlayingId] = useState<string | null>(null)
+  const playing = playingId === id
+  const playerRef = useRef<HTMLIFrameElement>(null)
+
+  // The play button disappears on click, so hand keyboard focus to the player.
+  useEffect(() => {
+    if (playing) playerRef.current?.focus()
+  }, [playing])
+
+  return (
+    <figure className="space-y-2">
+      <div className="relative aspect-video overflow-hidden rounded-lg bg-surface">
+        {playing ? (
+          <iframe
+            ref={playerRef}
+            className="absolute inset-0 h-full w-full border-0"
+            src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1`}
+            title={title}
+            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
+        ) : (
+          <button
+            type="button"
+            aria-label={`Play: ${title}`}
+            className="group absolute inset-0 block w-full outline-offset-[-4px]"
+            onClick={() => setPlayingId(id)}
+          >
+            <ResponsiveImage
+              image={thumbnail}
+              alt=""
+              sizes={sizes}
+              className="aspect-video w-full object-cover"
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-on-primary group-hover:bg-primary-hover">
+                <Icon name="play" filled size="xl" />
+              </span>
+            </span>
+          </button>
+        )}
+      </div>
+      <figcaption>
+        <Text.Caption>{caption}</Text.Caption>
+      </figcaption>
+    </figure>
+  )
+}
