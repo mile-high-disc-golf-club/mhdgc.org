@@ -140,6 +140,7 @@ original through the responsive image pipeline.
 ### Board photos (#13)
 
 Copied at full resolution from https://www.mhdgc.org/about on 2026-11-15. Jason Haas has no photo, as directed in #13.
+Google Sites rotates its image URLs, so the URLs below may no longer resolve. They record the source on that date.
 
 - `joel-chirhart.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQeZRwJFaqg5GsRBmYNHBfiWQFFZ9uVl0rW4QcnhkPH87xrbJf2tobhYeFb5TQMOBC-Y_mb5VUihFg_HmBSCk7EPNS7Wx2qCC5j-orLrS19HW8CCneFdC3zfGigHsJj2O6WDLt7VON5r0MIzV79Dpv4nm_Ccd1HGauUznGTNY1BV-jgZNcULayGyLSfcVuBoyNJbIkif38gV7gKqLhdAYBcE-DdiIH7fqkK_8iooR_M=s0
 - `josh-kreutzer.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQf_4BQHWyA0GfigIJO2Q3uyrf4KcJsqxsbjjfhPvJophXTgQY67I6WjrtaOkLO-4i75Xoss7Pk03fegE2MLx4k26FMr8m8HqXHG5Mxb3DR39lc_WxVetRPjavwY_hwYMnMiKzml_lb4Y7e8Kb_pQlJO1DkQ0P6ffDZUYb_v33DRSBOnxqgRX7DgTQP1aD8=s0
