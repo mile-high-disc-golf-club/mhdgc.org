@@ -25,15 +25,54 @@ const boardSchema = z.array(
   }),
 )
 
-export async function compileContent(root: string) {
-  const data: ContentData = { pages: {}, board: [], images: {} }
-  const assets = new Map<string, Buffer>()
+type EncodedImage = { image: ContentImage; assets: [string, Buffer][] }
+
+// Encoding is the slow part of a build: AVIF and WebP at several widths for each
+// image. One `react-router build` loads the Vite config, and so this plugin,
+// several times in the same process, so encoded images are shared through
+// globalThis, keyed by the file's bytes. A changed file gets a new key.
+const encodedImages = ((
+  globalThis as { repoContentImages?: Map<string, Promise<EncodedImage>> }
+).repoContentImages ??= new Map<string, Promise<EncodedImage>>())
+
+async function encodeImage(original: Buffer): Promise<EncodedImage> {
+  const assets: [string, Buffer][] = []
   function asset(bytes: Buffer, extension: string) {
     const hash = createHash('sha256').update(bytes).digest('hex').slice(0, 16)
     const path = `/content-assets/${hash}.${extension}`
-    assets.set(path, bytes)
+    assets.push([path, bytes])
     return path
   }
+  const rotated = sharp(original).rotate()
+  // Photos fall back to JPEG; only images with transparency need PNG.
+  const fallbackFormat = (await rotated.clone().stats()).isOpaque ? 'jpeg' : 'png'
+  const { data: fallback, info } = await rotated
+    .toFormat(fallbackFormat)
+    .toBuffer({ resolveWithObject: true })
+  const image: ContentImage = {
+    src: asset(fallback, fallbackFormat === 'jpeg' ? 'jpg' : 'png'),
+    width: info.width,
+    height: info.height,
+    sources: [],
+  }
+  const widths = [
+    ...new Set([320, 640, 960, 1440, info.width].filter((width) => width <= info.width)),
+  ].sort((a, b) => a - b)
+  for (const format of ['avif', 'webp'] as const) {
+    const candidates = []
+    for (const width of widths) {
+      // From the original, so lossy formats aren't encoded twice.
+      const bytes = await rotated.clone().resize({ width }).toFormat(format).toBuffer()
+      candidates.push(`${asset(bytes, format)} ${width}w`)
+    }
+    image.sources.push({ type: `image/${format}`, srcSet: candidates.join(', ') })
+  }
+  return { image, assets }
+}
+
+export async function compileContent(root: string) {
+  const data: ContentData = { pages: {}, board: [], images: {} }
+  const assets = new Map<string, Buffer>()
   // Keys are paths relative to content/images, such as `board/jane-doe.jpg`.
   const imageFiles = (await readdir(join(root, 'images'), { recursive: true, withFileTypes: true }))
     .filter((entry) => entry.isFile())
@@ -47,30 +86,16 @@ export async function compileContent(root: string) {
     if (!/\.(jpe?g|png|webp|avif)$/i.test(file))
       throw new Error(`content/images/${file}: use JPEG, PNG, WebP or AVIF`)
     const original = await readFile(join(root, 'images', file))
-    const rotated = sharp(original).rotate()
-    // Photos fall back to JPEG; only images with transparency need PNG.
-    const fallbackFormat = (await rotated.clone().stats()).isOpaque ? 'jpeg' : 'png'
-    const { data: fallback, info } = await rotated
-      .toFormat(fallbackFormat)
-      .toBuffer({ resolveWithObject: true })
-    const image: ContentImage = {
-      src: asset(fallback, fallbackFormat === 'jpeg' ? 'jpg' : 'png'),
-      width: info.width,
-      height: info.height,
-      sources: [],
+    const key = createHash('sha256').update(original).digest('hex')
+    let encoded = encodedImages.get(key)
+    if (!encoded) {
+      encoded = encodeImage(original)
+      encodedImages.set(key, encoded)
+      // A failed encode isn't kept, so the next compile tries again.
+      encoded.catch(() => encodedImages.delete(key))
     }
-    const widths = [
-      ...new Set([320, 640, 960, 1440, info.width].filter((width) => width <= info.width)),
-    ].sort((a, b) => a - b)
-    for (const format of ['avif', 'webp'] as const) {
-      const candidates = []
-      for (const width of widths) {
-        // From the original, so lossy formats aren't encoded twice.
-        const bytes = await rotated.clone().resize({ width }).toFormat(format).toBuffer()
-        candidates.push(`${asset(bytes, format)} ${width}w`)
-      }
-      image.sources.push({ type: `image/${format}`, srcSet: candidates.join(', ') })
-    }
+    const { image, assets: imageAssets } = await encoded
+    for (const [path, bytes] of imageAssets) assets.set(path, bytes)
     data.images[file] = image
   }
   function image(name: string) {
@@ -133,9 +158,12 @@ export function contentPlugin(): Plugin {
       root = join(config.root, 'content')
       building = config.command === 'build'
     },
+    // Only a build compiles up front. Other commands, such as `react-router
+    // typegen`, compile when something loads the content or an image.
     async buildStart() {
+      if (!building) return
       const result = await compile()
-      if (building && this.environment.name === 'client')
+      if (this.environment.name === 'client')
         for (const [path, source] of result.assets)
           this.emitFile({ type: 'asset', fileName: path.slice(1), source })
     },
