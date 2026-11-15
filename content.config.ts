@@ -36,10 +36,12 @@ export async function compileContent(root: string) {
   }
   // Keys are paths relative to content/images, such as `board/jane-doe.jpg`.
   const imageFiles = (await readdir(join(root, 'images'), { recursive: true, withFileTypes: true }))
-    .filter((entry) => entry.isFile() && !entry.name.startsWith('.'))
+    .filter((entry) => entry.isFile())
     .map((entry) =>
       relative(join(root, 'images'), join(entry.parentPath, entry.name)).replaceAll(sep, '/'),
     )
+    // Skips hidden files and folders, such as .gitkeep.
+    .filter((path) => !path.split('/').some((segment) => segment.startsWith('.')))
     .sort()
   for (const file of imageFiles) {
     if (!/\.(jpe?g|png|webp|avif)$/i.test(file))
@@ -63,7 +65,8 @@ export async function compileContent(root: string) {
     for (const format of ['avif', 'webp'] as const) {
       const candidates = []
       for (const width of widths) {
-        const bytes = await sharp(fallback).resize({ width }).toFormat(format).toBuffer()
+        // From the original, so lossy formats aren't encoded twice.
+        const bytes = await rotated.clone().resize({ width }).toFormat(format).toBuffer()
         candidates.push(`${asset(bytes, format)} ${width}w`)
       }
       image.sources.push({ type: `image/${format}`, srcSet: candidates.join(', ') })
@@ -154,18 +157,20 @@ export function contentPlugin(): Plugin {
         }
       })
       server.middlewares.use((req, res, next) => {
-        if (!req.url?.startsWith('/content-assets/')) {
+        // Ignores query strings, such as a cache-busting ?t=.
+        const path = new URL(req.url ?? '/', 'http://localhost').pathname
+        if (!path.startsWith('/content-assets/')) {
           next()
           return
         }
         void compile()
           .then(({ assets }) => {
-            const bytes = assets.get(req.url ?? '')
+            const bytes = assets.get(path)
             if (!bytes) {
               next()
               return
             }
-            const extension = req.url?.split('.').pop()
+            const extension = path.split('.').pop()
             res.setHeader('Content-Type', extension === 'jpg' ? 'image/jpeg' : `image/${extension}`)
             res.end(bytes)
           })

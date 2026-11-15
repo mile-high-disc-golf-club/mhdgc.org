@@ -12,6 +12,8 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
     await mkdir(join(root, 'images', 'board'), { recursive: true })
     await mkdir(join(root, 'pages'))
     await writeFile(join(root, 'images', '.gitkeep'), '')
+    await mkdir(join(root, 'images', '.thumbs'))
+    await writeFile(join(root, 'images', '.thumbs', 'notes.txt'), '')
     await writeFile(
       join(root, 'images', 'photo.png'),
       await sharp({ create: { width: 400, height: 200, channels: 3, background: '#123456' } })
@@ -32,7 +34,7 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
         .toBuffer(),
     )
     const page =
-      '---\ntitle: Test\ndescription: Test description\nogImage: photo.png\n---\n## Section\n\n**Copy** with [link](/about).'
+      '---\ntitle: Test\ndescription: Test description\nogImage: photo.png\n---\n## Section\n\n**Copy** with [link](/about) and [query](https://example.com/?a=1&b=2).'
     const pagePath = join(root, 'pages', 'test.md')
     const boardPath = join(root, 'board.json')
     await writeFile(pagePath, page)
@@ -44,6 +46,7 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
     expect(data.pages.test.html).toContain('<h2>Section</h2>')
     expect(data.pages.test.html).toContain('<strong>Copy</strong>')
     expect(data.pages.test.html).toContain('href="/about"')
+    expect(data.pages.test.html).toContain('href="https://example.com/?a=1&amp;b=2"')
     expect(data.pages.test.ogImage).toEqual(data.images['photo.png'])
     expect(data.images['photo.png']).toMatchObject({ width: 400, height: 200 })
     // Opaque images fall back to JPEG; transparent ones keep PNG.
