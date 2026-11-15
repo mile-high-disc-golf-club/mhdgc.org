@@ -1,1 +1,67 @@
-[]
+[
+  {
+    "name": "Joel Chirhart",
+    "roles": ["President"],
+    "tenure": ["Board Member '22–Present"],
+    "photo": "board/joel-chirhart.jpg"
+  },
+  {
+    "name": "Josh Kreutzer",
+    "roles": [],
+    "tenure": ["Board Member '15–Present"],
+    "photo": "board/josh-kreutzer.jpg"
+  },
+  {
+    "name": "Jamie Simino",
+    "roles": ["Vice President", "Tag Master"],
+    "tenure": ["Board Member '17–Present"],
+    "photo": "board/jamie-simino.jpg"
+  },
+  {
+    "name": "Jeremy Nichols",
+    "roles": ["Treasurer"],
+    "tenure": ["Board Member '18–Present"],
+    "photo": "board/jeremy-nichols.jpg"
+  },
+  {
+    "name": "Mike Irwin",
+    "roles": ["Tag Master"],
+    "tenure": ["Board Member '24–Present"],
+    "photo": "board/mike-irwin.jpg"
+  },
+  {
+    "name": "Jason Haas",
+    "roles": ["Tournament Director"],
+    "tenure": ["Board Member '24–Present"]
+  },
+  {
+    "name": "Harriette Shakeri",
+    "roles": [],
+    "tenure": ["Board Member '25–Present"],
+    "photo": "board/harriette-shakeri.jpg"
+  },
+  {
+    "name": "Jim Amidon",
+    "roles": [],
+    "tenure": ["Board Member '25–Present"],
+    "photo": "board/jim-amidon.jpg"
+  },
+  {
+    "name": "Jamie Olkowski",
+    "roles": [],
+    "tenure": ["Board Member '26–Present"],
+    "photo": "board/jamie-olkowski.jpg"
+  },
+  {
+    "name": "Sabina Arroyo",
+    "roles": [],
+    "tenure": ["Board Member '26–Present"],
+    "photo": "board/sabina-arroyo.jpg"
+  },
+  {
+    "name": "Kyle Harrigan",
+    "roles": ["Tournament Director"],
+    "tenure": ["Member At-Large '26–Present", "Board Member '14–'25"],
+    "photo": "board/kyle-harrigan.jpg"
+  }
+]

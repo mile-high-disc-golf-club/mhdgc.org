@@ -136,3 +136,19 @@ same responsive image pipeline as other content images.
 `content/images/membership/bag-tags.jpg` was exported from the current Google Site
 (`https://www.mhdgc.org/membership`) for issue #12. Builds process this local
 original through the responsive image pipeline.
+
+### Board photos (#13)
+
+Copied at full resolution from https://www.mhdgc.org/about on 2026-11-15. Jason Haas has no photo, as directed in #13.
+Google Sites rotates its image URLs, so the URLs below may no longer resolve. They record the source on that date.
+
+- `joel-chirhart.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQeZRwJFaqg5GsRBmYNHBfiWQFFZ9uVl0rW4QcnhkPH87xrbJf2tobhYeFb5TQMOBC-Y_mb5VUihFg_HmBSCk7EPNS7Wx2qCC5j-orLrS19HW8CCneFdC3zfGigHsJj2O6WDLt7VON5r0MIzV79Dpv4nm_Ccd1HGauUznGTNY1BV-jgZNcULayGyLSfcVuBoyNJbIkif38gV7gKqLhdAYBcE-DdiIH7fqkK_8iooR_M=s0
+- `josh-kreutzer.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQf_4BQHWyA0GfigIJO2Q3uyrf4KcJsqxsbjjfhPvJophXTgQY67I6WjrtaOkLO-4i75Xoss7Pk03fegE2MLx4k26FMr8m8HqXHG5Mxb3DR39lc_WxVetRPjavwY_hwYMnMiKzml_lb4Y7e8Kb_pQlJO1DkQ0P6ffDZUYb_v33DRSBOnxqgRX7DgTQP1aD8=s0
+- `jamie-simino.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQebUZhZwTZisA4ilYhXWeORQNSEDjWpEIB7AYHwuSM9qyHRRNIV6SItfcyC1ndlPvN4ySUmaYvm918gkxLkqGbaQBcL-M5x-77BNHAsLyaDPVx3oXpXdVBmX8K4bn5BudX4katf9entXHTn3vjpf8UHyhSTlkQ89aw-h3MJdlssrTFS_hADLZGkpAwaLliq9Su3zwEkPsEDnSjpfB_cpT4amZ2JTnDKvYmUsCkgxf4=s0
+- `jeremy-nichols.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQdOX4QWvkjEM0b3rT4G8I7Qf4rASS-XeJHwkUZVkJ7KobfSDNJ-46puoNzJXYQMe2KKY2ioqq-ZYl4Ojij_B23ZkXA6V7yBZWTGsLDfob1MhQIUCGuVm4XLuacrE-ST6GDeILx6rUgALApsafP-6zBfXkmPzCLu9qOa6j-qGwM8TghQ3WA4yEq8GgyDVv7NUT0C4C3iINGB3c2XHKT7HzK1ylPkwte7O34RNgoh=s0
+- `mike-irwin.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQepTbeCH6G0RUvUOOIH52KKmy0cOf1NCzpC479u7j36VJBqTzP8N_U_3lhbJMzaftPjJ8LSrDMxtB3VrFpFpGlivrdbuJiHfkxFTWcKXsFqYor-QbC_oTlJ7wzu69fI_z2Exr30kC7fKRJX6H7p7uFiuZ-8Ix8AVgYRDvE4ymkotrHFYrrdNl2OQjN5RdutzWEwYNF_b_R4PEZhtxsjOFLPBQM-4Lk_kxS5yu3Nc0U=s0
+- `harriette-shakeri.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQcU3AOx0i1vI_gaGDBR240fqjJ0YsV9GI1iYb3cT8Zs7toY-eAayAUzJ9nH1T0O13C2Fk5IVrHqgYhviw52CLyT7wnUb07kcd0DosPJ2v7OCf9NmycutpaJfU4Jl6VD0JDOMF8oxgumI6qd6pY9zFnIA1yIjoIBpfKuTXEQ8gsVNkKgnmM5LQ-zBk_DK5U=s0
+- `jim-amidon.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQdDWygNhiYY0V7RYYvErBJ2MzXwY2n9XZloO2aHJnl94tx1D72UK3GI0laR-sokZ9Koqe7zXLtmYskk8jcENYxXwsTEvncL8F7MDZP3E5UIoueIz6bYQwscL53i7XQmbbovBq_M_HDlYSmVsOjKQn9MiuHbmJTA_nQjwge_onmgsTCm6v9hZh9q_ndReo5qc84E96v5OIp4wiTHjDgJVDeHWL6suF9iWff9ZBv8=s0
+- `jamie-olkowski.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQcg_ewlxiu-8MsrE-7B0w7a99dqq5YbOX2YLMQgiqRJH1QJn1c3IOj_v7u-IsxUDWCLrH0EBPNpXrEb0jtLNnIUMwuzasCwnUDEAmCsWrNbTyzVP-plUNA2JQDrXjp8QrRmcSWFU1xpKEiY72kNKK2yXPIITYqFBvws0o2xHXxTbD682Vh6-679ZUGiFVEFjit86lSlrDk7WsPSb7bkQypTLfa6cj5E02HISsT7=s0
+- `sabina-arroyo.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQcwcG8nLH4cpMj0SiqEK1Q7xdoYppUsN6FJW5Rsnl5-3HiGtwcPR5A3Ohz97uV2RTsRx1uIW4UwrfUgqZ2sDQ6lNev78kYyGqGnsmG8LXvgACx9JwVQZoRcrTeW3FhEQpHe8vB4fUD_hOa_mtxbfLKcIAhe8KwissYffkIjdXjfjzGw5Awi7DYJxlfDO25Ak0u1VXdpzZvRP17MLuUdCLydfEV8ewdVjaB8mcWt-DE=s0
+- `kyle-harrigan.jpg`: https://lh7-us.googleusercontent.com/sitesv-images-rt/APXyLQeLEiTXs-zyIoGfx1qM5EF_cRTtcNnaSGudvYSy2OpSUNqqfC_BB8kjB1G2DKWlzEbant6jzXYAFDWJNFh7ZKENLiR1rq7hSxW1RK1wcLNBS4XHiuipHEUj0Oz1ZVkdMWsGwZuhD70ai1eF1LxHxeCigZrnoChT8gzYREigd8g7mdMPptXtKxyj1TS7rgw=s0
