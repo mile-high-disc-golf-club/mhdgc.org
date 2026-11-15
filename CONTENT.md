@@ -28,6 +28,9 @@ What We Do cards, and `home-involved.md` for Get Involved. Keep the activities
 as a list, with each activity name in bold and its description on the next line,
 indented by two spaces; each becomes a card. The About page also reads its Markdown;
 its full copy and board display come in issue #13.
+Membership reads `membership.md` for the bag tag explainer and pools,
+`membership-join.md` for the How to Join card, and `membership-matches.md` for
+the ordered match steps and scoring note. Keep the steps as an ordered list.
 Other placeholder routes have not yet been connected to Markdown. Adding a file
 alone doesn't create a URL: a developer must connect the page's route loader.
 
@@ -126,3 +129,9 @@ with the original case-sensitive video ID, title and caption from #10.
 (`https://www.mhdgc.org/home`) for issue #11. It shows a basket among evergreens,
 with gondolas and mountains beyond. Builds process this local original with the
 same responsive image pipeline as other content images.
+
+## Membership tag photo
+
+`content/images/membership/bag-tags.jpg` was exported from the current Google Site
+(`https://www.mhdgc.org/membership`) for issue #12. Builds process this local
+original through the responsive image pipeline.
