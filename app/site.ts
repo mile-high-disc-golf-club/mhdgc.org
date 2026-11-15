@@ -2,6 +2,9 @@
 
 export const siteName = 'Mile High Disc Golf Club'
 
+// Canonical URLs, social cards and the sitemap use this host, whichever host serves the page.
+export const siteUrl = 'https://www.mhdgc.org'
+
 export function pageTitle(page?: string) {
   return page ? `${page} · ${siteName}` : siteName
 }

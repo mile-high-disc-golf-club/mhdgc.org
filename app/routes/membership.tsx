@@ -1,6 +1,6 @@
 import { readImage, readPage } from '~/.server'
 import { MembershipPage } from '~/pages/membership'
-import { pageTitle } from '~/site'
+import { pageMeta } from '~/seo'
 
 import type { Route } from './+types/membership'
 
@@ -14,10 +14,7 @@ export function loader() {
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
-  return [
-    { title: pageTitle(loaderData.membership.title) },
-    { name: 'description', content: loaderData.membership.description },
-  ]
+  return pageMeta('/membership', loaderData.membership)
 }
 
 export default function MembershipRoute({ loaderData }: Route.ComponentProps) {
