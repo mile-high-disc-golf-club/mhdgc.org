@@ -77,7 +77,9 @@ Follow the `pr-new` skill. It pushes, links the issue with `Closes #N` and reque
 
 ## 3. Handle the review
 
-1. Wait for the `@claude` workflow run and CI. In the desktop app, bind the PR with the PR tools and let Auto-fix wake you. Otherwise, run `gh pr checks <N> --watch` in the background.
+1. Wait for the `@claude` review and CI, each with a background command that exits when it's done. In the desktop app, also bind the PR with the PR tools so Auto-fix handles failing CI.
+   - **CI:** after every push, run `gh pr checks <N> --watch` in the background, even with Auto-fix on. Auto-fix wakes you only when CI fails, not when it passes.
+   - **The review:** the bot posts a "working" comment, then edits that same comment into the finished review. An edit doesn't wake you, so don't wait for a new comment. Find the run your `@claude` comment started (the newest `gh run list --workflow claude.yml` run that isn't skipped) and run `gh run watch <run id>` in the background. When it exits, reread the bot's comment.
 2. Follow `pr-feedback` in auto mode (`pr-feedback <N> auto`).
 3. If that pushed fixes that change behavior, comment `@claude review the latest changes` and handle that review the same way. Request at most two re-reviews after the first review. If items are still open after the second, list them and stop.
 
