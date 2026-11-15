@@ -2,7 +2,7 @@ import matter from 'gray-matter'
 import { Marked } from 'marked'
 import { createHash } from 'node:crypto'
 import { readdir, readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { join, relative, sep } from 'node:path'
 import sharp from 'sharp'
 import type { Plugin } from 'vite'
 import { z } from 'zod'
@@ -15,7 +15,15 @@ const pageSchema = z.strictObject({
   description: text,
   ogImage: text.optional(),
 })
-const boardSchema = z.array(z.strictObject({ name: text, role: text, photo: text.optional() }))
+// The fields #13 needs: roles may be empty; tenure is one or more lines.
+const boardSchema = z.array(
+  z.strictObject({
+    name: text,
+    roles: z.array(text),
+    tenure: z.array(text).min(1),
+    photo: text.optional(),
+  }),
+)
 
 export async function compileContent(root: string) {
   const data: ContentData = { pages: {}, board: [], images: {} }
@@ -26,16 +34,25 @@ export async function compileContent(root: string) {
     assets.set(path, bytes)
     return path
   }
-  for (const file of (await readdir(join(root, 'images'))).sort()) {
+  // Keys are paths relative to content/images, such as `board/jane-doe.jpg`.
+  const imageFiles = (await readdir(join(root, 'images'), { recursive: true, withFileTypes: true }))
+    .filter((entry) => entry.isFile() && !entry.name.startsWith('.'))
+    .map((entry) =>
+      relative(join(root, 'images'), join(entry.parentPath, entry.name)).replaceAll(sep, '/'),
+    )
+    .sort()
+  for (const file of imageFiles) {
     if (!/\.(jpe?g|png|webp|avif)$/i.test(file))
       throw new Error(`content/images/${file}: use JPEG, PNG, WebP or AVIF`)
     const original = await readFile(join(root, 'images', file))
-    const { data: fallback, info } = await sharp(original)
-      .rotate()
-      .png()
+    const rotated = sharp(original).rotate()
+    // Photos fall back to JPEG; only images with transparency need PNG.
+    const fallbackFormat = (await rotated.clone().stats()).isOpaque ? 'jpeg' : 'png'
+    const { data: fallback, info } = await rotated
+      .toFormat(fallbackFormat)
       .toBuffer({ resolveWithObject: true })
     const image: ContentImage = {
-      src: asset(fallback, 'png'),
+      src: asset(fallback, fallbackFormat === 'jpeg' ? 'jpg' : 'png'),
       width: info.width,
       height: info.height,
       sources: [],
@@ -149,7 +166,7 @@ export function contentPlugin(): Plugin {
               return
             }
             const extension = req.url?.split('.').pop()
-            res.setHeader('Content-Type', `image/${extension}`)
+            res.setHeader('Content-Type', extension === 'jpg' ? 'image/jpeg' : `image/${extension}`)
             res.end(bytes)
           })
           .catch(next)

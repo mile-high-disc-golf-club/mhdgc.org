@@ -1,4 +1,4 @@
-// Site-wide values shared by routes. Content moves to content files in #9.
+// Site-wide values shared by routes. Page copy and the board list live in content/ (see CONTENT.md).
 
 export const siteName = 'Mile High Disc Golf Club'
 

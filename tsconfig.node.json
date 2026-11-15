@@ -12,7 +12,9 @@
     "noEmit": true,
     "skipLibCheck": true,
     "isolatedModules": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    // Lets vite.config.ts import content.config.ts with its extension, as Node needs.
+    "allowImportingTsExtensions": true
   },
   "include": ["app/content.ts", "*.config.ts", ".storybook/**/*.ts"],
   "exclude": [".storybook/vitest.setup.ts"]

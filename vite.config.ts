@@ -3,7 +3,7 @@ import { reactRouter } from '@react-router/dev/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, type Plugin } from 'vite'
 
-import { contentPlugin } from './content.config'
+import { contentPlugin } from './content.config.ts'
 
 // Chrome requests this whenever DevTools is open. Answering here keeps React
 // Router from logging "No route matches" for it on every page load.

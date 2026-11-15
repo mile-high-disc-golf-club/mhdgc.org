@@ -12,7 +12,7 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   return [
     { title: pageTitle(loaderData.title) },
     { name: 'description', content: loaderData.description },
-    ...(loaderData.ogImage ? [{ property: 'og:image', content: loaderData.ogImage.src }] : []),
+    // Open Graph tags, with absolute URLs and the ogImage override, come in #15.
   ]
 }
 

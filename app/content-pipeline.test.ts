@@ -9,11 +9,25 @@ import { compileContent } from '../content.config'
 test('compiles local images, metadata, Markdown and board references; rejects bad edits', async () => {
   const root = await mkdtemp(join(tmpdir(), 'mhdgc-content-'))
   try {
-    await mkdir(join(root, 'images'))
+    await mkdir(join(root, 'images', 'board'), { recursive: true })
     await mkdir(join(root, 'pages'))
+    await writeFile(join(root, 'images', '.gitkeep'), '')
     await writeFile(
       join(root, 'images', 'photo.png'),
       await sharp({ create: { width: 400, height: 200, channels: 3, background: '#123456' } })
+        .png()
+        .toBuffer(),
+    )
+    await writeFile(
+      join(root, 'images', 'board', 'logo.png'),
+      await sharp({
+        create: {
+          width: 100,
+          height: 100,
+          channels: 4,
+          background: { r: 0, g: 0, b: 0, alpha: 0 },
+        },
+      })
         .png()
         .toBuffer(),
     )
@@ -22,13 +36,21 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
     const pagePath = join(root, 'pages', 'test.md')
     const boardPath = join(root, 'board.json')
     await writeFile(pagePath, page)
-    await writeFile(boardPath, '[{"name":"Test name","role":"Test role","photo":"photo.png"}]')
+    await writeFile(
+      boardPath,
+      '[{"name":"Test name","roles":[],"tenure":["Test tenure"],"photo":"board/logo.png"}]',
+    )
     const { data, assets } = await compileContent(root)
     expect(data.pages.test.html).toContain('<h2>Section</h2>')
     expect(data.pages.test.html).toContain('<strong>Copy</strong>')
     expect(data.pages.test.html).toContain('href="/about"')
     expect(data.pages.test.ogImage).toEqual(data.images['photo.png'])
     expect(data.images['photo.png']).toMatchObject({ width: 400, height: 200 })
+    // Opaque images fall back to JPEG; transparent ones keep PNG.
+    expect(data.images['photo.png'].src).toMatch(/\.jpg$/)
+    expect(data.images['board/logo.png'].src).toMatch(/\.png$/)
+    expect(Object.keys(data.images)).toEqual(['board/logo.png', 'photo.png'])
+    expect(data.board[0].photo).toBe('board/logo.png')
     expect(data.images['photo.png'].sources.map((source) => source.type)).toEqual([
       'image/avif',
       'image/webp',
@@ -40,10 +62,12 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       expect(meta.width).toBeLessThanOrEqual(400)
       expect(path).toMatch(/^\/content-assets\/[a-f0-9]{16}\./)
     }
-    await writeFile(boardPath, '[{"name":"Test","role":"Role","typo":true}]')
+    await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":["T"],"typo":true}]')
     await expect(compileContent(root)).rejects.toThrow()
-    await writeFile(boardPath, '[{"name":"Test","role":"Role","photo":"missing.png"}]')
+    await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":["T"],"photo":"missing.png"}]')
     await expect(compileContent(root)).rejects.toThrow('Unknown content image')
+    await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":[]}]')
+    await expect(compileContent(root)).rejects.toThrow()
     await writeFile(boardPath, '[]')
     for (const invalid of [
       page.replace('title: Test\n', ''),

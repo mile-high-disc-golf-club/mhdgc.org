@@ -15,7 +15,8 @@ export interface ContentPage {
 
 export interface BoardMember {
   name: string
-  role: string
+  roles: string[]
+  tenure: string[]
   photo?: string
 }
 
