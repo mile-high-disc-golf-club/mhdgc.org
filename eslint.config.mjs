@@ -9,7 +9,7 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import tseslint from 'typescript-eslint'
 
 // The barrelled folders in app. Import these folders through their public index.ts.
-const barrels = ['components', 'design-system', 'lib', '.server']
+const barrels = ['brand', 'components', 'design-system', 'lib', '.server']
 
 const noDeepImports = {
   regex: `^~/(${barrels.map((folder) => folder.replace('.', '\\.')).join('|')})/`,

@@ -12,3 +12,9 @@ export const navLinks = [
   { to: '/membership', label: 'Membership' },
   { to: '/about', label: 'About' },
 ] as const
+
+// Linked straight to the sites, not through the Google Site's redirect wrapper.
+export const socialLinks = [
+  { href: 'https://www.facebook.com/groups/mhdgc/', label: 'Facebook', icon: 'facebook' },
+  { href: 'https://www.instagram.com/mhdgc_co/', label: 'Instagram', icon: 'instagram' },
+] as const

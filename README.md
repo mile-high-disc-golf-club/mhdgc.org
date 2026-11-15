@@ -23,10 +23,12 @@ All of this is configured in [`wrangler.jsonc`](wrangler.jsonc):
 
 ```
 app/                       React Router app
-  root.tsx                 Document, site shell and error boundary
+  root.tsx                 Document, icons, site shell (components/site-layout.tsx) and error boundary
   routes.ts                Route config; every path without a parameter is prerendered
   routes/                  One module per page, plus not-found.tsx (the catch-all)
-  site.ts                  Site name, page titles and nav links
+  site.ts                  Site name, page titles, nav and social links
+  brand/                   The club's badge and wordmark SVGs, imported with hashed URLs
+public/                    Served as is at the root: favicon, touch icons, web manifest, Open Graph image
 worker/
   index.ts                 Worker entry: /api/* first, then React Router
   api.ts                   API routes
@@ -94,6 +96,18 @@ Before the first PR preview, set up the account's `workers.dev` subdomain in Clo
 
 Preview responses include `X-Robots-Tag: noindex`. The production `workers.dev` route stays off, and no domain points at the Worker yet, so a production deploy has no public URL until launch. It keeps the Worker's active version in step with `main`, and PR previews need it. Production uses `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
 
+## Brand assets
+
+The logos come from the board's logo suite (`DIGITAL/MHDGC_Logos_RGB/SVG`), run through [svgo](https://svgo.dev/) with `--multipass -p 2`:
+
+| File                     | Source                                                         |
+| ------------------------ | -------------------------------------------------------------- |
+| `app/brand/badge.svg`    | `Badge/MHDGC_Badge_FC_rgb.svg`, the header and footer badge    |
+| `app/brand/wordmark.svg` | `Wordmark/MileHigh_Wordmark_2C_Blue_rgb.svg`                   |
+| `public/favicon.svg`     | `Mini Badge/MHDGC_MiniBadge_FC_rgb.svg`, drawn for small sizes |
+
+The PNG and ICO icons were rendered from those SVGs with [sharp](https://sharp.pixelplumbing.com/): the mini badge for `favicon.ico` (16, 32 and 48px), `apple-touch-icon.png` (180, on white), `icon-192.png`, `icon-512.png` and `icon-maskable-512.png` (on white, inside the safe zone), and the wordmark on white for `og-image.png` (1200×630). They're committed, so building the site doesn't need either tool.
+
 ## Why it's built this way
 
 ### Hosting and rendering
@@ -107,6 +121,7 @@ Preview responses include `X-Robots-Tag: noindex`. The production `workers.dev` 
 - **Content lives in the repo** as Markdown and data files, changed by pull request and read at build time ([#9](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/9)).
 - **Events come from the club's Google Calendars.** The board keeps editing in Google Calendar, and `/api/events` reads the public ICS feeds and caches them ([#16](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/16), [#18](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/18)).
 - **Design system copied from dgtags**, light theme only ([#5](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/5), [#6](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/6)).
+- **One font, Outfit,** for headings and body text. Headings stand apart by size and weight. The club's logos carry the display lettering, and a second font needs a clear job, such as monospace for code.
 - **The contact form stays a Google Form** for the MVP ([#13](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/13)), and moves to our own form later ([#25](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/25)).
 - **Tooling matches dgtags:** Bun, ESLint, Prettier, Vitest, Storybook and lefthook ([#2](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/2)).
 - **Launch is staged:** first on `new.mhdgc.org` for board review, then `www` moves over from the Google Site ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23), [#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
