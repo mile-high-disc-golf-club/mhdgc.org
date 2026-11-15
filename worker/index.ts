@@ -1,6 +1,5 @@
 import { createRequestHandler } from 'react-router'
 
-import { isPreviewHost, robotsTxt } from '../shared/robots'
 import { handleApi } from './api'
 
 const handleDocument = createRequestHandler(
@@ -13,21 +12,13 @@ const handleDocument = createRequestHandler(
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
-    if (url.pathname === '/robots.txt') {
-      return new Response(robotsTxt(url.hostname), {
-        headers: {
-          'Content-Type': 'text/plain; charset=utf-8',
-          ...(isPreviewHost(url.hostname) ? { 'X-Robots-Tag': 'noindex' } : {}),
-        },
-      })
-    }
     const response =
       url.pathname === '/api' || url.pathname.startsWith('/api/')
         ? handleApi(request, env)
         : await handleDocument(request)
 
-    // Static previews receive this header through public/_headers; cover Worker responses too.
-    if (isPreviewHost(url.hostname)) {
+    // The production workers.dev route is disabled, so Workers hostnames are version URLs.
+    if (url.hostname.endsWith('.workers.dev')) {
       const previewResponse = new Response(response.body, response)
       previewResponse.headers.set('X-Robots-Tag', 'noindex')
       return previewResponse

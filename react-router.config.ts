@@ -2,6 +2,8 @@ import type { Config } from '@react-router/dev/config'
 import { readdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
+import { siteUrl } from './app/site'
+
 const config: Config = {
   // The Worker can render pages, but every page is prerendered to static HTML at
   // build time (`prerender: true` covers every path in routes.ts without a
@@ -9,6 +11,7 @@ const config: Config = {
   // renders what isn't a file: the 404 page, and any future dynamic route.
   ssr: true,
   prerender: true,
+  // Lists every prerendered page. The 404 page isn't prerendered, and /home is a redirect.
   async buildEnd({ reactRouterConfig }) {
     const client = join(reactRouterConfig.buildDirectory, 'client')
     const files = await readdir(client, { recursive: true })
@@ -18,7 +21,7 @@ const config: Config = {
       .sort()
     await writeFile(
       join(client, 'sitemap.xml'),
-      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map((path) => `  <url><loc>https://www.mhdgc.org${path}</loc></url>`).join('\n')}\n</urlset>\n`,
+      `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map((path) => `  <url><loc>${siteUrl}${path}</loc></url>`).join('\n')}\n</urlset>\n`,
     )
   },
   // Put the whole route manifest in the page instead of fetching /__manifest on

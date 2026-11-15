@@ -16,6 +16,6 @@
     // Lets vite.config.ts import content.config.ts with its extension, as Node needs.
     "allowImportingTsExtensions": true
   },
-  "include": ["app/content.ts", "*.config.ts", ".storybook/**/*.ts"],
+  "include": ["app/content.ts", "app/site.ts", "*.config.ts", ".storybook/**/*.ts"],
   "exclude": [".storybook/vitest.setup.ts"]
 }

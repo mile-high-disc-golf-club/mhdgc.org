@@ -1,13 +1,12 @@
 import type { MetaDescriptor } from 'react-router'
 
 import type { ContentPage } from './content'
-import { pageTitle, siteName, socialLinks } from './site'
+import { pageTitle, siteName, siteUrl, socialLinks } from './site'
 
-export const siteUrl = 'https://www.mhdgc.org'
-
+// Leave out the title for the home page, which is titled with the site name alone.
 export function pageMeta(
   path: string,
-  page: Pick<ContentPage, 'title' | 'description' | 'ogImage'>,
+  page: Pick<ContentPage, 'description' | 'ogImage'> & { title?: string },
 ): MetaDescriptor[] {
   const title = pageTitle(page.title)
   const url = new URL(path, siteUrl).href

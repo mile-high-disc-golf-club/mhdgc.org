@@ -16,7 +16,8 @@ export function loader() {
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
-  return pageMeta('/', loaderData.welcome)
+  const { description, ogImage } = loaderData.welcome
+  return pageMeta('/', { description, ogImage })
 }
 
 export default function HomeRoute({ loaderData }: Route.ComponentProps) {

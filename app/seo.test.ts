@@ -18,7 +18,12 @@ describe('page metadata', () => {
       content: 'https://www.mhdgc.org/og-image.png',
     })
     expect(meta).toContainEqual({ name: 'twitter:card', content: 'summary_large_image' })
-    expect(pageMeta('/', page)).toContainEqual({
+  })
+
+  it('titles the home page with the site name alone', () => {
+    const meta = pageMeta('/', { description: page.description })
+    expect(meta).toContainEqual({ title: 'Mile High Disc Golf Club' })
+    expect(meta).toContainEqual({
       tagName: 'link',
       rel: 'canonical',
       href: 'https://www.mhdgc.org/',
