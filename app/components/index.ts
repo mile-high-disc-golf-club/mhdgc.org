@@ -1,3 +1,4 @@
 export { ButtonLink } from './button-link'
+export { ResponsiveImage } from './responsive-image'
 export { SiteLayout } from './site-layout'
 export { TextLink } from './text-link'

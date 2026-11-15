@@ -96,6 +96,12 @@ Before the first PR preview, set up the account's `workers.dev` subdomain in Clo
 
 Preview responses include `X-Robots-Tag: noindex`. The production `workers.dev` route stays off, and no domain points at the Worker yet, so a production deploy has no public URL until launch. It keeps the Worker's active version in step with `main`, and PR previews need it. Production uses `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
 
+## Editing content
+
+See [CONTENT.md](CONTENT.md) for editing pages and board data in GitHub, adding photos,
+and checking PR previews. Markdown, schemas and image processing run at build time
+through `content.config.ts`; routes read the compiled output through `~/.server`.
+
 ## Brand assets
 
 The logos come from the board's logo suite (`DIGITAL/MHDGC_Logos_RGB/SVG`), run through [svgo](https://svgo.dev/) with `--multipass -p 2`:
