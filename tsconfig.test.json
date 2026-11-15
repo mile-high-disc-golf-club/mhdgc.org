@@ -4,6 +4,8 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo"
   },
   "include": [
+    "content.config.ts",
+    "app/.server/**/*.ts",
     "app",
     "shared",
     ".react-router/types/**/*",

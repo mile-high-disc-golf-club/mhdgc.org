@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["*.config.ts", ".storybook/**/*.ts"],
+  "include": ["app/content.ts", "*.config.ts", ".storybook/**/*.ts"],
   "exclude": [".storybook/vitest.setup.ts"]
 }

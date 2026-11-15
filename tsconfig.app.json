@@ -22,6 +22,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
+    "app/.server/**/*.ts",
     "app",
     "shared",
     ".react-router/types/**/*",
