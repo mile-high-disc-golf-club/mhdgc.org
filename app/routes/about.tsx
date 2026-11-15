@@ -1,11 +1,11 @@
-import { readPage } from '~/.server'
+import { readBoard, readPage } from '~/.server'
 import { AboutPage } from '~/pages/about'
 import { pageTitle } from '~/site'
 
 import type { Route } from './+types/about'
 
 export function loader() {
-  return readPage('about')
+  return { ...readPage('about'), board: readBoard() }
 }
 
 export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
