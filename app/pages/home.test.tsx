@@ -6,12 +6,21 @@ import * as stories from './home.stories'
 
 const { Default } = composeStories(stories)
 
-test('renders the club welcome heading', () => {
+test('renders the welcome, section headings and activity cards', () => {
   render(<Default />)
 
   expect(
     screen.getByRole('heading', { level: 1, name: 'Welcome to the Mile High Disc Golf Club' }),
   ).toBeInTheDocument()
+  expect(screen.getByRole('heading', { level: 2, name: 'What We Do' })).toBeInTheDocument()
+  expect(screen.getByRole('heading', { level: 2, name: 'Get Involved' })).toBeInTheDocument()
+  for (const activity of [
+    'Weekly Tag Matches',
+    'Events & Tournaments',
+    'Course Cleanups & Improvements',
+    'Community Building',
+  ])
+    expect(screen.getByText(activity, { selector: 'li > strong' })).toBeInTheDocument()
 })
 
 test('links visitors to events, membership anchors and the Facebook group', () => {
