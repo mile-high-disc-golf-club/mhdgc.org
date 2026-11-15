@@ -25,7 +25,8 @@ export function ResponsiveImage({
         alt={alt}
         loading={loading}
         decoding="async"
-        className={className ?? 'h-auto max-w-full'}
+        // Keeps the image inside its container whatever classes the caller adds.
+        className={className ? `h-auto max-w-full ${className}` : 'h-auto max-w-full'}
       />
     </picture>
   )

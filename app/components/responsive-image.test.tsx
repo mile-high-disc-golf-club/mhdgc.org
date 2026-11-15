@@ -4,7 +4,7 @@ import { expect, test } from 'vitest'
 
 import * as stories from './responsive-image.stories'
 
-const { Default, Decorative } = composeStories(stories)
+const { Default, Decorative, Cropped } = composeStories(stories)
 
 test('preserves intrinsic dimensions and selects modern sources with layout sizes', () => {
   const { container } = render(
@@ -36,4 +36,9 @@ test('supports decorative images and eager loading', () => {
   expect(screen.queryByRole('img')).not.toBeInTheDocument()
   expect(container.querySelector('img')).toHaveAttribute('alt', '')
   expect(container.querySelector('img')).toHaveAttribute('loading', 'eager')
+})
+
+test('keeps the image inside its container when a class is added', () => {
+  const { container } = render(<Cropped />)
+  expect(container.querySelector('img')).toHaveClass('max-w-full', 'object-cover')
 })
