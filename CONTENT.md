@@ -23,8 +23,11 @@ web editor, without installing software.
 4. Select **Commit changes**, choose **Create a new branch for this commit and
    start a pull request**, and describe what changed.
 
-So far only the About page reads its Markdown, and only its heading. Its copy and
-board display come in issue #13.
+The Home page reads `home.md` for its welcome, `home-activities.md` for the
+What We Do cards, and `home-involved.md` for Get Involved. Keep the activities
+as a list, with each activity name in bold and its description on the next line,
+indented by two spaces; each becomes a card. The About page also reads its Markdown;
+its full copy and board display come in issue #13.
 Other placeholder routes have not yet been connected to Markdown. Adding a file
 alone doesn't create a URL: a developer must connect the page's route loader.
 
@@ -116,3 +119,10 @@ The committed `content/images/videos/bypfs7tfhni.jpg` and
 For the home page, pass `readImage('videos/bypfs7tfhni.jpg')` or
 `readImage('videos/f2dkiwxatsy.jpg')` from the loader to `YouTubeEmbed` as `thumbnail`,
 with the original case-sensitive video ID, title and caption from #10.
+
+## Home course photo
+
+`content/images/home/course.jpg` was exported from the current Google Site
+(`https://www.mhdgc.org/home`) for issue #11. It shows a basket among evergreens,
+with gondolas and mountains beyond. Builds process this local original with the
+same responsive image pipeline as other content images.
