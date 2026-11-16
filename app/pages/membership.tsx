@@ -28,6 +28,7 @@ export function MembershipPage({ membership, join, matches, tags }: MembershipPa
           alt="Numbered Mile High Disc Golf Club bag tags: purple Ladies tags and green tags"
           sizes="(min-width: 768px) 480px, 100vw"
           loading="eager"
+          fetchPriority="high"
           className="rounded-lg"
         />
         <Prose html={membership.html} />

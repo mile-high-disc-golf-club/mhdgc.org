@@ -41,6 +41,7 @@ export function HomePage({
           alt="Disc golf basket among evergreen trees, with gondolas and mountains beyond"
           sizes="(min-width: 768px) 480px, 100vw"
           loading="eager"
+          fetchPriority="high"
           className="rounded-lg"
         />
       </section>

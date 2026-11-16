@@ -17,7 +17,7 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
       <Text.H1>{title}</Text.H1>
       {html && <Prose html={html} />}
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {board.map((member) => (
+        {board.map((member, index) => (
           <li
             key={member.name}
             className="overflow-hidden rounded-lg border border-line bg-surface"
@@ -27,6 +27,9 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
                 image={member.photo}
                 alt={member.name}
                 sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                // The first row, up to three across, is on screen as the page opens.
+                loading={index < 3 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : undefined}
                 className="aspect-square w-full object-cover"
               />
             ) : (
