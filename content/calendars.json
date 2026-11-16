@@ -1,0 +1,44 @@
+[
+  {
+    "id": "c_73988d5a86f321570525d7c6a62f5136d39a3c78f54dfc99acd0823894a7c5b6@group.calendar.google.com",
+    "name": "Rotating Tags League",
+    "slug": "tags",
+    "icon": "tag",
+    "color": "event-tags"
+  },
+  {
+    "id": "c_2a60fe2d38c5b4b5a41649c0d7411e233b643b80a0204b61954a054895029a88@group.calendar.google.com",
+    "name": "Rotating Ladies Tags League",
+    "slug": "ladies-tags",
+    "icon": "tags",
+    "color": "event-ladies-tags"
+  },
+  {
+    "id": "c_9f26aa03662c4614d930e59c3380a3a4b218c5a4c7b1e080d2a7572f1880568a@group.calendar.google.com",
+    "name": "Tournament",
+    "slug": "tournaments",
+    "icon": "trophy",
+    "color": "event-tournaments"
+  },
+  {
+    "id": "c_902b5e5a7d2d698e174186de089d9c3684616e113b827a154bd2bdc9d3206fd7@group.calendar.google.com",
+    "name": "Board Meeting",
+    "slug": "board",
+    "icon": "users-group",
+    "color": "event-board"
+  },
+  {
+    "id": "c_8f31b5e2f51feccba372d0172a85860d4febc3b04be9045240461ebeb8173c50@group.calendar.google.com",
+    "name": "Clinic",
+    "slug": "clinics",
+    "icon": "school",
+    "color": "event-clinics"
+  },
+  {
+    "id": "c_437bb88b851639c391bccb1712aa43fe6984d40cfa1ee8bc657186d0ce10b557@group.calendar.google.com",
+    "name": "Volunteer Day",
+    "slug": "volunteer",
+    "icon": "heart-handshake",
+    "color": "event-volunteer"
+  }
+]

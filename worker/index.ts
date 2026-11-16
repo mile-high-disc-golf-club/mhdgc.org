@@ -1,6 +1,8 @@
 import { createRequestHandler } from 'react-router'
 
 import { handleApi } from './api'
+import { calendars } from './calendars'
+import { refreshEvents } from './events/store'
 
 const handleDocument = createRequestHandler(
   () => import('virtual:react-router/server-build'),
@@ -14,7 +16,7 @@ export default {
     const url = new URL(request.url)
     const response =
       url.pathname === '/api' || url.pathname.startsWith('/api/')
-        ? handleApi(request, env)
+        ? await handleApi(request, env)
         : await handleDocument(request)
 
     // The production workers.dev route is disabled, so Workers hostnames are version URLs.
@@ -24,5 +26,11 @@ export default {
       return previewResponse
     }
     return response
+  },
+
+  // The cron trigger in wrangler.jsonc. Locally, run it with
+  // /cdn-cgi/handler/scheduled (see the README).
+  async scheduled(_controller, env) {
+    await refreshEvents({ kv: env.EVENTS, apiKey: env.GOOGLE_CALENDAR_API_KEY }, calendars)
   },
 } satisfies ExportedHandler<Env>

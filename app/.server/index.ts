@@ -1,1 +1,1 @@
-export { readBoard, readImage, readPage } from './content'
+export { readBoard, readCalendars, readImage, readPage } from './content'

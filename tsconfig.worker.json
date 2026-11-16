@@ -18,5 +18,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true
   },
-  "include": ["worker", "shared", ".react-router/types/+server-build.d.ts"]
+  // virtual-content.d.ts types the content pipeline's output, which holds content/calendars.json.
+  "include": [
+    "worker",
+    "shared",
+    "app/virtual-content.d.ts",
+    ".react-router/types/+server-build.d.ts"
+  ]
 }

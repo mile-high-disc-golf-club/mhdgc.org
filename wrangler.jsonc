@@ -26,6 +26,11 @@
   "workers_dev": false,
   // Explicitly enable version preview URLs while the production route is off.
   "preview_urls": true,
+  // Holds the club's calendar events, written by the cron refresh and read by
+  // /api/events. Local dev and preview use a simulated namespace in .wrangler/.
+  "kv_namespaces": [{ "binding": "EVENTS", "id": "3fd16964d0dd453eabc0f2ec5ad08af3" }],
+  // Refreshes the events in KV from the Google Calendar API every 15 minutes.
+  "triggers": { "crons": ["*/15 * * * *"] },
   // Non-secret config, available on `env` in the Worker. Secrets go in .dev.vars
   // locally and `wrangler secret put` in production.
   "vars": {

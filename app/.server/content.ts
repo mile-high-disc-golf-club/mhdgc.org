@@ -16,3 +16,8 @@ export function readImage(name: string) {
   if (!Object.hasOwn(content.images, name)) throw new Error(`Unknown content image: ${name}`)
   return content.images[name]
 }
+
+/** The club's public calendars, in display order. */
+export function readCalendars() {
+  return content.calendars
+}
