@@ -1,4 +1,5 @@
 import { type Ref, useId, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 
 import type { CalendarEvent } from '~/../shared/api'
 import { Badge, Icon, IconButton, Text } from '~/design-system'
@@ -54,7 +55,11 @@ export function EventMonth({
   // popover passes that day's button, since the popover closes first.
   function select(item: DayEvent, from: HTMLElement | null) {
     returnTo.current = from
-    setSelected(item)
+    // Renders the event into the dialog before it opens, so opening it moves
+    // focus to the close button inside.
+    flushSync(() => {
+      setSelected(item)
+    })
     dialog.current?.showModal()
   }
 
