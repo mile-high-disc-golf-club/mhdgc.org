@@ -123,6 +123,14 @@ Before the first PR preview, set up the account's `workers.dev` subdomain in Clo
 
 Previews stay out of search results. The CI preview step adds `X-Robots-Tag: noindex` for every static file to `build/client/_headers` and replaces `robots.txt` with one that disallows crawling. The Worker adds the same header to the responses it handles on `*.workers.dev`. Production's static `public/robots.txt` allows crawling and points to `sitemap.xml`, which `buildEnd` in `react-router.config.ts` writes from the prerendered pages, so it leaves out the 404 page and the `/home` redirect. `new.mhdgc.org` gets its own noindex and robots.txt in [#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23). The production `workers.dev` route stays off, and no domain points at the Worker yet, so a production deploy has no public URL until launch. It keeps the Worker's active version in step with `main`, and PR previews need it. Production uses `new.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
 
+### Analytics
+
+Page views go to [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/), which sets no cookies, so the site needs no consent banner. See the stats in the club's Cloudflare dashboard under **Web Analytics**, on the `www.mhdgc.org` site.
+
+The beacon is added by the site's own code rather than Cloudflare's automatic injection. Every host serves the same prerendered HTML, so after hydration [`app/root.tsx`](app/root.tsx) loads the beacon only when the page is on `www.mhdgc.org` ([`app/lib/web-analytics.ts`](app/lib/web-analytics.ts)). PR previews, `new.mhdgc.org` and local servers aren't counted. The beacon counts client-side route changes itself, so React Router navigations show up as page views. The Content Security Policy in [`shared/security-headers.ts`](shared/security-headers.ts) allows its script from `static.cloudflareinsights.com` and its reports to `cloudflareinsights.com`.
+
+To set it up, add `www.mhdgc.org` as a site in **Web Analytics**. If the dashboard sets it up automatically, choose **Manage site** and change it to **Enable with JS Snippet installation**, since a page can only have one beacon. Copy the token from the site's JS snippet into `webAnalyticsToken` in [`app/site.ts`](app/site.ts). The token is public, since it's in every page. While it's empty, the beacon stays off.
+
 ## Editing content
 
 See [CONTENT.md](CONTENT.md) for editing pages and board data in GitHub, adding photos,

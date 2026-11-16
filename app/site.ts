@@ -5,6 +5,10 @@ export const siteName = 'Mile High Disc Golf Club'
 // Canonical URLs, social cards and the sitemap use this host, whichever host serves the page.
 export const siteUrl = 'https://www.mhdgc.org'
 
+// The Cloudflare Web Analytics site token for www.mhdgc.org. It's public, since
+// it's in every page. Empty leaves the beacon off. See Analytics in the README.
+export const webAnalyticsToken = '6c61cde4505440d8824483d33777dad6'
+
 export function pageTitle(page?: string) {
   return page ? `${page} · ${siteName}` : siteName
 }
