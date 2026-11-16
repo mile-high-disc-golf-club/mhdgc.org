@@ -82,8 +82,12 @@ them. Each entry needs:
 - `slug`: a short name in lowercase letters, digits and hyphens, such as
   `ladies-tags`. It appears in shared links that filter the page, such as
   `/events?cal=tags,tournaments`, so changing it breaks those links.
-- `icon`: the icon's name, such as `trophy`.
-- `color`: the calendar's color token, such as `event-tournaments`.
+- `icon`: the icon's name, such as `trophy`. It must be one of the icons in
+  `app/design-system/components/icons.ts`. The calendars use `tag`, `tags`,
+  `trophy`, `users-group`, `school` and `heart-handshake`.
+- `color`: the calendar's color token, such as `event-tournaments`. It must be
+  one of the `event-*` colors in `app/design-system/theme/colors.ts`, without
+  `-soft` or `-ink`. There's one for each calendar.
 
 IDs and slugs must be unique. For example:
 
@@ -93,18 +97,21 @@ IDs and slugs must be unique. For example:
     "id": "<calendar ID>@group.calendar.google.com",
     "name": "<calendar name>",
     "slug": "<slug>",
-    "icon": "<icon>",
-    "color": "event-<slug>"
+    "icon": "trophy",
+    "color": "event-tournaments"
   }
 ]
 ```
 
 To add a calendar, make it public first, then add an entry and ask a developer
-which icon and color to use. To stop showing a calendar, remove its entry. The
-list is checked on every build. For now, the checks only cover the shape of
-`icon` and `color` (lowercase words joined by hyphens, and a name starting
-`event-`). Once the Events page adds the icons and colors (#19), only the ones
-that exist pass.
+to add an icon and an `event-*` color for it. To stop showing a calendar, remove
+its entry. The list is checked on every build, and an icon or color that doesn't
+exist fails the check.
+
+The Events page shows a filter chip and subscribe links only for calendars that
+have events. Each event shows its title, time, location (linked to Google Maps)
+and description. For a league or tournament, put its UDisc or Disc Golf Scene
+link in the event's description in Google Calendar, so the page links to it.
 
 ## Add a photo
 

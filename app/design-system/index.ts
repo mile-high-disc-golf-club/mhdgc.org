@@ -25,5 +25,7 @@ export {
   Spinner,
   Text,
   textLinkClasses,
+  ToggleChip,
 } from './components'
-export type { ColorToken, Theme, ThemeName } from './theme'
+export type { ColorToken, EventColor, Theme, ThemeName } from './theme'
+export { eventColors } from './theme'

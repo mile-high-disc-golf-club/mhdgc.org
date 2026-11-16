@@ -8,6 +8,8 @@ import type { Plugin } from 'vite'
 import { z } from 'zod'
 
 import type { ContentData, ContentImage } from './app/content'
+import { icons } from './app/design-system/components/icons.ts'
+import { eventColors } from './app/design-system/theme/colors.ts'
 
 const text = z.string().trim().min(1)
 const pageSchema = z.strictObject({
@@ -40,10 +42,13 @@ const calendarsSchema = z
       name: text,
       // In the Events page's ?cal= filter, so changing one breaks shared links.
       slug,
-      // Only the shape is checked for now. #19 adds the icons and the event-*
-      // color tokens, then narrows these to the names that exist.
-      icon: slug,
-      color: z.string().regex(/^event-[a-z0-9]+(-[a-z0-9]+)*$/, 'Use an event-* color token'),
+      // An icon and an event-* color token that exist in the design system.
+      icon: z.enum(Object.keys(icons) as (keyof typeof icons)[], {
+        error: 'Use an icon name from app/design-system/components/icons.ts',
+      }),
+      color: z.enum(eventColors, {
+        error: 'Use an event-* color token from app/design-system/theme/colors.ts',
+      }),
     }),
   )
   .min(1)

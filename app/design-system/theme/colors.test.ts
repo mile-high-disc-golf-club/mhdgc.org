@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { type ColorToken, themes } from './colors'
+import { type ColorToken, eventColors, themes } from './colors'
 import { contrast } from './contrast'
 
 // Higher than AA for the main text, because people read this on phones outdoors.
@@ -30,7 +30,31 @@ const pairs: [ColorToken, ColorToken, number][] = [
   ]),
   ...backgrounds.map((bg): [ColorToken, ColorToken, number] => ['link', bg, TEXT]),
   ['danger', 'surface', CONTROL],
+  // Event colors have no hover, and share `on-event`. A shown calendar's chip
+  // is the fill on the page, so it must stand out from the background.
+  ...eventColors.flatMap((name): [ColorToken, ColorToken, number][] => [
+    ['on-event', name, TEXT],
+    ['ink', `${name}-soft`, BODY],
+    ['ink-muted', `${name}-soft`, MUTED],
+    ['link', `${name}-soft`, TEXT],
+    [`${name}-ink`, `${name}-soft`, TEXT],
+    ...backgrounds.flatMap((bg): [ColorToken, ColorToken, number][] => [
+      [`${name}-ink`, bg, TEXT],
+      [name, bg, CONTROL],
+    ]),
+  ]),
 ]
+
+it('has an event color for each calendar', () => {
+  expect(eventColors).toEqual([
+    'event-tags',
+    'event-ladies-tags',
+    'event-tournaments',
+    'event-board',
+    'event-clinics',
+    'event-volunteer',
+  ])
+})
 
 describe.each(Object.keys(themes) as (keyof typeof themes)[])('%s theme contrast', (mode) => {
   it.each(pairs)('%s on %s is at least %d:1', (fg, bg, minimum) => {

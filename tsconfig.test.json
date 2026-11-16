@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo"
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    // content.config.ts imports design-system files with their extension, as Node needs.
+    "allowImportingTsExtensions": true
   },
   "include": [
     "content.config.ts",
@@ -11,7 +13,8 @@
     ".react-router/types/**/*",
     ".storybook/vitest.setup.ts",
     ".storybook/preview.tsx",
-    ".storybook/router-decorator.tsx"
+    ".storybook/router-decorator.tsx",
+    ".storybook/content-page.ts"
   ],
   "exclude": [".react-router/types/+server-build.d.ts"]
 }
