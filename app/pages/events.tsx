@@ -35,13 +35,17 @@ const facebook = socialLinks.find((link) => link.label === 'Facebook')
 
 export function EventsPage({ title, html, calendars, state }: EventsPageProps) {
   const ready = state.status === 'ready' ? state : null
-  // Only calendars with events get a chip and a subscribe link. Until the
-  // events load, every calendar's subscribe links show.
+  // Only calendars with events get a chip.
   const withEvents = ready
     ? calendars.filter((calendar) =>
         ready.response.events.some((event) => event.calendar === calendar.slug),
       )
     : calendars
+  // So do their subscribe links, unless the feed has no events or may be missing
+  // some calendars' events. Then, and until the events load, every calendar's show,
+  // since the links need only the calendar.
+  const subscribable =
+    ready && !ready.response.partial && withEvents.length > 0 ? withEvents : calendars
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-4">
@@ -70,7 +74,7 @@ export function EventsPage({ title, html, calendars, state }: EventsPageProps) {
           Add a calendar to your own, and its events stay up to date there as the club changes them.
         </Text.Body>
         <ul className="grid gap-4 sm:grid-cols-2">
-          {withEvents.map((calendar) => (
+          {subscribable.map((calendar) => (
             <li
               key={calendar.slug}
               className="flex flex-col gap-1 rounded-lg border border-line bg-surface p-4"

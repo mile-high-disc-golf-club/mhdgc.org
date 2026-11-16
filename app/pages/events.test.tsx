@@ -171,9 +171,10 @@ test('shows a spinner while loading, with every subscribe link', () => {
   expect(screen.getAllByRole('link', { name: /Add to Google Calendar/ })).toHaveLength(6)
 })
 
-test('says so when there are no events', () => {
+test('says so when there are no events, and keeps every subscribe link', () => {
   render(<Empty />)
   expect(screen.getByText('No upcoming events, check back soon.')).toBeInTheDocument()
+  expect(screen.getAllByRole('link', { name: /Add to Google Calendar/ })).toHaveLength(6)
 })
 
 test('points to Facebook when the events fail to load', () => {
@@ -186,8 +187,9 @@ test('points to Facebook when the events fail to load', () => {
   )
 })
 
-test('warns when some calendars may be out of date', () => {
+test('warns when some calendars may be out of date, and keeps every subscribe link', () => {
   render(<Partial />)
   expect(screen.getByText('Some calendars may be out of date')).toBeInTheDocument()
   expect(screen.getAllByRole('heading', { level: 3 }).length).toBeGreaterThan(0)
+  expect(screen.getAllByRole('link', { name: /Add to Google Calendar/ })).toHaveLength(6)
 })
