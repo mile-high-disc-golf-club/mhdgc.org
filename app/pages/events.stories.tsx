@@ -40,7 +40,7 @@ export const List: Story = {}
 
 export const ListOnPhone: Story = { globals: phone }
 
-// Every calendar has events, one round is cancelled and one description is long.
+// Every calendar has events, one round is cancelled and one description has several paragraphs.
 export const AllCalendars: Story = {
   args: { state: { status: 'ready', response: exampleResponse, now: fixtureNow } },
 }

@@ -2,14 +2,7 @@ import { useId, useState } from 'react'
 
 import type { CalendarEvent, DescriptionParagraph } from '~/../shared/api'
 import { Badge, Button, Icon, IconButton, Text } from '~/design-system'
-import {
-  type Calendar,
-  type DayGroup,
-  dayHeading,
-  eventTime,
-  isLongDescription,
-  mapsUrl,
-} from '~/lib'
+import { type Calendar, type DayGroup, dayHeading, eventTime, mapsUrl } from '~/lib'
 
 import { CalendarLabel } from './calendar-label'
 import { TextLink } from './text-link'
@@ -69,9 +62,7 @@ function EventItem({ event, calendar }: { event: CalendarEvent; calendar: Calend
   const [open, setOpen] = useState(false)
   const panelId = useId()
   const time = eventTime(event)
-  const long = isLongDescription(event.description)
-  const short = event.description.length > 0 && !long
-  const hasMore = Boolean(event.location) || long || Boolean(event.url)
+  const hasMore = Boolean(event.location) || event.description.length > 0 || Boolean(event.url)
   return (
     <article
       data-cancelled={event.cancelled || undefined}
@@ -89,7 +80,6 @@ function EventItem({ event, calendar }: { event: CalendarEvent; calendar: Calend
             {event.cancelled && <Badge tone="danger">Cancelled</Badge>}
           </div>
           <CalendarLabel calendar={calendar} />
-          {short && <Description paragraphs={event.description} />}
           {hasMore && (
             // Grows from no height to its content's, so it animates without
             // measuring. Closed, it's inert: hidden from screen readers and
@@ -116,7 +106,7 @@ function EventItem({ event, calendar }: { event: CalendarEvent; calendar: Calend
                       </div>
                     </div>
                   )}
-                  {long && <Description paragraphs={event.description} />}
+                  {event.description.length > 0 && <Description paragraphs={event.description} />}
                   {event.url && (
                     <TextLink to={event.url} standalone newTab>
                       Open in Google Calendar
@@ -149,8 +139,7 @@ function EventItem({ event, calendar }: { event: CalendarEvent; calendar: Calend
   )
 }
 
-// Paragraphs of text and links. A short one shows on the event; a long one is
-// in its expandable panel, so the list stays easy to scan.
+// The description's paragraphs of text and links, in the event's panel.
 function Description({ paragraphs }: { paragraphs: DescriptionParagraph[] }) {
   return (
     <div className="flex min-w-0 flex-col gap-2 wrap-anywhere">

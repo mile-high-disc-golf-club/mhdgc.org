@@ -12,7 +12,6 @@ export {
   gridMonthList,
   gridMonths,
   hasEnded,
-  isLongDescription,
   listWeeks,
   mapsUrl,
   monthEvents,

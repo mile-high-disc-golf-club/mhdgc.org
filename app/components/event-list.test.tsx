@@ -53,12 +53,15 @@ it('hides the location and links in a panel until its button opens it', () => {
   expect(panel).toHaveAttribute('inert')
 })
 
-it('shows a short description on the event, and puts a long one in the panel', () => {
+it('puts every description in the panel, including tournament links', () => {
   render(<Examples />)
   const tournament = screen
     .getByRole('heading', { name: 'Winter Warriors - Fehringer' })
     .closest('article')
-  const link = within(tournament as HTMLElement).getByRole('link', { name: /discgolfscene/ })
+  if (!tournament) throw new Error('Missing event')
+  const link = within(tournament).getByRole('link', { name: /discgolfscene/ })
+  expect(link.closest('[inert]')).not.toBeNull()
+  fireEvent.click(within(tournament).getByRole('button', { expanded: false }))
   expect(link.closest('[inert]')).toBeNull()
   const agenda = screen.getByRole('link', { name: /the agenda/ })
   expect(agenda.closest('[inert]')).not.toBeNull()

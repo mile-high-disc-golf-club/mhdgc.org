@@ -29,15 +29,15 @@ function example(
   }
 }
 
-const longDescription: CalendarEvent['description'] = [
-  ['Example agenda, to show a long description. Not a real meeting.'],
+const agenda: CalendarEvent['description'] = [
+  ['Example agenda, to show a description of several paragraphs. Not a real meeting.'],
   [
     'Each paragraph shows on its own line, and links such as ',
     { href: 'https://example.com/agenda', text: 'the agenda' },
     ' stay links.',
   ],
   [
-    'A description with more than two paragraphs, or more than a few lines of text, starts collapsed so the list stays easy to scan on a phone.',
+    'Descriptions show in the expandable panel, with the location and the Google Calendar link, so the list stays easy to scan on a phone.',
   ],
 ]
 
@@ -45,14 +45,14 @@ function edit(event: CalendarEvent): CalendarEvent {
   if (event.title === 'Village Greens Tags' && event.start === '2026-11-29T21:00:00.000Z')
     return { ...event, cancelled: true }
   if (event.title === 'Board Meeting' && event.start === '2026-12-11T01:30:00.000Z')
-    return { ...event, description: longDescription }
+    return { ...event, description: agenda }
   return event
 }
 
 /**
  * The real events, plus made-up ones that aren't in the feeds: an event on each of
  * the three empty calendars, so every chip and color shows, a cancelled round and
- * a description long enough to collapse.
+ * a description of several paragraphs.
  */
 export const exampleResponse: EventsResponse = {
   ...eventsResponse,

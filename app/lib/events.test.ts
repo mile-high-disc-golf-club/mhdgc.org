@@ -11,7 +11,6 @@ import {
   googleCalendarUrl,
   gridMonthList,
   hasEnded,
-  isLongDescription,
   mapsUrl,
   monthEvents,
   monthLabel,
@@ -282,13 +281,5 @@ describe('links', () => {
     expect(mapsUrl('Centre Hills Park, Aurora, CO')).toBe(
       'https://www.google.com/maps/search/?api=1&query=Centre%20Hills%20Park%2C%20Aurora%2C%20CO',
     )
-  })
-
-  it('collapses only long descriptions', () => {
-    expect(
-      isLongDescription([[{ href: 'https://example.com', text: 'https://example.com' }]]),
-    ).toBe(false)
-    expect(isLongDescription([['a'], ['b'], ['c']])).toBe(true)
-    expect(isLongDescription([['x'.repeat(281)]])).toBe(true)
   })
 })

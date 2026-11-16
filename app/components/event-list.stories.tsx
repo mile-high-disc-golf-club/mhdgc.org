@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>
 // Two weeks of real events, with more after them.
 export const Default: Story = {}
 
-// Every calendar, a cancelled round and a long description.
+// Every calendar, a cancelled round and a description of several paragraphs.
 export const Examples: Story = { args: { ...examples } }
 
 // The end of the 12 months, with no Show more.

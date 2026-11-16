@@ -2,7 +2,7 @@
 // falls on, the list's window, the month grid's weeks, the `?cal=` and `?view=`
 // parameters, and how times read. Days are `YYYY-MM-DD` strings throughout, so
 // they compare and sort as text.
-import type { CalendarEvent, DescriptionParagraph } from '~/../shared/api'
+import type { CalendarEvent } from '~/../shared/api'
 import type { CalendarConfig } from '~/content'
 import type { EventColor, IconName } from '~/design-system'
 
@@ -249,18 +249,6 @@ const monthFormat = new Intl.DateTimeFormat('en-US', {
 // "November 2026" for `2026-11`.
 export function monthLabel(month: string): string {
   return monthFormat.format(utcDate(`${month}-01`))
-}
-
-// A description is long when it has more than two paragraphs, or more than
-// about three lines of text on a phone. Long ones go in the event's panel.
-export function isLongDescription(description: DescriptionParagraph[]): boolean {
-  const length = description
-    .flat()
-    .reduce(
-      (total, segment) => total + (typeof segment === 'string' ? segment : segment.text).length,
-      0,
-    )
-  return description.length > 2 || length > 280
 }
 
 // Google Maps search for an event's location.
