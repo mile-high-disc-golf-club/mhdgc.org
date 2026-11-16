@@ -32,8 +32,11 @@ export function EventList({
         const { label, relative } = dayHeading(day, now)
         return (
           <div key={day} className="flex flex-col gap-3">
-            {/* An h2 under the page's h1, sized down so the events stay the focus. */}
-            <Text.H3 as="h2">{relative ? `${relative}, ${label}` : label}</Text.H3>
+            {/* An h2 under the page's h1, set smaller and lighter than the event
+                titles, so the events stay the focus. */}
+            <Text as="h2" weight="semibold" color="muted">
+              {relative ? `${relative}, ${label}` : label}
+            </Text>
             <ul className="flex flex-col gap-3">
               {events.map((event) => {
                 const calendar = bySlug.get(event.calendar)
@@ -74,7 +77,7 @@ function EventItem({ event, calendar }: { event: CalendarEvent; calendar: Calend
         </Text>
         <div className="flex min-w-0 flex-col gap-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <Text as="h3" size="lg" weight="semibold" color={event.cancelled ? 'muted' : 'ink'}>
+            <Text as="h3" size="xl" weight="semibold" color={event.cancelled ? 'muted' : 'ink'}>
               {event.cancelled ? <s>{event.title}</s> : event.title}
             </Text>
             {event.cancelled && <Badge tone="danger">Cancelled</Badge>}
