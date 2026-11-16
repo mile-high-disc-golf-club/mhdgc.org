@@ -61,15 +61,16 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
       </ul>
       <section aria-labelledby="contact-us" className="flex flex-col gap-4">
         <Text.H2 id="contact-us">Contact Us</Text.H2>
-        <TextLink to={contactForm} standalone newTab>
-          Open the contact form
-        </TextLink>
         <iframe
           src={`${contactForm}?embedded=true`}
           title="Contact Us: Name, Email and Comment"
           loading="lazy"
           className="h-[1100px] w-full border-0"
         />
+        {/* A fallback for visitors whose browser doesn't load the embedded form. */}
+        <TextLink to={contactForm} standalone newTab>
+          Open the contact form
+        </TextLink>
       </section>
     </div>
   )
