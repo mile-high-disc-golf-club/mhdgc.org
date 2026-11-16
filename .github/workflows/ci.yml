@@ -98,6 +98,21 @@ jobs:
         run: bun run test
       - name: Build
         run: bun run build
+      # The deploy job reuses this build instead of building again. Wrangler finds
+      # the generated config through .wrangler/deploy/config.json. The copied
+      # .dev.vars holds only the example's placeholders and is left out.
+      - name: Save the build for the deploy job
+        if: github.event_name == 'push' || steps.preview.outputs.preview == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: build
+          path: |
+            build
+            .wrangler/deploy/config.json
+            !build/server/.dev.vars
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 1
 
   # The build links to encoded images in R2 instead of encoding them. This
   # uploads any that are missing, before a preview or production deploy uses them.
@@ -166,7 +181,10 @@ jobs:
           key: ${{ runner.os }}-${{ runner.arch }}-bun-${{ hashFiles('bun.lock') }}
           restore-keys: ${{ runner.os }}-${{ runner.arch }}-bun-
       - run: bun install --frozen-lockfile
-      - run: bun run build
+      - name: Download the build from CI checks
+        uses: actions/download-artifact@v8
+        with:
+          name: build
       - name: Deploy production
         if: github.event_name == 'push'
         env:
