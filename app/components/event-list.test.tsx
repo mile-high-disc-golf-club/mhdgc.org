@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react-vite'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { expect, it } from 'vitest'
 
 import * as stories from './event-list.stories'
@@ -29,12 +29,37 @@ it('shows all-day events as such, before timed ones', () => {
   expect(items[0]).toHaveTextContent('All dayExample Volunteer Day')
 })
 
-it('opens a long description from its summary', () => {
-  render(<Examples />)
-  const details = screen.getByText('Details').closest('details')
-  expect(details?.querySelector('summary')).toHaveClass('min-h-11')
-  expect(screen.getByRole('link', { name: /the agenda/ })).toHaveAttribute(
-    'href',
-    'https://example.com/agenda',
+it('hides the location and links in a panel until its button opens it', () => {
+  render(<Default />)
+  const item = screen
+    .getAllByRole('heading', { level: 3, name: "Johnny Robert's Tags (Glow)" })[0]
+    .closest('article')
+  if (!item) throw new Error('Missing event')
+  const button = within(item).getByRole('button', {
+    name: "More about Johnny Robert's Tags (Glow)",
+    expanded: false,
+  })
+  const panel = document.getElementById(button.getAttribute('aria-controls') ?? '')
+  expect(panel).toHaveAttribute('inert')
+  expect(panel).toContainElement(within(item).getByRole('link', { name: /Memorial Park/ }))
+  expect(panel).toContainElement(
+    within(item).getByRole('link', { name: /Open in Google Calendar/ }),
   )
+  fireEvent.click(button)
+  expect(button).toHaveAttribute('aria-expanded', 'true')
+  expect(panel).not.toHaveAttribute('inert')
+  expect(panel).toHaveAttribute('data-open')
+  fireEvent.click(button)
+  expect(panel).toHaveAttribute('inert')
+})
+
+it('shows a short description on the event, and puts a long one in the panel', () => {
+  render(<Examples />)
+  const tournament = screen
+    .getByRole('heading', { name: 'Winter Warriors - Fehringer' })
+    .closest('article')
+  const link = within(tournament as HTMLElement).getByRole('link', { name: /discgolfscene/ })
+  expect(link.closest('[inert]')).toBeNull()
+  const agenda = screen.getByRole('link', { name: /the agenda/ })
+  expect(agenda.closest('[inert]')).not.toBeNull()
 })

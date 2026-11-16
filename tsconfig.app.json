@@ -27,7 +27,8 @@
     "shared",
     ".react-router/types/**/*",
     ".storybook/preview.tsx",
-    ".storybook/router-decorator.tsx"
+    ".storybook/router-decorator.tsx",
+    ".storybook/content-page.ts"
   ],
   "exclude": [".react-router/types/+server-build.d.ts", "app/**/*.test.ts", "app/**/*.test.tsx"]
 }

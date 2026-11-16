@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import matter from 'gray-matter'
-import { marked } from 'marked'
 
+import { contentPage } from '~/../.storybook/content-page'
 import calendarsJson from '~/../content/calendars.json'
 import source from '~/../content/pages/events.md?raw'
 import {
@@ -15,7 +14,7 @@ import type { Calendar } from '~/lib'
 
 import { EventsPage } from './events'
 
-const { data, content } = matter(source)
+const page = contentPage(source)
 // content.config.ts checks the icons and colors when the site builds.
 const calendars = calendarsJson as Calendar[]
 
@@ -23,8 +22,8 @@ const meta = {
   title: 'Pages/Events',
   component: EventsPage,
   args: {
-    title: String(data.title),
-    html: marked.parse(content, { async: false }),
+    title: page.title,
+    html: page.html,
     calendars,
     state: { status: 'ready', response: eventsResponse, now: fixtureNow },
   },

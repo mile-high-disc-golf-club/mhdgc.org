@@ -76,14 +76,11 @@ test('shows each event with its calendar, a map link, its description links and 
   )
 })
 
-test('strikes through cancelled events with a badge, and collapses long descriptions', () => {
+test('strikes through cancelled events with a badge', () => {
   render(<AllCalendars />)
   const cancelled = screen.getByText('Cancelled').closest('article')
   const struck = [...(cancelled?.querySelectorAll('s') ?? [])].map((s) => s.textContent)
   expect(struck).toEqual([expect.stringMatching(/^2:00\s–\s4:30\sPM$/), 'Village Greens Tags'])
-  const details = screen.getByText('Details').closest('details')
-  expect(details).not.toHaveAttribute('open')
-  expect(details).toHaveTextContent('Example agenda')
 })
 
 test('has a chip for each calendar with events, all shown by default', () => {

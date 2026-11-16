@@ -13,7 +13,8 @@
     ".react-router/types/**/*",
     ".storybook/vitest.setup.ts",
     ".storybook/preview.tsx",
-    ".storybook/router-decorator.tsx"
+    ".storybook/router-decorator.tsx",
+    ".storybook/content-page.ts"
   ],
   "exclude": [".react-router/types/+server-build.d.ts"]
 }

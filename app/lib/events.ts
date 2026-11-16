@@ -252,7 +252,7 @@ export function monthLabel(month: string): string {
 }
 
 // A description is long when it has more than two paragraphs, or more than
-// about three lines of text on a phone. Long ones start collapsed.
+// about three lines of text on a phone. Long ones go in the event's panel.
 export function isLongDescription(description: DescriptionParagraph[]): boolean {
   const length = description
     .flat()
