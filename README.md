@@ -88,7 +88,7 @@ To empty the local KV and test the first-request refresh, run `bunx wrangler kv 
 
 To check what would be uploaded without deploying, run `bun run build && bunx wrangler deploy --dry-run`.
 
-The build copies [`public/_headers`](public/_headers) and adds security headers and a Content Security Policy for each prerendered page to `build/client/_headers`. It hashes the inline scripts from the generated HTML, so there are no hashes to update by hand. Local preview and deployed builds enforce the policy in [`shared/security-headers.ts`](shared/security-headers.ts), which is also where to allow new embed, asset or analytics origins, and any other site a form on our pages posts to (`form-action`). The Worker applies security headers to its own responses and authorizes the 404 page's inline scripts with a per-response nonce.
+The build copies [`public/_headers`](public/_headers) and adds security headers and a Content Security Policy for each prerendered page to `build/client/_headers`. It hashes the inline scripts from the generated HTML, so there are no hashes to update by hand. Local preview and deployed builds enforce the policy in [`shared/security-headers.ts`](shared/security-headers.ts), which is also where to allow new embed, asset or analytics origins, and any other site a form on our pages posts to (`form-action`). Chromium also applies `form-action` to redirects after a form post, so a handler that redirects a submission to another site needs that site allowed too. The Worker applies security headers to its own responses and authorizes the 404 page's inline scripts with a per-response nonce.
 
 ## Environment variables and secrets
 
