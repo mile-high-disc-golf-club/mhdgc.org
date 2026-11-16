@@ -16,6 +16,9 @@ export function documentPolicy(inlineScriptSources: readonly string[]) {
     `img-src 'self' data: ${contentAssetsOrigin}`,
     ["script-src 'self' https://static.cloudflareinsights.com", ...inlineScriptSources].join(' '),
     "connect-src 'self' https://cloudflareinsights.com",
+    // form-action doesn't fall back to default-src. Embedded forms, such as the
+    // Google Form in an iframe, follow their own document's policy.
+    "form-action 'self'",
     "frame-ancestors 'none'",
     "base-uri 'none'",
     "object-src 'none'",

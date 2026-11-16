@@ -11,3 +11,7 @@ test('authorizes a document nonce in script-src without allowing arbitrary inlin
   expect(directives).toContain("frame-ancestors 'none'")
   expect(directives.join(' ')).not.toContain("'unsafe-inline'")
 })
+
+test('limits form submissions to the site, since form-action has no default-src fallback', () => {
+  expect(documentPolicy([]).split('; ')).toContain("form-action 'self'")
+})
