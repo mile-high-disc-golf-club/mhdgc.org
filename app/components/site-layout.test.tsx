@@ -127,6 +127,57 @@ it('closes the menu on a click outside the nav, and not on one inside it', () =>
   expect(button).not.toHaveFocus()
 })
 
+it('closes the menu when focus leaves the nav, and not while it moves inside it', () => {
+  vi.useFakeTimers()
+  try {
+    render(<Desktop />)
+    const button = screen.getByRole('button', { name: 'Menu' })
+    act(() => {
+      button.focus()
+    })
+    fireEvent.click(button)
+
+    const nav = screen.getByRole('navigation', { name: 'Main' })
+    act(() => {
+      within(nav).getByRole('link', { name: 'About' }).focus()
+      vi.runAllTimers()
+    })
+    expect(button).toHaveAttribute('aria-expanded', 'true')
+
+    // Tabbing on from the last link, out of the panel.
+    act(() => {
+      screen.getByRole('link', { name: 'Back to top' }).focus()
+      vi.runAllTimers()
+    })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+  } finally {
+    vi.useRealTimers()
+  }
+})
+
+it('keeps the menu open when the window loses focus', () => {
+  vi.useFakeTimers()
+  const hasFocus = vi.spyOn(document, 'hasFocus')
+  try {
+    render(<Desktop />)
+    const button = screen.getByRole('button', { name: 'Menu' })
+    act(() => {
+      button.focus()
+    })
+    fireEvent.click(button)
+
+    hasFocus.mockReturnValue(false)
+    act(() => {
+      button.blur()
+      vi.runAllTimers()
+    })
+    expect(button).toHaveAttribute('aria-expanded', 'true')
+  } finally {
+    hasFocus.mockRestore()
+    vi.useRealTimers()
+  }
+})
+
 it('closes the menu when the window widens to tablet width', () => {
   render(<Desktop />)
   const button = screen.getByRole('button', { name: 'Menu' })
