@@ -38,8 +38,9 @@ function useEvents(): EventsState {
     fetch('/api/events', { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error(`/api/events: ${String(response.status)}`)
-        const body = (await response.json()) as EventsResponse
-        setState({ status: 'ready', response: body, now: new Date() })
+        const body = (await response.json()) as Partial<EventsResponse> | null
+        if (!Array.isArray(body?.events)) throw new Error('/api/events: no events in the response')
+        setState({ status: 'ready', response: body as EventsResponse, now: new Date() })
       })
       .catch((error: unknown) => {
         if (controller.signal.aborted) return
