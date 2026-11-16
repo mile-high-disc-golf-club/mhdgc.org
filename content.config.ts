@@ -25,6 +25,43 @@ const boardSchema = z.array(
   }),
 )
 
+// The club's public Google Calendars, in display order, for /api/events (#18)
+// and the Events page (#19).
+const slug = z
+  .string()
+  .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'Use lowercase letters, digits and hyphens')
+const calendarsSchema = z
+  .array(
+    z.strictObject({
+      // The full calendar ID, from Google Calendar's settings: Integrate calendar.
+      id: z
+        .string()
+        .regex(/^[\w.-]+@group\.calendar\.google\.com$/, 'Use the full Google Calendar ID'),
+      name: text,
+      // In the Events page's ?cal= filter, so changing one breaks shared links.
+      slug,
+      // Only the shape is checked for now. #19 adds the icons and the event-*
+      // color tokens, then narrows these to the names that exist.
+      icon: slug,
+      color: z.string().regex(/^event-[a-z0-9]+(-[a-z0-9]+)*$/, 'Use an event-* color token'),
+    }),
+  )
+  .min(1)
+  .superRefine((calendars, context) => {
+    for (const key of ['id', 'slug'] as const) {
+      const seen = new Set<string>()
+      calendars.forEach((calendar, index) => {
+        if (seen.has(calendar[key]))
+          context.addIssue({
+            code: 'custom',
+            path: [index, key],
+            message: `Duplicate calendar ${key}: ${calendar[key]}`,
+          })
+        seen.add(calendar[key])
+      })
+    }
+  })
+
 type EncodedImage = { image: ContentImage; assets: [string, Buffer][] }
 
 // Encoding is the slow part of a build: AVIF and WebP at several widths for each
@@ -71,7 +108,7 @@ async function encodeImage(original: Buffer): Promise<EncodedImage> {
 }
 
 export async function compileContent(root: string) {
-  const data: ContentData = { pages: {}, board: [], images: {} }
+  const data: ContentData = { pages: {}, board: [], calendars: [], images: {} }
   const assets = new Map<string, Buffer>()
   // Keys are paths relative to content/images, such as `board/jane-doe.jpg`.
   const imageFiles = (await readdir(join(root, 'images'), { recursive: true, withFileTypes: true }))
@@ -105,6 +142,9 @@ export async function compileContent(root: string) {
   }
   data.board = boardSchema.parse(JSON.parse(await readFile(join(root, 'board.json'), 'utf8')))
   for (const member of data.board) if (member.photo) image(member.photo)
+  data.calendars = calendarsSchema.parse(
+    JSON.parse(await readFile(join(root, 'calendars.json'), 'utf8')),
+  )
   // Raw HTML is rejected: prose stays in the design system, and photos must use
   // ResponsiveImage instead of bypassing local image processing through Markdown.
   const markdown = new Marked({

@@ -61,6 +61,51 @@ when there isn't one. Don't paste the example into the live list. The list start
 empty; issue #13 fills it in and shows it on the About page. It is checked on
 every build.
 
+## Events and calendars
+
+Events come from the club's six public Google Calendars. Keep adding and editing
+events in Google Calendar, as before. The website checks the calendars every 15
+minutes, so a change shows on the Events page within about 15 minutes. The page
+shows every occurrence of a repeating event separately, from the start of the
+current month to 12 months ahead. Cancelling one occurrence in Google Calendar
+shows it as cancelled; deleting it removes it. Descriptions show as plain text
+and links: bold, colors and other formatting are dropped.
+
+`content/calendars.json` lists the calendars, in the order the Events page shows
+them. Each entry needs:
+
+- `id`: the calendar's full ID, from **Settings → Integrate calendar → Calendar
+  ID** in Google Calendar, ending in `@group.calendar.google.com`. The calendar
+  must be public (**Access permissions for events → Make available to public**,
+  with **See all event details**).
+- `name`: the name the Events page shows.
+- `slug`: a short name in lowercase letters, digits and hyphens, such as
+  `ladies-tags`. It appears in shared links that filter the page, such as
+  `/events?cal=tags,tournaments`, so changing it breaks those links.
+- `icon`: the icon's name, such as `trophy`.
+- `color`: the calendar's color token, such as `event-tournaments`.
+
+IDs and slugs must be unique. For example:
+
+```json
+[
+  {
+    "id": "<calendar ID>@group.calendar.google.com",
+    "name": "<calendar name>",
+    "slug": "<slug>",
+    "icon": "<icon>",
+    "color": "event-<slug>"
+  }
+]
+```
+
+To add a calendar, make it public first, then add an entry and ask a developer
+which icon and color to use. To stop showing a calendar, remove its entry. The
+list is checked on every build. For now, the checks only cover the shape of
+`icon` and `color` (lowercase words joined by hyphens, and a name starting
+`event-`). Once the Events page adds the icons and colors (#19), only the ones
+that exist pass.
+
 ## Add a photo
 
 1. Open `content/images/` on GitHub (or a folder in it, such as `board/` for
@@ -102,13 +147,17 @@ no route uses yet. Marked renders Markdown in Node; Zod validates strict schemas
 These are build dependencies. No Markdown parser, schema library or image processor
 is included in the browser or Worker runtime.
 
-Import `readPage`, `readBoard` and `readImage` from `~/.server` in a route loader.
+Import `readPage`, `readBoard`, `readCalendars` and `readImage` from `~/.server` in a route loader.
 Pass the result to a page as props. Use `Prose` for the HTML and `ResponsiveImage`
 from `~/components` for images, passing `image`, `alt` and layout-specific `sizes`.
 `readBoard()` resolves photo paths to image build output. Page metadata includes
 `title`, `description`, optional `ogImage`, and `html`. The image's `src` is a local
 fallback URL; its `sources` hold AVIF/WebP srcsets. Routes must remain prerendered.
 Content edits trigger a full reload during `bun run dev`.
+The Worker reads `calendars.json` through the same compiled content
+(`worker/calendars.ts`), so the cron refresh and `/api/events` use the validated
+list. Events themselves aren't content: the Worker fetches them from Google
+Calendar at run time (see the README).
 
 These tools were chosen because Marked produces plain HTML without a client
 runtime, Zod catches malformed JSON/YAML and misspelled fields before deployment,

@@ -42,6 +42,15 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       boardPath,
       '[{"name":"Test name","roles":[],"tenure":["Test tenure"],"photo":"board/logo.png"}]',
     )
+    const calendarsPath = join(root, 'calendars.json')
+    const calendar = {
+      id: 'c_abc123@group.calendar.google.com',
+      name: 'Test calendar',
+      slug: 'test',
+      icon: 'tag',
+      color: 'event-test',
+    }
+    await writeFile(calendarsPath, JSON.stringify([calendar]))
     const { data, assets } = await compileContent(root)
     expect(data.pages.test.html).toContain('<h2>Section</h2>')
     expect(data.pages.test.html).toContain('<strong>Copy</strong>')
@@ -54,6 +63,7 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
     expect(data.images['board/logo.png'].src).toMatch(/\.png$/)
     expect(Object.keys(data.images)).toEqual(['board/logo.png', 'photo.png'])
     expect(data.board[0].photo).toBe('board/logo.png')
+    expect(data.calendars).toEqual([calendar])
     expect(data.images['photo.png'].sources.map((source) => source.type)).toEqual([
       'image/avif',
       'image/webp',
@@ -85,6 +95,20 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
     }
     await writeFile(boardPath, '{invalid json')
     await expect(compileContent(root)).rejects.toThrow()
+    await writeFile(boardPath, '[]')
+    for (const invalid of [
+      [],
+      [{ ...calendar, id: 'c_abc123' }],
+      [{ ...calendar, slug: 'Test Slug' }],
+      [{ ...calendar, icon: 'Tag' }],
+      [{ ...calendar, color: 'blue-500' }],
+      [{ ...calendar, enabled: true }],
+      [calendar, { ...calendar, slug: 'other' }],
+      [calendar, { ...calendar, id: 'c_other@group.calendar.google.com' }],
+    ]) {
+      await writeFile(calendarsPath, JSON.stringify(invalid))
+      await expect(compileContent(root)).rejects.toThrow()
+    }
   } finally {
     await rm(root, { recursive: true, force: true })
   }
