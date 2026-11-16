@@ -51,6 +51,38 @@ export const palette = {
     700: '#b3261e',
     800: '#8f1e18',
   },
+  // The event calendars' hues, apart from the families above, so a calendar
+  // never reads as a status.
+  green: {
+    50: '#e3f3e1',
+    700: '#2e7d32',
+    800: '#1e5c22',
+  },
+  pink: {
+    50: '#fbe4ef',
+    700: '#ad1f6b',
+    800: '#8a1656',
+  },
+  purple: {
+    50: '#efe7fa',
+    700: '#6b3fb0',
+    800: '#55308f',
+  },
+  slate: {
+    50: '#e6ecf1',
+    700: '#4b5d6e',
+    800: '#384856',
+  },
+  blue: {
+    50: '#e1ebfa',
+    700: '#1f5fbf',
+    800: '#184c99',
+  },
+  brown: {
+    50: '#f5ebe0',
+    700: '#8a5a2b',
+    800: '#6e4720',
+  },
 }
 
 const light = {
@@ -121,9 +153,40 @@ const light = {
   'on-danger': palette.gray[0],
   'danger-soft': palette.red[50],
   'danger-ink': palette.red[800],
+
+  // One per event calendar, named for its slug and chosen in
+  // content/calendars.json. Each has three
+  // roles: the base is a solid fill, such as a calendar's chip when it's
+  // shown, with `on-event` for text on it. `-soft` is a tint, such as an event
+  // in the month grid, and `-ink` is text and icons in that color. Text and
+  // an icon always name the calendar, so color is never the only cue.
+  'on-event': palette.gray[0],
+  'event-tags': palette.green[700],
+  'event-tags-soft': palette.green[50],
+  'event-tags-ink': palette.green[800],
+  'event-ladies-tags': palette.pink[700],
+  'event-ladies-tags-soft': palette.pink[50],
+  'event-ladies-tags-ink': palette.pink[800],
+  'event-tournaments': palette.purple[700],
+  'event-tournaments-soft': palette.purple[50],
+  'event-tournaments-ink': palette.purple[800],
+  'event-board': palette.slate[700],
+  'event-board-soft': palette.slate[50],
+  'event-board-ink': palette.slate[800],
+  'event-clinics': palette.blue[700],
+  'event-clinics-soft': palette.blue[50],
+  'event-clinics-ink': palette.blue[800],
+  'event-volunteer': palette.brown[700],
+  'event-volunteer-soft': palette.brown[50],
+  'event-volunteer-ink': palette.brown[800],
 }
 
 export type ColorToken = keyof typeof light
+// An event calendar's color: the name of its fill token, such as `event-tags`.
+export type EventColor = Exclude<
+  Extract<ColorToken, `event-${string}`>,
+  `${string}-soft` | `${string}-ink`
+>
 // Any other theme must define every token `light` does.
 export type Theme = Record<ColorToken, string>
 export type ThemeName = keyof typeof themes
@@ -131,3 +194,9 @@ export type ThemeName = keyof typeof themes
 // The site is light only. A dark theme would go here, and plugin.ts and
 // colors.test.ts would pick it up.
 export const themes = { light } satisfies Record<string, Theme>
+
+// Every event color, for checking content/calendars.json.
+export const eventColors = Object.keys(light).filter(
+  (token): token is EventColor =>
+    token.startsWith('event-') && !token.endsWith('-soft') && !token.endsWith('-ink'),
+)

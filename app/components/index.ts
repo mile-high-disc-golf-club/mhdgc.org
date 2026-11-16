@@ -1,4 +1,7 @@
 export { ButtonLink } from './button-link'
+export { calendarColors, CalendarLabel } from './calendar-label'
+export { EventList } from './event-list'
+export { EventMonth } from './event-month'
 export { ResponsiveImage } from './responsive-image'
 export { SiteLayout } from './site-layout'
 export { TextLink } from './text-link'

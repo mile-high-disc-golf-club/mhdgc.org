@@ -1,0 +1,1559 @@
+{
+  "events": [
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261101T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-11-01T21:00:00.000Z",
+      "end": "2026-11-01T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjExMDFUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261107T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-11-07T02:30:00.000Z",
+      "end": "2026-11-07T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjExMDdUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261107T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Glen Isle",
+      "start": "2026-11-07T15:00:00.000Z",
+      "end": "2026-11-07T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjExMDdUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261108T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-11-08T21:00:00.000Z",
+      "end": "2026-11-08T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjExMDhUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "2ek16ernknsvai0hpqo35dedg1",
+      "calendar": "board",
+      "title": "Board Meeting",
+      "start": "2026-11-13T01:30:00.000Z",
+      "end": "2026-11-13T02:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "G1 Climbing + Fitness, 8845 W 116th Cir, Broomfield, CO 80021, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MmVrMTZlcm5rbnN2YWkwaHBxbzM1ZGVkZzEgY185MDJiNWU1YTdkMmQ2OThlMTc0MTg2ZGUwODlkOWMzNjg0NjE2ZTExM2I4MjdhMTU0YmQyYmRjOWQzMjA2ZmQ3QGc"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261114T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-11-14T02:30:00.000Z",
+      "end": "2026-11-14T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjExMTRUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261114T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Sakuna Pines",
+      "start": "2026-11-14T15:00:00.000Z",
+      "end": "2026-11-14T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_2_Sakuna_Pines_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_2_Sakuna_Pines_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjExMTRUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261115T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-11-15T21:00:00.000Z",
+      "end": "2026-11-15T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjExMTVUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261121T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-11-21T02:30:00.000Z",
+      "end": "2026-11-21T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjExMjFUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261121T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Fehringer",
+      "start": "2026-11-21T15:00:00.000Z",
+      "end": "2026-11-21T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_3_Ferhinger_Ranch_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_3_Ferhinger_Ranch_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjExMjFUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261122T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-11-22T21:00:00.000Z",
+      "end": "2026-11-22T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjExMjJUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261128T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-11-28T02:30:00.000Z",
+      "end": "2026-11-28T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjExMjhUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261128T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Owl's Den",
+      "start": "2026-11-28T15:00:00.000Z",
+      "end": "2026-11-28T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_4_Owls_Den_Daytime_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_4_Owls_Den_Daytime_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjExMjhUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "78upeckfiearqd9l9k9dcjikkm",
+      "calendar": "tournaments",
+      "title": "WW Glow @Owls",
+      "start": "2026-11-28T23:00:00.000Z",
+      "end": "2026-11-29T00:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_4_Owls_Den_Evening_Glow_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_4_Owls_Den_Evening_Glow_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nzh1cGVja2ZpZWFycWQ5bDlrOWRjamlra20gY185ZjI2YWEwMzY2MmM0NjE0ZDkzMGU1OWMzMzgwYTNhNGIyMThjNWE0YzdiMWUwODBkMmE3NTcyZjE4ODA1NjhhQGc"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261129T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-11-29T21:00:00.000Z",
+      "end": "2026-11-29T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjExMjlUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261205T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-12-05T02:30:00.000Z",
+      "end": "2026-12-05T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjEyMDVUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261205T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Clark Centennial",
+      "start": "2026-12-05T15:00:00.000Z",
+      "end": "2026-12-05T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_5_Clark_Centennial_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_5_Clark_Centennial_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjEyMDVUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261206T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-12-06T21:00:00.000Z",
+      "end": "2026-12-06T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjEyMDZUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "02p3u13ibvir411ohuur2vh668",
+      "calendar": "board",
+      "title": "Board Meeting",
+      "start": "2026-12-11T01:30:00.000Z",
+      "end": "2026-12-11T02:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Lake Arbor Police Station, 8110 Vance Dr, Arvada, CO 80003, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MDJwM3UxM2lidmlyNDExb2h1dXIydmg2NjggY185MDJiNWU1YTdkMmQ2OThlMTc0MTg2ZGUwODlkOWMzNjg0NjE2ZTExM2I4MjdhMTU0YmQyYmRjOWQzMjA2ZmQ3QGc"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261212T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-12-12T02:30:00.000Z",
+      "end": "2026-12-12T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjEyMTJUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261212T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Coal Creek",
+      "start": "2026-12-12T15:00:00.000Z",
+      "end": "2026-12-12T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_6_Coal_Creek_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_6_Coal_Creek_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjEyMTJUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261213T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-12-13T21:00:00.000Z",
+      "end": "2026-12-13T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjEyMTNUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261219T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-12-19T02:30:00.000Z",
+      "end": "2026-12-19T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjEyMTlUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261219T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Creekside Church",
+      "start": "2026-12-19T15:00:00.000Z",
+      "end": "2026-12-19T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_7_Creekside_Church_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_7_Creekside_Church_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjEyMTlUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261220T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-12-20T21:00:00.000Z",
+      "end": "2026-12-20T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjEyMjBUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20261226T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2026-12-26T02:30:00.000Z",
+      "end": "2026-12-26T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNjEyMjZUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20261226T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Centre Hills",
+      "start": "2026-12-26T15:00:00.000Z",
+      "end": "2026-12-26T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_8_Centre_Hills_Make_Up_2026",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_8_Centre_Hills_Make_Up_2026"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNjEyMjZUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20261227T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2026-12-27T21:00:00.000Z",
+      "end": "2026-12-27T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNjEyMjdUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270102T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-01-02T02:30:00.000Z",
+      "end": "2027-01-02T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAxMDJUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20270102T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Birds Nest",
+      "start": "2027-01-02T15:00:00.000Z",
+      "end": "2027-01-02T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_9_Birds_Nest_2027",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_9_Birds_Nest_2027"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNzAxMDJUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270103T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-01-03T21:00:00.000Z",
+      "end": "2027-01-03T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAxMDNUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270109T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-01-09T02:30:00.000Z",
+      "end": "2027-01-09T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAxMDlUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20270109T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Lower Badlands",
+      "start": "2027-01-09T15:00:00.000Z",
+      "end": "2027-01-09T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_10_Lower_Badlands_2027",
+            "text": "https://www.discgolfscene.com/tournament/Winter_Warriors_XXII_Week_10_Lower_Badlands_2027"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNzAxMDlUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270110T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-01-10T21:00:00.000Z",
+      "end": "2027-01-10T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAxMTBUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270116T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-01-16T02:30:00.000Z",
+      "end": "2027-01-16T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAxMTZUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20270116T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - TBD",
+      "start": "2027-01-16T15:00:00.000Z",
+      "end": "2027-01-16T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNzAxMTZUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270117T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-01-17T21:00:00.000Z",
+      "end": "2027-01-17T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAxMTdUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270123T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-01-23T02:30:00.000Z",
+      "end": "2027-01-23T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAxMjNUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20270123T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Westcreek",
+      "start": "2027-01-23T15:00:00.000Z",
+      "end": "2027-01-23T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNzAxMjNUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270124T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-01-24T21:00:00.000Z",
+      "end": "2027-01-24T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAxMjRUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270130T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-01-30T02:30:00.000Z",
+      "end": "2027-01-30T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAxMzBUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20270130T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Adams Hollow",
+      "start": "2027-01-30T15:00:00.000Z",
+      "end": "2027-01-30T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNzAxMzBUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270131T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-01-31T21:00:00.000Z",
+      "end": "2027-01-31T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAxMzFUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270206T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-02-06T02:30:00.000Z",
+      "end": "2027-02-06T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAyMDZUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "6ot93pmu0j64t4c56g11ifeate_20270206T150000Z",
+      "calendar": "tournaments",
+      "title": "Winter Warriors - Exposition Park",
+      "start": "2027-02-06T15:00:00.000Z",
+      "end": "2027-02-06T20:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": null,
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=Nm90OTNwbXUwajY0dDRjNTZnMTFpZmVhdGVfMjAyNzAyMDZUMTUwMDAwWiBjXzlmMjZhYTAzNjYyYzQ2MTRkOTMwZTU5YzMzODBhM2E0YjIxOGM1YTRjN2IxZTA4MGQyYTc1NzJmMTg4MDU2OGFAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270207T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-02-07T21:00:00.000Z",
+      "end": "2027-02-07T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAyMDdUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270213T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-02-13T02:30:00.000Z",
+      "end": "2027-02-13T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAyMTNUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270214T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-02-14T21:00:00.000Z",
+      "end": "2027-02-14T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAyMTRUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270220T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-02-20T02:30:00.000Z",
+      "end": "2027-02-20T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAyMjBUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270221T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-02-21T21:00:00.000Z",
+      "end": "2027-02-21T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAyMjFUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270227T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-02-27T02:30:00.000Z",
+      "end": "2027-02-27T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAyMjdUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270228T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-02-28T21:00:00.000Z",
+      "end": "2027-02-28T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAyMjhUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270306T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-03-06T02:30:00.000Z",
+      "end": "2027-03-06T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAzMDZUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270307T210000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-03-07T21:00:00.000Z",
+      "end": "2027-03-07T23:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAzMDdUMjEwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270313T023000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-03-13T02:30:00.000Z",
+      "end": "2027-03-13T05:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAzMTNUMDIzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270314T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-03-14T20:00:00.000Z",
+      "end": "2027-03-14T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAzMTRUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270320T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-03-20T01:30:00.000Z",
+      "end": "2027-03-20T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAzMjBUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270321T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-03-21T20:00:00.000Z",
+      "end": "2027-03-21T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAzMjFUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270327T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-03-27T01:30:00.000Z",
+      "end": "2027-03-27T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzAzMjdUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270328T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-03-28T20:00:00.000Z",
+      "end": "2027-03-28T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzAzMjhUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270403T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-04-03T01:30:00.000Z",
+      "end": "2027-04-03T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA0MDNUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270404T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-04-04T20:00:00.000Z",
+      "end": "2027-04-04T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA0MDRUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270410T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-04-10T01:30:00.000Z",
+      "end": "2027-04-10T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA0MTBUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270411T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-04-11T20:00:00.000Z",
+      "end": "2027-04-11T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA0MTFUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270417T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-04-17T01:30:00.000Z",
+      "end": "2027-04-17T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA0MTdUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270418T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-04-18T20:00:00.000Z",
+      "end": "2027-04-18T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA0MThUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270424T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-04-24T01:30:00.000Z",
+      "end": "2027-04-24T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA0MjRUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270425T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-04-25T20:00:00.000Z",
+      "end": "2027-04-25T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA0MjVUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270501T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-05-01T01:30:00.000Z",
+      "end": "2027-05-01T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA1MDFUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270502T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-05-02T20:00:00.000Z",
+      "end": "2027-05-02T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA1MDJUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270508T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-05-08T01:30:00.000Z",
+      "end": "2027-05-08T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA1MDhUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270509T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-05-09T20:00:00.000Z",
+      "end": "2027-05-09T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA1MDlUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270515T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-05-15T01:30:00.000Z",
+      "end": "2027-05-15T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA1MTVUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270516T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-05-16T20:00:00.000Z",
+      "end": "2027-05-16T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA1MTZUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270522T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-05-22T01:30:00.000Z",
+      "end": "2027-05-22T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA1MjJUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270523T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-05-23T20:00:00.000Z",
+      "end": "2027-05-23T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA1MjNUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270529T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-05-29T01:30:00.000Z",
+      "end": "2027-05-29T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA1MjlUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270530T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-05-30T20:00:00.000Z",
+      "end": "2027-05-30T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA1MzBUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270605T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-06-05T01:30:00.000Z",
+      "end": "2027-06-05T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA2MDVUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270606T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-06-06T20:00:00.000Z",
+      "end": "2027-06-06T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA2MDZUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270612T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-06-12T01:30:00.000Z",
+      "end": "2027-06-12T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA2MTJUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270613T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-06-13T20:00:00.000Z",
+      "end": "2027-06-13T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA2MTNUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270619T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-06-19T01:30:00.000Z",
+      "end": "2027-06-19T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA2MTlUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270620T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-06-20T20:00:00.000Z",
+      "end": "2027-06-20T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA2MjBUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "7e4quethk4gp0jgl9gelfkfq8l",
+      "calendar": "tournaments",
+      "title": "High Plains Challenge",
+      "start": "2027-06-25",
+      "end": "2027-06-28",
+      "allDay": true,
+      "cancelled": false,
+      "location": null,
+      "description": [
+        [
+          {
+            "href": "https://www.discgolfscene.com/tournament/High_Plains_Challenge_2027_sponsored_by_Trash_Panda_Disc_Golf",
+            "text": "https://www.discgolfscene.com/tournament/High_Plains_Challenge_2027_sponsored_by_Trash_Panda_Disc_Golf"
+          }
+        ]
+      ],
+      "url": "https://www.google.com/calendar/event?eid=N2U0cXVldGhrNGdwMGpnbDlnZWxma2ZxOGwgY185ZjI2YWEwMzY2MmM0NjE0ZDkzMGU1OWMzMzgwYTNhNGIyMThjNWE0YzdiMWUwODBkMmE3NTcyZjE4ODA1NjhhQGc"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270626T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-06-26T01:30:00.000Z",
+      "end": "2027-06-26T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA2MjZUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270627T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-06-27T20:00:00.000Z",
+      "end": "2027-06-27T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA2MjdUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270703T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-07-03T01:30:00.000Z",
+      "end": "2027-07-03T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA3MDNUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270704T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-07-04T20:00:00.000Z",
+      "end": "2027-07-04T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA3MDRUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270710T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-07-10T01:30:00.000Z",
+      "end": "2027-07-10T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA3MTBUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270711T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-07-11T20:00:00.000Z",
+      "end": "2027-07-11T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA3MTFUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270717T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-07-17T01:30:00.000Z",
+      "end": "2027-07-17T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA3MTdUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270718T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-07-18T20:00:00.000Z",
+      "end": "2027-07-18T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA3MThUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270724T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-07-24T01:30:00.000Z",
+      "end": "2027-07-24T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA3MjRUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270725T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-07-25T20:00:00.000Z",
+      "end": "2027-07-25T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA3MjVUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270731T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-07-31T01:30:00.000Z",
+      "end": "2027-07-31T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA3MzFUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270801T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-08-01T20:00:00.000Z",
+      "end": "2027-08-01T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA4MDFUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270807T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-08-07T01:30:00.000Z",
+      "end": "2027-08-07T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA4MDdUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270808T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-08-08T20:00:00.000Z",
+      "end": "2027-08-08T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA4MDhUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270814T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-08-14T01:30:00.000Z",
+      "end": "2027-08-14T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA4MTRUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270815T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-08-15T20:00:00.000Z",
+      "end": "2027-08-15T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA4MTVUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270821T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-08-21T01:30:00.000Z",
+      "end": "2027-08-21T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA4MjFUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270822T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-08-22T20:00:00.000Z",
+      "end": "2027-08-22T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA4MjJUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270828T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-08-28T01:30:00.000Z",
+      "end": "2027-08-28T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA4MjhUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270829T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-08-29T20:00:00.000Z",
+      "end": "2027-08-29T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA4MjlUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270904T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-09-04T01:30:00.000Z",
+      "end": "2027-09-04T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA5MDRUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270905T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-09-05T20:00:00.000Z",
+      "end": "2027-09-05T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA5MDVUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270911T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-09-11T01:30:00.000Z",
+      "end": "2027-09-11T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA5MTFUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270912T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-09-12T20:00:00.000Z",
+      "end": "2027-09-12T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA5MTJUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270918T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-09-18T01:30:00.000Z",
+      "end": "2027-09-18T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA5MThUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270919T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-09-19T20:00:00.000Z",
+      "end": "2027-09-19T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA5MTlUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20270925T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-09-25T01:30:00.000Z",
+      "end": "2027-09-25T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzA5MjVUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20270926T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-09-26T20:00:00.000Z",
+      "end": "2027-09-26T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzA5MjZUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20271002T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-10-02T01:30:00.000Z",
+      "end": "2027-10-02T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzEwMDJUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20271003T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-10-03T20:00:00.000Z",
+      "end": "2027-10-03T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzEwMDNUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20271009T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-10-09T01:30:00.000Z",
+      "end": "2027-10-09T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzEwMDlUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20271010T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-10-10T20:00:00.000Z",
+      "end": "2027-10-10T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzEwMTBUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20271016T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-10-16T01:30:00.000Z",
+      "end": "2027-10-16T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzEwMTZUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20271017T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-10-17T20:00:00.000Z",
+      "end": "2027-10-17T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzEwMTdUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20271023T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-10-23T01:30:00.000Z",
+      "end": "2027-10-23T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzEwMjNUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20271024T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-10-24T20:00:00.000Z",
+      "end": "2027-10-24T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzEwMjRUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "0ooeeg8400urskeejbqu9q0bjr_20271030T013000Z",
+      "calendar": "tags",
+      "title": "Johnny Robert's Tags (Glow)",
+      "start": "2027-10-30T01:30:00.000Z",
+      "end": "2027-10-30T04:00:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Memorial Park and Johnny Roberts Disc Golf Course, 8001 W 59th Ave, Arvada, CO 80004, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=MG9vZWVnODQwMHVyc2tlZWpicXU5cTBianJfMjAyNzEwMzBUMDEzMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    },
+    {
+      "id": "omebo0dj29kuaufa6b7pmlv8m5_20271031T200000Z",
+      "calendar": "tags",
+      "title": "Village Greens Tags",
+      "start": "2027-10-31T20:00:00.000Z",
+      "end": "2027-10-31T22:30:00.000Z",
+      "allDay": false,
+      "cancelled": false,
+      "location": "Village Greens Disc Golf Course, 9501 E Union Ave, Greenwood Village, CO 80111, USA",
+      "description": [],
+      "url": "https://www.google.com/calendar/event?eid=b21lYm8wZGoyOWt1YXVmYTZiN3BtbHY4bTVfMjAyNzEwMzFUMjAwMDAwWiBjXzczOTg4ZDVhODZmMzIxNTcwNTI1ZDdjNmE2MmY1MTM2ZDM5YTNjNzhmNTRkZmM5OWFjZDA4MjM4OTRhN2M1YjZAZw"
+    }
+  ],
+  "updatedAt": "2026-11-15T18:45:00.000Z",
+  "partial": false
+}

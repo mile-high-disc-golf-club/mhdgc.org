@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo"
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test.tsbuildinfo",
+    // content.config.ts imports design-system files with their extension, as Node needs.
+    "allowImportingTsExtensions": true
   },
   "include": [
     "content.config.ts",

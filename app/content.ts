@@ -27,9 +27,12 @@ export interface CalendarConfig {
   name: string
   /** Used in `?cal=` and as `calendar` in `/api/events`. */
   slug: string
-  /** An icon name. #19 narrows it to the icons in the design system. */
+  /**
+   * An icon from the design system's `icons.ts`. The build checks it, and
+   * `Calendar` in `~/lib` narrows the type for the app.
+   */
   icon: string
-  /** An `event-*` color token. #19 narrows it to the tokens in colors.ts. */
+  /** An `event-*` color token from `colors.ts`, checked and narrowed the same way. */
   color: string
 }
 

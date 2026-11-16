@@ -48,7 +48,7 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       name: 'Test calendar',
       slug: 'test',
       icon: 'tag',
-      color: 'event-test',
+      color: 'event-tags',
     }
     await writeFile(calendarsPath, JSON.stringify([calendar]))
     const { data, assets } = await compileContent(root)
@@ -101,7 +101,10 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       [{ ...calendar, id: 'c_abc123' }],
       [{ ...calendar, slug: 'Test Slug' }],
       [{ ...calendar, icon: 'Tag' }],
+      [{ ...calendar, icon: 'flag' }],
       [{ ...calendar, color: 'blue-500' }],
+      [{ ...calendar, color: 'event-test' }],
+      [{ ...calendar, color: 'event-tags-soft' }],
       [{ ...calendar, enabled: true }],
       [calendar, { ...calendar, slug: 'other' }],
       [calendar, { ...calendar, id: 'c_other@group.calendar.google.com' }],
