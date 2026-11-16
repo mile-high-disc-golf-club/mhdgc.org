@@ -1,6 +1,6 @@
 import './app.css'
 
-import type { ReactNode } from 'react'
+import { type ReactNode, useEffect } from 'react'
 import {
   isRouteErrorResponse,
   Links,
@@ -12,9 +12,10 @@ import {
 } from 'react-router'
 
 import { SiteLayout } from '~/components'
+import { loadBeacon, webAnalyticsBeacon } from '~/lib'
 
 import type { Route } from './+types/root'
-import { pageTitle } from './site'
+import { pageTitle, siteUrl, webAnalyticsToken } from './site'
 
 // The favicon, touch icons and manifest live in public/, where browsers expect them.
 export const links: Route.LinksFunction = () => [
@@ -38,6 +39,15 @@ export function shouldRevalidate() {
 export function Layout({ children }: { children: ReactNode }) {
   // Undefined if the root loader failed and the error boundary is showing.
   const data = useRouteLoaderData<typeof loader>('root')
+  // Runs once after hydration. The beacon counts later route changes itself.
+  // Layout also wraps the error boundary, so error pages are counted too.
+  useEffect(() => {
+    const beacon = webAnalyticsBeacon(location.hostname, {
+      token: webAnalyticsToken,
+      productionHost: new URL(siteUrl).hostname,
+    })
+    if (beacon) loadBeacon(beacon)
+  }, [])
   return (
     <html lang="en">
       <head>

@@ -25,3 +25,4 @@ export {
   upcomingEvents,
   webcalUrl,
 } from './events'
+export { loadBeacon, webAnalyticsBeacon } from './web-analytics'
