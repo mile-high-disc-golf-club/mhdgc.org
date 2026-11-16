@@ -1,5 +1,6 @@
 import { createRequestHandler } from 'react-router'
 
+import { noContentPolicy, securityHeaders } from '../shared/security-headers'
 import { handleApi } from './api'
 import { calendars } from './calendars'
 import { refreshEvents } from './events/store'
@@ -19,13 +20,20 @@ export default {
         ? await handleApi(request, env)
         : await handleDocument(request)
 
+    const headers = new Headers(response.headers)
+    for (const [name, value] of Object.entries(securityHeaders)) headers.set(name, value)
+    if (import.meta.env.PROD && !headers.has('Content-Security-Policy')) {
+      headers.set('Content-Security-Policy', noContentPolicy)
+    }
     // The production workers.dev route is disabled, so Workers hostnames are version URLs.
     if (url.hostname.endsWith('.workers.dev')) {
-      const previewResponse = new Response(response.body, response)
-      previewResponse.headers.set('X-Robots-Tag', 'noindex')
-      return previewResponse
+      headers.set('X-Robots-Tag', 'noindex')
     }
-    return response
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    })
   },
 
   // The cron trigger in wrangler.jsonc. Locally, run it with

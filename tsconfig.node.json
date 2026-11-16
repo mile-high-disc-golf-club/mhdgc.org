@@ -21,6 +21,7 @@
     "app/design-system/components/icons.ts",
     "app/design-system/theme/colors.ts",
     "app/site.ts",
+    "shared/security-headers.ts",
     "*.config.ts",
     ".storybook/**/*.ts"
   ],
