@@ -9,7 +9,11 @@ import { Text } from './text'
 // one that appears already filled. It sits outside the busy content, which is
 // dimmed and inert while loading. While busy the region is at least tall
 // enough for the spinner, so an empty first load has somewhere to show it,
-// and the spinner stays on screen however far the page is scrolled.
+// and the spinner stays on screen however far the page is scrolled. An empty
+// first load reserves a screen's height, so whatever follows the region starts
+// below the fold and doesn't jump when the content arrives. That jump counts
+// as a layout shift. While idle, the status region shrinks to nothing, so it
+// doesn't sit over the content, where axe can't tell the text's background.
 export function LoadingRegion({
   busy = false,
   label = 'Loading…',
@@ -26,13 +30,14 @@ export function LoadingRegion({
         aria-busy={busy}
         inert={busy || undefined}
         data-busy={busy ? '' : undefined}
-        className="flex flex-col gap-4 data-busy:pointer-events-none data-busy:opacity-40 motion-safe:transition-opacity motion-safe:duration-150"
+        className="flex flex-col gap-4 data-busy:pointer-events-none data-busy:opacity-40 data-busy:empty:min-h-dvh motion-safe:transition-opacity motion-safe:duration-150"
       >
         {children}
       </div>
       <div
         aria-live="polite"
-        className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-ink-muted"
+        data-busy={busy ? '' : undefined}
+        className="pointer-events-none absolute flex flex-col items-center justify-center text-ink-muted data-busy:inset-0"
       >
         {/* Centered in the content, but sticky to the middle of the screen, so on a
             long, scrolled list it never leaves the view. The offsets are half its

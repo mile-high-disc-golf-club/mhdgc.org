@@ -30,5 +30,16 @@ it('keeps the live region mounted, and gives an empty first load room for the sp
   const region = container.firstElementChild
   expect(region).toHaveClass('data-busy:min-h-40')
   expect(region).toHaveAttribute('data-busy')
-  expect(container.querySelector('[aria-live="polite"]')).toHaveTextContent('Loading events…')
+  // A screen's height, so what follows doesn't shift when the content arrives.
+  expect(region?.firstElementChild).toBeEmptyDOMElement()
+  expect(region?.firstElementChild).toHaveClass('data-busy:empty:min-h-dvh')
+  const status = container.querySelector('[aria-live="polite"]')
+  expect(status).toHaveTextContent('Loading events…')
+  expect(status).toHaveClass('data-busy:inset-0')
+  expect(status).toHaveAttribute('data-busy')
+})
+
+it('shrinks the idle status region so it doesn’t cover the content', () => {
+  const { container } = render(<Default />)
+  expect(container.querySelector('[aria-live="polite"]')).not.toHaveAttribute('data-busy')
 })
