@@ -61,11 +61,13 @@ export function AboutPage({ title, html, board }: AboutPageProps) {
       </ul>
       <section aria-labelledby="contact-us" className="flex flex-col gap-4">
         <Text.H2 id="contact-us">Contact Us</Text.H2>
+        {/* The form can't report its height across origins. It's about 770–800px tall, depending
+            on width, so this leaves room for its "required question" errors without a blank gap. */}
         <iframe
           src={`${contactForm}?embedded=true`}
           title="Contact Us: Name, Email and Comment"
           loading="lazy"
-          className="h-[1100px] w-full border-0"
+          className="h-[860px] w-full border-0"
         />
         {/* A fallback for visitors whose browser doesn't load the embedded form. */}
         <TextLink to={contactForm} standalone newTab>
