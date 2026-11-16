@@ -128,10 +128,13 @@ link in the event's description in Google Calendar, so the page links to it.
    the page component with useful alt text (or empty alt text for decoration).
    Describe what the photo shows and where it should go in the PR.
 
-The build rotates photos using their orientation metadata, removes metadata,
-creates AVIF and WebP sizes up to the original width, and adds a JPEG fallback
-(PNG for images with transparency). It never enlarges an original. Width and height
-reserve space before loading.
+When the PR's checks run, a job encodes each new photo once: it rotates it
+using its orientation metadata, removes metadata, creates AVIF and WebP sizes up to
+the original width, and adds a JPEG fallback (PNG for images with transparency).
+It never enlarges an original. The files go to the club's image host,
+`assets.mhdgc.org`, and the site links to them there. Width and height reserve
+space before loading. Changing a photo makes new files; the old ones stay for
+older previews.
 
 ## Check the preview and publish
 
@@ -150,17 +153,25 @@ review and merge the PR when it is ready. Merging to `main` deploys the site.
 
 `content.config.ts` validates **all** content during Vite startup/build, even files
 no route uses yet. Marked renders Markdown in Node; Zod validates strict schemas
-(unknown fields fail); Sharp generates content-hashed local image assets.
-These are build dependencies. No Markdown parser, schema library or image processor
+(unknown fields fail); Sharp reads each photo's size from its header. Encoding
+happens outside the build: `bun run images:upload`
+([`scripts/upload-content-images.ts`](scripts/upload-content-images.ts)) encodes
+missing variants and uploads them to R2, and CI runs it before every deploy. Object
+keys are `v1/<first 16 hex digits of the original's SHA-256>/<width>.<format>`, so
+the build can write every URL without asking R2. Bump `encodingVersion` in
+`content.config.ts` when the encoding changes. These are build dependencies. No Markdown parser, schema library or image processor
 is included in the browser or Worker runtime.
 
 Import `readPage`, `readBoard`, `readCalendars` and `readImage` from `~/.server` in a route loader.
 Pass the result to a page as props. Use `Prose` for the HTML and `ResponsiveImage`
 from `~/components` for images, passing `image`, `alt` and layout-specific `sizes`.
 `readBoard()` resolves photo paths to image build output. Page metadata includes
-`title`, `description`, optional `ogImage`, and `html`. The image's `src` is a local
-fallback URL; its `sources` hold AVIF/WebP srcsets. Routes must remain prerendered.
-Content edits trigger a full reload during `bun run dev`.
+`title`, `description`, optional `ogImage`, and `html`. In a build, the image's `src`
+is the full-size JPEG or PNG on `assets.mhdgc.org` and its `sources` hold AVIF/WebP
+srcsets there. `bun run dev`, and a build with `CONTENT_IMAGES=local`, serve the
+unencoded originals from `/content-assets/` with no `sources`, so they need neither
+R2 nor any encoding. Routes must remain prerendered. Content edits trigger a full
+reload during `bun run dev`.
 The Worker reads `calendars.json` through the same compiled content
 (`worker/calendars.ts`), so the cron refresh and `/api/events` use the validated
 list. Events themselves aren't content: the Worker fetches them from Google
@@ -176,7 +187,8 @@ without a third-party service. Validate changes with the checks in `AGENTS.md`.
 The committed `content/images/videos/bypfs7tfhni.jpg` and
 `content/images/videos/f2dkiwxatsy.jpg` thumbnails were downloaded once from YouTube's
 `maxresdefault.jpg` endpoint for `BYpfS7tfhNI` and `F2DkIwXATsY` respectively
-(issue #10). Builds process them locally; visitors make no YouTube request until play.
+(issue #10). They go through the same image pipeline as other photos; visitors make
+no YouTube request until play.
 For the home page, pass `readImage('videos/bypfs7tfhni.jpg')` or
 `readImage('videos/f2dkiwxatsy.jpg')` from the loader to `YouTubeEmbed` as `thumbnail`,
 with the original case-sensitive video ID, title and caption from #10.
@@ -185,14 +197,14 @@ with the original case-sensitive video ID, title and caption from #10.
 
 `content/images/home/course.jpg` was exported from the current Google Site
 (`https://www.mhdgc.org/home`) for issue #11. It shows a basket among evergreens,
-with gondolas and mountains beyond. Builds process this local original with the
-same responsive image pipeline as other content images.
+with gondolas and mountains beyond. It goes through the same responsive image
+pipeline as other content images.
 
 ## Membership tag photo
 
 `content/images/membership/bag-tags.jpg` was exported from the current Google Site
-(`https://www.mhdgc.org/membership`) for issue #12. Builds process this local
-original through the responsive image pipeline.
+(`https://www.mhdgc.org/membership`) for issue #12. It goes through the responsive
+image pipeline.
 
 ### Board photos (#13)
 

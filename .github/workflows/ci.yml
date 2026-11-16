@@ -99,9 +99,44 @@ jobs:
       - name: Build
         run: bun run build
 
+  # The build links to encoded images in R2 instead of encoding them. This
+  # uploads any that are missing, before a preview or production deploy uses them.
+  # Fork and Dependabot PRs can't read the secrets; their photos upload once merged.
+  images:
+    name: Upload content images
+    if: >-
+      github.event_name == 'push' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.user.login != 'dependabot[bot]' &&
+      github.actor != 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: ${{ runner.os }}-${{ runner.arch }}-bun-
+      - run: bun install --frozen-lockfile
+      - name: Encode and upload missing images
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: bun run images:upload
+
   deploy:
     name: Deploy to Cloudflare
-    needs: checks
+    needs: [checks, images]
     if: >-
       github.event_name == 'push' ||
       (needs.checks.outputs.preview == 'true' &&

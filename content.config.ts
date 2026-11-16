@@ -10,6 +10,7 @@ import { z } from 'zod'
 import type { ContentData, ContentImage } from './app/content'
 import { icons } from './app/design-system/components/icons.ts'
 import { eventColors } from './app/design-system/theme/colors.ts'
+import { contentAssetsOrigin } from './shared/content-assets.ts'
 
 const text = z.string().trim().min(1)
 const pageSchema = z.strictObject({
@@ -67,78 +68,136 @@ const calendarsSchema = z
     }
   })
 
-type EncodedImage = { image: ContentImage; assets: [string, Buffer][] }
+/**
+ * `remote`: image URLs point at the R2 bucket, which `bun run images:upload`
+ * fills (scripts/upload-content-images.ts). `local`: each original is served as
+ * is from /content-assets/, with no AVIF or WebP versions, for `bun run dev` and
+ * builds without R2. Neither mode encodes anything, so both take milliseconds.
+ */
+export type ImageMode = 'remote' | 'local'
 
-// Encoding is the slow part of a build: AVIF and WebP at several widths for each
-// image. One `react-router build` loads the Vite config, and so this plugin,
-// several times in the same process, so encoded images are shared through
-// globalThis, keyed by the file's bytes. A changed file gets a new key.
-const encodedImages = ((
-  globalThis as { repoContentImages?: Map<string, Promise<EncodedImage>> }
-).repoContentImages ??= new Map<string, Promise<EncodedImage>>())
-
-async function encodeImage(original: Buffer): Promise<EncodedImage> {
-  const assets: [string, Buffer][] = []
-  function asset(bytes: Buffer, extension: string) {
-    const hash = createHash('sha256').update(bytes).digest('hex').slice(0, 16)
-    const path = `/content-assets/${hash}.${extension}`
-    assets.push([path, bytes])
-    return path
-  }
-  const rotated = sharp(original).rotate()
-  // Photos fall back to JPEG; only images with transparency need PNG.
-  const fallbackFormat = (await rotated.clone().stats()).isOpaque ? 'jpeg' : 'png'
-  const { data: fallback, info } = await rotated
-    .toFormat(fallbackFormat)
-    .toBuffer({ resolveWithObject: true })
-  const image: ContentImage = {
-    src: asset(fallback, fallbackFormat === 'jpeg' ? 'jpg' : 'png'),
-    width: info.width,
-    height: info.height,
-    sources: [],
-  }
-  const widths = [
-    ...new Set([320, 640, 960, 1440, info.width].filter((width) => width <= info.width)),
-  ].sort((a, b) => a - b)
-  for (const format of ['avif', 'webp'] as const) {
-    const candidates = []
-    for (const width of widths) {
-      // From the original, so lossy formats aren't encoded twice.
-      const bytes = await rotated.clone().resize({ width }).toFormat(format).toBuffer()
-      candidates.push(`${asset(bytes, format)} ${width}w`)
-    }
-    image.sources.push({ type: `image/${format}`, srcSet: candidates.join(', ') })
-  }
-  return { image, assets }
+export type ImageFormat = 'avif' | 'webp' | 'jpeg' | 'png'
+export interface ImageVariant {
+  /** The R2 object key, such as `v1/0123456789abcdef/640.avif`. */
+  key: string
+  format: ImageFormat
+  width: number
+}
+export interface ImagePlan {
+  /** The first 16 hex digits of the original's SHA-256. */
+  hash: string
+  /** The folder in the bucket that holds every variant, such as `v1/0123456789abcdef/`. */
+  prefix: string
+  width: number
+  height: number
+  /** Full size, as JPEG, or PNG for images with transparency. */
+  fallback: ImageVariant
+  sources: { format: 'avif' | 'webp'; variants: ImageVariant[] }[]
 }
 
-export async function compileContent(root: string) {
-  const data: ContentData = { pages: {}, board: [], calendars: [], images: {} }
-  const assets = new Map<string, Buffer>()
-  // Keys are paths relative to content/images, such as `board/jane-doe.jpg`.
-  const imageFiles = (await readdir(join(root, 'images'), { recursive: true, withFileTypes: true }))
+// Part of every key. Bump it when the encoding below changes (formats, widths,
+// quality), so the new files get new URLs instead of replacing cached ones.
+// Nothing else changes a key: after a Sharp or libavif upgrade, existing files
+// stay as they were encoded and only new photos use the new encoder. Bump it
+// too if the upgrade's output should replace them.
+const encodingVersion = 'v1'
+const sourceWidths = [320, 640, 960, 1440]
+const extensions: Record<ImageFormat, string> = {
+  avif: 'avif',
+  webp: 'webp',
+  jpeg: 'jpg',
+  png: 'png',
+}
+
+/**
+ * Which files an original becomes, from its header alone. Only an image with an
+ * alpha channel is decoded, to check whether it really has transparency.
+ */
+export async function planImage(original: Buffer): Promise<ImagePlan> {
+  const hash = createHash('sha256').update(original).digest('hex').slice(0, 16)
+  const meta = await sharp(original).metadata()
+  // The size after EXIF rotation, which is how the image is encoded and shown.
+  const { width, height } = meta.autoOrient
+  const opaque = !meta.hasAlpha || (await sharp(original).stats()).isOpaque
+  const prefix = `${encodingVersion}/${hash}/`
+  function variant(format: ImageFormat, variantWidth: number): ImageVariant {
+    return {
+      key: `${prefix}${variantWidth}.${extensions[format]}`,
+      format,
+      width: variantWidth,
+    }
+  }
+  // Never enlarged: only widths up to the original's, plus the original's own.
+  const widths = [...new Set([...sourceWidths, width].filter((w) => w <= width))].sort(
+    (a, b) => a - b,
+  )
+  return {
+    hash,
+    prefix,
+    width,
+    height,
+    fallback: variant(opaque ? 'jpeg' : 'png', width),
+    sources: (['avif', 'webp'] as const).map((format) => ({
+      format,
+      variants: widths.map((w) => variant(format, w)),
+    })),
+  }
+}
+
+/** Encodes one variant. Only the upload script calls this, never the build. */
+export function encodeVariant(original: Buffer, plan: ImagePlan, variant: ImageVariant) {
+  const image = sharp(original).rotate()
+  // The fallback is full size, so it isn't resampled.
+  if (variant.width !== plan.width) image.resize({ width: variant.width })
+  return image.toFormat(variant.format).toBuffer()
+}
+
+/** The paths of the originals inside `content/images`, such as `board/jane-doe.jpg`. */
+export async function listContentImages(root: string) {
+  const imagesRoot = join(root, 'images')
+  const files = (await readdir(imagesRoot, { recursive: true, withFileTypes: true }))
     .filter((entry) => entry.isFile())
-    .map((entry) =>
-      relative(join(root, 'images'), join(entry.parentPath, entry.name)).replaceAll(sep, '/'),
-    )
+    .map((entry) => relative(imagesRoot, join(entry.parentPath, entry.name)).replaceAll(sep, '/'))
     // Skips hidden files and folders, such as .gitkeep.
     .filter((path) => !path.split('/').some((segment) => segment.startsWith('.')))
     .sort()
-  for (const file of imageFiles) {
+  for (const file of files)
     if (!/\.(jpe?g|png|webp|avif)$/i.test(file))
       throw new Error(`content/images/${file}: use JPEG, PNG, WebP or AVIF`)
+  return files
+}
+
+function remoteImage(plan: ImagePlan): ContentImage {
+  const url = (variant: ImageVariant) => `${contentAssetsOrigin}/${variant.key}`
+  return {
+    src: url(plan.fallback),
+    width: plan.width,
+    height: plan.height,
+    sources: plan.sources.map(({ format, variants }) => ({
+      type: `image/${format}`,
+      srcSet: variants.map((variant) => `${url(variant)} ${variant.width}w`).join(', '),
+    })),
+  }
+}
+
+export async function compileContent(root: string, { images }: { images: ImageMode }) {
+  const data: ContentData = { pages: {}, board: [], calendars: [], images: {} }
+  // Only `local` mode serves files from the site itself: path to bytes.
+  const assets = new Map<string, Buffer>()
+  for (const file of await listContentImages(root)) {
     const original = await readFile(join(root, 'images', file))
-    const key = createHash('sha256').update(original).digest('hex')
-    let encoded = encodedImages.get(key)
-    if (!encoded) {
-      encoded = encodeImage(original)
-      encodedImages.set(key, encoded)
-      // A failed encode isn't kept, so the next compile tries again.
-      encoded.catch(() => encodedImages.delete(key))
+    const plan = await planImage(original)
+    if (images === 'remote') {
+      data.images[file] = remoteImage(plan)
+    } else {
+      const extension = file
+        .slice(file.lastIndexOf('.') + 1)
+        .toLowerCase()
+        .replace('jpeg', 'jpg')
+      const path = `/content-assets/${plan.hash}.${extension}`
+      assets.set(path, original)
+      data.images[file] = { src: path, width: plan.width, height: plan.height, sources: [] }
     }
-    const { image, assets: imageAssets } = await encoded
-    for (const [path, bytes] of imageAssets) assets.set(path, bytes)
-    data.images[file] = image
   }
   function image(name: string) {
     const result = data.images[name]
@@ -151,7 +210,7 @@ export async function compileContent(root: string) {
     JSON.parse(await readFile(join(root, 'calendars.json'), 'utf8')),
   )
   // Raw HTML is rejected: prose stays in the design system, and photos must use
-  // ResponsiveImage instead of bypassing local image processing through Markdown.
+  // ResponsiveImage instead of bypassing the image pipeline through Markdown.
   const markdown = new Marked({
     renderer: {
       html() {
@@ -194,14 +253,24 @@ export function contentPlugin(): Plugin {
   let root: string
   let compiled: ReturnType<typeof compileContent> | undefined
   let building = false
+  let images: ImageMode = 'local'
   function compile() {
-    return (compiled ??= compileContent(root))
+    return (compiled ??= compileContent(root, { images }))
   }
   return {
     name: 'repo-content',
     configResolved(config) {
       root = join(config.root, 'content')
       building = config.command === 'build'
+      // A build links to the encoded images in R2. CONTENT_IMAGES=local builds
+      // with the originals instead, for when R2 isn't set up. Everything else,
+      // such as `bun run dev`, serves the originals.
+      if (building) {
+        const mode = process.env.CONTENT_IMAGES ?? 'remote'
+        if (mode !== 'remote' && mode !== 'local')
+          throw new Error(`CONTENT_IMAGES must be remote or local, not ${mode}`)
+        images = mode
+      }
     },
     // Only a build compiles up front. Other commands, such as `react-router
     // typegen`, compile when something loads the content or an image.
