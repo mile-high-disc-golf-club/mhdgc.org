@@ -59,7 +59,10 @@ export function eventDays(event: CalendarEvent): { first: string; last: string }
 
 export function hasEnded(event: CalendarEvent, now: Date): boolean {
   if (event.allDay) return eventDays(event).last < denverDay(now)
-  return Date.parse(event.end) <= now.getTime()
+  // An event with no length, or one whose end is before its start, stays listed
+  // for a minute after it starts, rather than ending the moment it begins.
+  const end = Math.max(Date.parse(event.end), Date.parse(event.start) + 60_000)
+  return end <= now.getTime()
 }
 
 // All-day events first on their day, then by start time.

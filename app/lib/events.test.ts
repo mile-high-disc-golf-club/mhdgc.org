@@ -79,6 +79,12 @@ describe('Denver days', () => {
     expect(hasEnded(timed('2026-11-15T17:00:00Z', '2026-11-15T19:00:00Z'), fixtureNow)).toBe(true)
     expect(hasEnded(timed('2026-11-15T17:00:00Z', '2026-11-15T19:01:00Z'), fixtureNow)).toBe(false)
   })
+
+  it('keeps an event with no length listed for a minute after it starts', () => {
+    expect(hasEnded(timed('2026-11-15T19:00:00Z', '2026-11-15T19:00:00Z'), fixtureNow)).toBe(false)
+    expect(hasEnded(timed('2026-11-15T18:59:30Z', '2026-11-15T18:59:30Z'), fixtureNow)).toBe(false)
+    expect(hasEnded(timed('2026-11-15T18:59:00Z', '2026-11-15T18:59:00Z'), fixtureNow)).toBe(true)
+  })
 })
 
 describe('the list', () => {
