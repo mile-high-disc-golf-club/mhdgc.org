@@ -112,7 +112,8 @@ jobs:
             !build/server/.dev.vars
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 1
+          # Long enough for "Re-run failed jobs" on a deploy days later.
+          retention-days: 7
 
   # The build links to encoded images in R2 instead of encoding them. This
   # uploads any that are missing, before a preview or production deploy uses them.
