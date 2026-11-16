@@ -22,6 +22,8 @@ export default {
 
     const headers = new Headers(response.headers)
     for (const [name, value] of Object.entries(securityHeaders)) headers.set(name, value)
+    // API and data responses get the restrictive fallback. Any new dynamic
+    // HTML route must set its document policy in the server entry.
     if (import.meta.env.PROD && !headers.has('Content-Security-Policy')) {
       headers.set('Content-Security-Policy', noContentPolicy)
     }

@@ -2,7 +2,7 @@ import { isbot } from 'isbot'
 import { renderToReadableStream } from 'react-dom/server'
 import { type EntryContext, ServerRouter } from 'react-router'
 
-import { documentPolicy } from '~/../shared/security-headers'
+import { documentPolicy } from '~shared/security-headers'
 
 export const streamTimeout = 5_000
 
@@ -14,6 +14,8 @@ export default async function handleRequest(
 ) {
   // Successful pages are prerendered and receive script hashes at build time.
   // The Worker renders error pages with a fresh nonce for each response.
+  // If the Worker starts rendering successful pages, give them a nonce before
+  // rendering too. A subsequent render error can change the status to 500.
   const nonce =
     import.meta.env.PROD && status >= 400
       ? btoa(String.fromCharCode(...crypto.getRandomValues(new Uint8Array(16))))
