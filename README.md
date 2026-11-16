@@ -129,7 +129,7 @@ Page views go to [Cloudflare Web Analytics](https://developers.cloudflare.com/we
 
 The beacon is added by the site's own code rather than Cloudflare's automatic injection. Every host serves the same prerendered HTML, so after hydration [`app/root.tsx`](app/root.tsx) loads the beacon only when the page is on `www.mhdgc.org` ([`app/lib/web-analytics.ts`](app/lib/web-analytics.ts)). PR previews, `new.mhdgc.org` and local servers aren't counted. The beacon counts client-side route changes itself, so React Router navigations show up as page views. The Content Security Policy in [`shared/security-headers.ts`](shared/security-headers.ts) allows its script from `static.cloudflareinsights.com` and its reports to `cloudflareinsights.com`.
 
-To set it up, add `www.mhdgc.org` as a site in **Web Analytics**. If the dashboard sets it up automatically, choose **Manage site** and change it to **Enable with JS Snippet installation**, since a page can only have one beacon. Copy the token from the site's JS snippet into `webAnalyticsToken` in [`app/site.ts`](app/site.ts). The token is public, since it's in every page. While it's empty, the beacon stays off.
+To set it up, add `www.mhdgc.org` as a site in **Web Analytics**. If the dashboard sets it up automatically, choose **Manage site** and change it to **Enable with JS Snippet installation**, since a page can only have one beacon. Copy the token from the site's JS snippet into `webAnalyticsToken` in [`app/site.ts`](app/site.ts). The token is public, since it's in every page. Setting it to `''` turns analytics off.
 
 ## Editing content
 

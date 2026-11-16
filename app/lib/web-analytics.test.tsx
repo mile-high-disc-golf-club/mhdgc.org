@@ -1,6 +1,10 @@
-import { expect, test } from 'vitest'
+import { afterEach, expect, test } from 'vitest'
 
-import { webAnalyticsBeacon } from './web-analytics'
+import { loadBeacon, webAnalyticsBeacon } from './web-analytics'
+
+afterEach(() => {
+  document.body.replaceChildren()
+})
 
 const config = { token: 'site-token', productionHost: 'www.mhdgc.org' }
 
@@ -23,4 +27,19 @@ test.each([
 
 test('stays off until the site has a token', () => {
   expect(webAnalyticsBeacon('www.mhdgc.org', { ...config, token: '' })).toBeUndefined()
+})
+
+test('appends one module beacon script, however often it runs', () => {
+  const beacon = {
+    src: 'https://static.cloudflareinsights.com/beacon.min.js',
+    cfBeacon: '{"token":"site-token"}',
+  }
+  loadBeacon(beacon)
+  loadBeacon(beacon)
+
+  const scripts = document.querySelectorAll('script')
+  expect(scripts).toHaveLength(1)
+  expect(scripts[0]).toHaveAttribute('type', 'module')
+  expect(scripts[0]).toHaveAttribute('src', beacon.src)
+  expect(scripts[0]).toHaveAttribute('data-cf-beacon', '{"token":"site-token"}')
 })
