@@ -51,5 +51,19 @@ function useEvents(): EventsState {
       controller.abort()
     }
   }, [])
+  // A tab left open past midnight would keep yesterday as today, so the time is
+  // read again whenever the page comes back into view.
+  useEffect(() => {
+    function refresh() {
+      if (document.visibilityState !== 'visible') return
+      setState((current) =>
+        current.status === 'ready' ? { ...current, now: new Date() } : current,
+      )
+    }
+    document.addEventListener('visibilitychange', refresh)
+    return () => {
+      document.removeEventListener('visibilitychange', refresh)
+    }
+  }, [])
   return state
 }
