@@ -41,6 +41,8 @@ worker/
   events/                  The events refresh: Calendar API client, descriptions, the window and KV
     fixtures/              Real Calendar API responses for the club's calendars, used by the tests
 shared/api.ts              Types shared by the app and the Worker
+shared/content-assets.ts   The image host and R2 bucket for content photos
+scripts/                   upload-content-images.ts: encodes photos and uploads them to R2
 wrangler.jsonc             Cloudflare config: Worker, assets, KV, cron trigger, vars
 react-router.config.ts     SSR on, prerender everything, route discovery
 vite.config.ts             Vite + @cloudflare/vite-plugin + React Router
@@ -109,6 +111,7 @@ Set up the [repository's Actions secrets](https://github.com/mile-high-disc-golf
 
 - `CLOUDFLARE_API_TOKEN` uses **Workers Scripts → Edit** scoped to the club's Cloudflare account. To rotate it, create a replacement with the same scope, update the GitHub secret, verify a deployment, then revoke the old token. [Cloudflare API tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
 - `CLOUDFLARE_ACCOUNT_ID` holds the club's Cloudflare account ID. Update this secret and replace the token together if the Worker moves to a different account. [Find the Cloudflare account ID](https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/)
+- `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY` are an R2 API token with **Object Read & Write** on the `mhdgc-content-images` bucket only, for the image upload job. See [Content images in R2](#content-images-in-r2).
 
 Events need two one-time setups, both already done for the club:
 
@@ -123,8 +126,45 @@ Previews stay out of search results. The CI preview step adds `X-Robots-Tag: noi
 ## Editing content
 
 See [CONTENT.md](CONTENT.md) for editing pages and board data in GitHub, adding photos,
-and checking PR previews. Markdown, schemas and image processing run at build time
-through `content.config.ts`; routes read the compiled output through `~/.server`.
+and checking PR previews. Markdown and schemas run at build time through
+`content.config.ts`; routes read the compiled output through `~/.server`. Photos are
+encoded once, outside the build, and served from R2 (below).
+
+## Content images in R2
+
+Encoding photos to AVIF and WebP at several widths took minutes on every dev start and
+build ([#47](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/47)), so the
+build no longer does it ([#49](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/49)).
+`content.config.ts` reads each photo's size from its header and hashes its bytes, and
+links to `https://assets.mhdgc.org/v1/<hash>/<width>.<format>`. The `Upload content
+images` job in CI runs `bun run images:upload`, which lists each photo's folder in the
+`mhdgc-content-images` R2 bucket and encodes and uploads only the files that are
+missing. Deploys wait for it. Fork and Dependabot PRs can't read the secrets, so their
+photos are uploaded when they merge to `main`. Objects are never overwritten or
+deleted: a changed photo gets new keys, so they're cached as immutable and old
+previews keep working.
+
+`bun run dev` serves the originals from `/content-assets/` instead, with no AVIF or
+WebP versions, so it needs no network or encoding. `CONTENT_IMAGES=local bun run build`
+does the same for a build without R2.
+
+One-time setup in the club's Cloudflare account:
+
+1. **R2 → Create bucket** named `mhdgc-content-images`, with automatic location.
+2. In the bucket's **Settings → Custom Domains**, connect `assets.mhdgc.org`. This
+   needs `mhdgc.org` as a zone in the same account. Leave the `r2.dev` URL off: it's
+   rate-limited and not meant for production.
+3. **R2 → Manage API tokens → Create API token** with **Object Read & Write**, applied
+   to `mhdgc-content-images` only. Save its **Access Key ID** and **Secret Access Key**
+   as the repository's Actions secrets `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY`.
+   The job also uses `CLOUDFLARE_ACCOUNT_ID`.
+4. Re-run CI on `main`, or push any commit, so the job uploads the existing photos.
+
+Until this is done, the upload job fails, so previews and production deploys don't run.
+To upload from your machine, put the three variables in your shell and run
+`bun run images:upload` (`--dry-run` lists what's missing). The host and bucket names are
+in [`shared/content-assets.ts`](shared/content-assets.ts), and the Content Security
+Policy allows images from that host.
 
 ## Brand assets
 

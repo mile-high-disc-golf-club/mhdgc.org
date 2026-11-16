@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import sharp from 'sharp'
@@ -6,7 +6,9 @@ import { expect, test } from 'vitest'
 
 import { compileContent } from '../content.config'
 
-test('compiles local images, metadata, Markdown and board references; rejects bad edits', async () => {
+import { contentAssetsOrigin } from '~shared/content-assets'
+
+test('compiles images, metadata, Markdown and board references; rejects bad edits', async () => {
   const root = await mkdtemp(join(tmpdir(), 'mhdgc-content-'))
   try {
     await mkdir(join(root, 'images', 'board'), { recursive: true })
@@ -51,16 +53,20 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       color: 'event-tags',
     }
     await writeFile(calendarsPath, JSON.stringify([calendar]))
-    const { data, assets } = await compileContent(root)
+    const { data, assets } = await compileContent(root, { images: 'remote' })
     expect(data.pages.test.html).toContain('<h2>Section</h2>')
     expect(data.pages.test.html).toContain('<strong>Copy</strong>')
     expect(data.pages.test.html).toContain('href="/about"')
     expect(data.pages.test.html).toContain('href="https://example.com/?a=1&amp;b=2"')
     expect(data.pages.test.ogImage).toEqual(data.images['photo.png'])
     expect(data.images['photo.png']).toMatchObject({ width: 400, height: 200 })
+    // Remote images link to R2 and add nothing to the build.
+    expect(assets.size).toBe(0)
+    const remote = new RegExp(`^${contentAssetsOrigin}/v1/[a-f0-9]{16}/`)
+    expect(data.images['photo.png'].src).toMatch(remote)
     // Opaque images fall back to JPEG; transparent ones keep PNG.
-    expect(data.images['photo.png'].src).toMatch(/\.jpg$/)
-    expect(data.images['board/logo.png'].src).toMatch(/\.png$/)
+    expect(data.images['photo.png'].src).toMatch(/\/400\.jpg$/)
+    expect(data.images['board/logo.png'].src).toMatch(/\/100\.png$/)
     expect(Object.keys(data.images)).toEqual(['board/logo.png', 'photo.png'])
     expect(data.board[0].photo).toBe('board/logo.png')
     expect(data.calendars).toEqual([calendar])
@@ -68,19 +74,32 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       'image/avif',
       'image/webp',
     ])
-    expect(data.images['photo.png'].sources[0].srcSet).toContain('320w')
-    expect(data.images['photo.png'].sources[0].srcSet).not.toContain('640w')
-    for (const [path, bytes] of assets) {
-      const meta = await sharp(bytes).metadata()
-      expect(meta.width).toBeLessThanOrEqual(400)
-      expect(path).toMatch(/^\/content-assets\/[a-f0-9]{16}\./)
-    }
+    // Never enlarged: 320 and the original's 400, but not 640.
+    const avif = data.images['photo.png'].sources[0].srcSet.split(', ')
+    expect(avif).toHaveLength(2)
+    expect(avif[0]).toMatch(remote)
+    expect(avif.map((candidate) => candidate.replace(/^\S+\//, ''))).toEqual([
+      '320.avif 320w',
+      '400.avif 400w',
+    ])
+
+    // Local images serve the originals, unencoded, from the site.
+    const local = await compileContent(root, { images: 'local' })
+    const localPhoto = local.data.images['photo.png']
+    expect(localPhoto).toMatchObject({ width: 400, height: 200, sources: [] })
+    expect(localPhoto.src).toMatch(/^\/content-assets\/[a-f0-9]{16}\.png$/)
+    expect(local.assets.get(localPhoto.src)).toEqual(
+      await readFile(join(root, 'images', 'photo.png')),
+    )
+    expect(local.data.pages.test.ogImage).toEqual(localPhoto)
     await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":["T"],"typo":true}]')
-    await expect(compileContent(root)).rejects.toThrow()
+    await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":["T"],"photo":"missing.png"}]')
-    await expect(compileContent(root)).rejects.toThrow('Unknown content image')
+    await expect(compileContent(root, { images: 'remote' })).rejects.toThrow(
+      'Unknown content image',
+    )
     await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":[]}]')
-    await expect(compileContent(root)).rejects.toThrow()
+    await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     await writeFile(boardPath, '[]')
     for (const invalid of [
       page.replace('title: Test\n', ''),
@@ -91,10 +110,10 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       `${page}\n# Wrong heading`,
     ]) {
       await writeFile(pagePath, invalid)
-      await expect(compileContent(root)).rejects.toThrow()
+      await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     }
     await writeFile(boardPath, '{invalid json')
-    await expect(compileContent(root)).rejects.toThrow()
+    await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     await writeFile(boardPath, '[]')
     for (const invalid of [
       [],
@@ -110,7 +129,7 @@ test('compiles local images, metadata, Markdown and board references; rejects ba
       [calendar, { ...calendar, id: 'c_other@group.calendar.google.com' }],
     ]) {
       await writeFile(calendarsPath, JSON.stringify(invalid))
-      await expect(compileContent(root)).rejects.toThrow()
+      await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     }
   } finally {
     await rm(root, { recursive: true, force: true })
