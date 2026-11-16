@@ -9,8 +9,8 @@ export type HealthResponse = {
 /**
  * `GET /api/events`: every occurrence from the club's calendars, from the 1st of
  * the current month in America/Denver to 12 months ahead, sorted by start.
- * A cron Worker refreshes it from the public Google Calendar feeds every 15
- * minutes, so it can be up to about 15 minutes behind Google Calendar.
+ * A cron Worker refreshes it from the Google Calendar API every 15 minutes,
+ * so it can be up to about 15 minutes behind Google Calendar.
  */
 export type EventsResponse = {
   events: CalendarEvent[]
@@ -30,11 +30,12 @@ export type EventsResponse = {
 /** One occurrence. Each occurrence of a recurring event is its own entry. */
 export type CalendarEvent = {
   /**
-   * Stable across refreshes: the ICS `UID` (without Google's `@google.com`), an
-   * underscore, and the occurrence's original start (its `RECURRENCE-ID`), as
-   * `20261121T150000Z` or, for all-day events, `20270625`. Rescheduling one
-   * occurrence keeps its ID. The same Google event on two calendars shares an
-   * ID, so key lists by `calendar` and `id` together.
+   * Google Calendar's event ID, stable across refreshes. For an occurrence of a
+   * recurring event it's the series' ID, an underscore and the occurrence's
+   * original start, such as `6ot93pmu0j64t4c56g11ifeate_20261121T150000Z` (or
+   * `…_20270625` for all-day events), so rescheduling one occurrence keeps its
+   * ID. The same Google event on two calendars shares an ID, so key lists by
+   * `calendar` and `id` together.
    */
   id: string
   /** The calendar's `slug` from `content/calendars.json`. */
@@ -48,18 +49,22 @@ export type CalendarEvent = {
    */
   start: string
   /**
-   * Like `start`. For all-day events the date is exclusive, as in ICS: a
-   * one-day event on 2027-06-25 ends `2027-06-26`.
+   * Like `start`. For all-day events the date is exclusive, as in Google
+   * Calendar: a one-day event on 2027-06-25 ends `2027-06-26`.
    */
   end: string
   allDay: boolean
-  /** Cancelled in Google Calendar but still listed. Deleted occurrences are left out. */
+  /**
+   * Cancelled but still listed. Google Calendar has no cancel action, only
+   * delete, and deleted events and occurrences are left out, so this is
+   * rarely `true`.
+   */
   cancelled: boolean
   /** A course name and/or address, as typed in Google Calendar. `null` when empty. */
   location: string | null
   /** Plain text and links, never HTML. An empty list when there's no description. */
   description: DescriptionParagraph[]
-  /** The event's ICS `URL` property, if it's an `http(s)` link. Google's feeds rarely set it. */
+  /** The event's page on Google Calendar, where visitors can add it to their own calendar. */
   url: string | null
 }
 

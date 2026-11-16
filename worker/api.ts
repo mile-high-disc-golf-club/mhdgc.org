@@ -21,9 +21,9 @@ const routes: Partial<Record<string, { GET: Handler }>> = {
     GET: async (_request, env) => {
       let body
       try {
-        body = await readEvents(env.EVENTS, calendars)
+        body = await readEvents({ kv: env.EVENTS, apiKey: env.GOOGLE_CALENDAR_API_KEY }, calendars)
       } catch (error) {
-        console.error('Events: reading KV failed.', error)
+        console.error('Events: reading them failed.', error)
         return json({ ok: false, error: 'Events are unavailable' }, { status: 503 })
       }
       return json(body, {

@@ -11,7 +11,7 @@ request ──► Cloudflare edge
               ├─ a built file or prerendered page ──► static asset (build/client/…)
               └─ anything else                  ──► Worker: React Router renders the 404 page, status 404
 
-cron, every 15 minutes ──► Worker: refresh the events in KV from the Google Calendar feeds
+cron, every 15 minutes ──► Worker: refresh the events in KV from the Google Calendar API
 ```
 
 All of this is configured in [`wrangler.jsonc`](wrangler.jsonc):
@@ -20,7 +20,7 @@ All of this is configured in [`wrangler.jsonc`](wrangler.jsonc):
 - **The Worker runs only for `/api/*` and for paths that match no file.** `run_worker_first: ["/api/*"]` sends API paths to it. Anything else that matches no file (`not_found_handling: "none"`) also reaches it, and React Router's catch-all route renders the 404 page with a real 404 status.
 - **One URL per page.** `html_handling: "drop-trailing-slash"` serves `about/index.html` at `/about` and redirects `/about/` there.
 - **Old home links redirect.** `public/_redirects` sends `/home` and `/home/` to `/` with status 301. `/membership`, `/about` and `/events` retain their Google Sites paths. Canonical URLs use `/` for home and no trailing slash for other pages. Facebook, Instagram, UDisc and Disc Golf Scene have not been audited for other old links.
-- **Events load in the browser from `/api/events`, which reads Workers KV.** A cron trigger runs the Worker's `scheduled` handler every 15 minutes. It fetches the public ICS feed of each calendar in [`content/calendars.json`](content/calendars.json) in parallel, expands the events over a window from the 1st of the current month (America/Denver) to 12 months ahead, and writes the result to the `EVENTS` namespace. If a feed fails, that calendar keeps its last good events. `/api/events` returns the whole window from KV, with `Cache-Control: public, max-age=300, stale-while-revalidate=600`. If KV is empty, as on a first deploy, it runs the refresh inline once. The response type is `EventsResponse` in [`shared/api.ts`](shared/api.ts).
+- **Events load in the browser from `/api/events`, which reads Workers KV.** A cron trigger runs the Worker's `scheduled` handler every 15 minutes. For each calendar in [`content/calendars.json`](content/calendars.json), in parallel, it asks the Google Calendar API for every occurrence from the 1st of the current month (America/Denver) to 12 months ahead, and writes the result to the `EVENTS` namespace. Google expands repeating events, so the Worker only maps fields, in about a millisecond of CPU. If a calendar's request fails, that calendar keeps its last good events. `/api/events` returns the whole window from KV, with `Cache-Control: public, max-age=300, stale-while-revalidate=600`. If KV is empty, as on a first deploy, it runs the refresh inline once. The response type is `EventsResponse` in [`shared/api.ts`](shared/api.ts).
 - **Navigating between pages doesn't run the Worker either.** `routeDiscovery: { mode: "initial" }` puts the route manifest in the page, so the browser never fetches `/__manifest`. The exception is a link to a path that doesn't exist: the catch-all route has a `loader`, so the browser fetches its `.data` file, which the Worker answers with the 404.
 
 ## Layout
@@ -38,8 +38,8 @@ worker/
   index.ts                 Worker entry: /api/* first, then React Router; the cron's scheduled handler
   api.ts                   API routes
   calendars.ts             content/calendars.json, as the content pipeline compiled it
-  events/                  The events refresh: ICS parsing (ical.js), descriptions, the window and KV
-    fixtures/              Test feeds: real downloads from the club's calendars, plus synthetic.ics
+  events/                  The events refresh: Calendar API client, descriptions, the window and KV
+    fixtures/              Real Calendar API responses for the club's calendars, used by the tests
 shared/api.ts              Types shared by the app and the Worker
 wrangler.jsonc             Cloudflare config: Worker, assets, KV, cron trigger, vars
 react-router.config.ts     SSR on, prerender everything, route discovery
@@ -62,7 +62,7 @@ bun run dev
 
 Open http://localhost:5173. `vite dev` runs the Worker in **workerd**, the same runtime as production, so pages, the 404 and `/api/health` all work on one port.
 
-**Events locally.** `bun run dev` and `bun run preview` use a local, simulated KV namespace in `.wrangler/state`, never the production one. Cron triggers don't run on their own locally. The first request to `/api/events` fills the empty KV by fetching the real feeds, which needs an internet connection. To run the scheduled handler, as the cron would, request its URL on either server:
+**Events locally.** `bun run dev` and `bun run preview` use a local, simulated KV namespace in `.wrangler/state`, never the production one. Cron triggers don't run on their own locally. The first request to `/api/events` fills the empty KV from the Calendar API, which needs an internet connection and `GOOGLE_CALENDAR_API_KEY` in `.dev.vars` (ask a maintainer for the key, or create your own as described under Deploying). To run the scheduled handler, as the cron would, request its URL on either server:
 
 ```bash
 curl "http://localhost:5173/cdn-cgi/handler/scheduled"
@@ -108,7 +108,11 @@ Set up the [repository's Actions secrets](https://github.com/mile-high-disc-golf
 - `CLOUDFLARE_API_TOKEN` uses **Workers Scripts → Edit** scoped to the club's Cloudflare account. To rotate it, create a replacement with the same scope, update the GitHub secret, verify a deployment, then revoke the old token. [Cloudflare API tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
 - `CLOUDFLARE_ACCOUNT_ID` holds the club's Cloudflare account ID. Update this secret and replace the token together if the Worker moves to a different account. [Find the Cloudflare account ID](https://developers.cloudflare.com/fundamentals/account/find-account-and-zone-ids/)
 
-The `EVENTS` KV namespace was created once in the club's Cloudflare account, and its ID is in `wrangler.jsonc`. To create it again, for example in another account, run `bunx wrangler kv namespace create EVENTS`, put the new ID in `kv_namespaces` in `wrangler.jsonc`, and run `bun run cf-typegen`. Deploying registers the cron trigger, and its runs show in the Worker's Observability logs. Cron triggers only run on the deployed version, and PR previews read the same namespace, so a preview shows production's latest refresh. A calendar that a PR adds to `calendars.json` is missing from its preview, which returns `partial: true`, until the PR is merged and deployed.
+Events need two one-time setups, both already done for the club:
+
+- **The `EVENTS` KV namespace**, in the club's Cloudflare account ("Tech@mhdgc.org's Account"). Its ID is in `wrangler.jsonc`. Check `bunx wrangler whoami` shows the club's account first, because a personal Cloudflare login has its own account, and a namespace created there can't be bound. To create it again, run `bunx wrangler kv namespace create EVENTS`, decline the offer to edit `wrangler.jsonc` (it reformats the file), put the new ID in `kv_namespaces`, and run `bun run cf-typegen`.
+- **A Google Calendar API key**, as the Worker secret `GOOGLE_CALENDAR_API_KEY`. It lives in the `prod-website` project in the club's Google Cloud organization (mhdgc.org, signed in with a club Workspace account). To replace it, in the [Google Cloud console](https://console.cloud.google.com): enable the **Google Calendar API**, then **APIs & Services → Credentials → Create credentials → API key**, with **Application restrictions: None** (the Worker sends no referrer and has no fixed IP) and **API restrictions** set to the Google Calendar API only. Then run `bunx wrangler secret put GOOGLE_CALENDAR_API_KEY` and delete the old key. The API is free, with a quota of 1,000,000 requests a day, against about 600 from the cron. The key only reads public calendars, and it stays in the Worker, never in the browser bundle.
+  Deploying registers the cron trigger, and its runs show in the Worker's Observability logs. Cron triggers only run on the deployed version, and PR previews read the same namespace, so a preview shows production's latest refresh. A calendar that a PR adds to `calendars.json` is missing from its preview, which returns `partial: true`, until the PR is merged and deployed.
 
 Before the first PR preview, set up the account's `workers.dev` subdomain in Cloudflare's Workers & Pages dashboard and deploy the Worker once with `preview_urls: true`. The first successful deploy from `main` creates the Worker. PR preview uploads fail until that deployment exists. [Deployment setup tracking issue](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/4)
 
@@ -143,7 +147,8 @@ The PNG and ICO icons were rendered from those SVGs with [sharp](https://sharp.p
 ### Decisions recorded from planning
 
 - **Content lives in the repo** as Markdown and data files, changed by pull request and read at build time ([#9](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/9)).
-- **Events come from the club's Google Calendars, refreshed by a cron Worker into KV.** The board keeps editing in Google Calendar. Every 15 minutes, a scheduled Worker reads the public ICS feeds and stores the expanded events in Workers KV, and `/api/events` serves them from there. Fetching the six feeds takes about 0.85s, sometimes 1.3s, and Google sends `Cache-Control: no-store`, so fetching them per request, or caching them per data center with the Cache API, would usually be slow on a low-traffic site. The cron keeps the API fast, works on preview URLs and keeps the last good copy through a Google outage. Descriptions are reduced to plain text and links, and cancelled occurrences are kept with `cancelled: true` ([#16](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/16), [#17](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/17), [#18](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/18)).
+- **Events come from the club's Google Calendars, refreshed by a cron Worker into KV.** The board keeps editing in Google Calendar. Every 15 minutes, a scheduled Worker reads the Google Calendar API and stores the events in Workers KV, and `/api/events` serves them from there. Fetching from Google per request would be slow (about 0.3s per calendar), and a per-data-center cache would usually be cold on a low-traffic site. The cron keeps the API fast, works on preview URLs and keeps the last good copy through a Google outage.
+- **The Calendar API, not the public ICS feeds.** The first version parsed the ICS feeds with ical.js, which took 8 to 20ms of CPU per refresh, over the free plan's 10ms limit per invocation. The Calendar API returns each occurrence already expanded, so the Worker only maps JSON, in about 1ms. Browsers can't call the ICS feeds themselves (Google sends no CORS headers), and calling the API from the browser would put the key in the page, so the Worker calls it with the key as a secret. Descriptions are reduced to plain text and links, and cancelled occurrences are kept with `cancelled: true` ([#16](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/16), [#17](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/17), [#18](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/18)).
 - **Design system copied from dgtags**, light theme only ([#5](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/5), [#6](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/6)).
 - **One font, Outfit,** for headings and body text. Headings stand apart by size and weight. The club's logos carry the display lettering, and a second font needs a clear job, such as monospace for code.
 - **The contact form stays a Google Form** for the MVP ([#13](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/13)), and moves to our own form later ([#25](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/25)).

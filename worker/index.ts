@@ -31,6 +31,6 @@ export default {
   // The cron trigger in wrangler.jsonc. Locally, run it with
   // /cdn-cgi/handler/scheduled (see the README).
   async scheduled(_controller, env) {
-    await refreshEvents(env.EVENTS, calendars)
+    await refreshEvents({ kv: env.EVENTS, apiKey: env.GOOGLE_CALENDAR_API_KEY }, calendars)
   },
 } satisfies ExportedHandler<Env>

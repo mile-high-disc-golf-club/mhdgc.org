@@ -67,9 +67,9 @@ Events come from the club's six public Google Calendars. Keep adding and editing
 events in Google Calendar, as before. The website checks the calendars every 15
 minutes, so a change shows on the Events page within about 15 minutes. The page
 shows every occurrence of a repeating event separately, from the start of the
-current month to 12 months ahead. Cancelling one occurrence in Google Calendar
-shows it as cancelled; deleting it removes it. Descriptions show as plain text
-and links: bold, colors and other formatting are dropped.
+current month to 12 months ahead. Deleting an event, or one occurrence of a
+repeating event, removes it from the page. Descriptions show as plain text and
+links: bold, colors and other formatting are dropped.
 
 `content/calendars.json` lists the calendars, in the order the Events page shows
 them. Each entry needs:

@@ -1,5 +1,5 @@
 import type { CalendarEvent, EventsResponse } from '../../shared/api'
-import { expandFeed, type FeedEvent } from './ics'
+import { type FeedEvent, fetchCalendarEvents } from './google'
 import { clubMidnight, eventWindow } from './time'
 
 /** The fields of a `content/calendars.json` entry the Worker needs. */
@@ -18,34 +18,26 @@ export type EventsSnapshot = {
 }
 
 export const SNAPSHOT_KEY = 'events:v1'
-const FETCH_TIMEOUT_MS = 10_000
 
-export function feedUrl(calendarId: string) {
-  return `https://calendar.google.com/calendar/ical/${encodeURIComponent(calendarId)}/public/basic.ics`
-}
+/** What the refresh needs: the KV namespace and the Calendar API key. */
+export type EventsEnv = { kv: KVNamespace; apiKey: string }
 
 /**
- * Fetches every feed in parallel, expands it over the window and writes the
- * result to KV. A feed that fails keeps that calendar's previous entry. Nothing
- * is written if no calendar has any data, so an empty KV still triggers the
- * inline refresh in `readEvents`.
+ * Fetches every calendar's occurrences in the window from the Google Calendar
+ * API in parallel and writes them to KV. A calendar whose fetch fails keeps its
+ * previous entry. Nothing is written if no calendar has any data, so an empty
+ * KV still triggers the inline refresh in `readEvents`.
  */
 export async function refreshEvents(
-  kv: KVNamespace,
+  { kv, apiKey }: EventsEnv,
   calendars: readonly FeedCalendar[],
   now = new Date(),
 ): Promise<EventsSnapshot> {
+  if (!apiKey) throw new Error('Events: GOOGLE_CALENDAR_API_KEY is not set. See the README.')
   const window = eventWindow(now)
   const previous = await kv.get<EventsSnapshot>(SNAPSHOT_KEY, 'json')
   const results = await Promise.allSettled(
-    calendars.map(async ({ id }) => {
-      const response = await fetch(feedUrl(id), {
-        headers: { Accept: 'text/calendar' },
-        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-      })
-      if (!response.ok) throw new Error(`HTTP ${String(response.status)}`)
-      return expandFeed(await response.text(), window)
-    }),
+    calendars.map(({ id }) => fetchCalendarEvents(id, apiKey, window)),
   )
   const snapshot: EventsSnapshot = {
     version: 1,
@@ -61,7 +53,7 @@ export async function refreshEvents(
     const kept = previous?.version === 1 ? previous.calendars[id] : undefined
     if (kept) snapshot.calendars[id] = kept
     console.error(
-      `Events: the ${slug} calendar's feed failed${kept ? `, keeping its data from ${kept.updatedAt}` : ''}.`,
+      `Events: fetching the ${slug} calendar failed${kept ? `, keeping its data from ${kept.updatedAt}` : ''}.`,
       result.reason,
     )
   })
@@ -71,12 +63,12 @@ export async function refreshEvents(
 
 /** The `/api/events` body. Reads KV, and refreshes inline once if it's empty. */
 export async function readEvents(
-  kv: KVNamespace,
+  env: EventsEnv,
   calendars: readonly FeedCalendar[],
   now = new Date(),
 ): Promise<EventsResponse> {
-  let snapshot = await kv.get<EventsSnapshot>(SNAPSHOT_KEY, 'json')
-  if (snapshot?.version !== 1) snapshot = await refreshEvents(kv, calendars, now)
+  let snapshot = await env.kv.get<EventsSnapshot>(SNAPSHOT_KEY, 'json')
+  if (snapshot?.version !== 1) snapshot = await refreshEvents(env, calendars, now)
   return toResponse(snapshot, calendars, now)
 }
 

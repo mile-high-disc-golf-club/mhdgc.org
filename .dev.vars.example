@@ -1,3 +1,7 @@
 # Local overrides for `vars` in wrangler.jsonc, and local secrets.
 # Copy to .dev.vars (gitignored). Never put real secrets in this example file.
 APP_ENV=development
+# Google Calendar API key for the events refresh (worker/events). Restricted to
+# the Calendar API in the club's Google Cloud project. Production uses
+# `bunx wrangler secret put GOOGLE_CALENDAR_API_KEY`. See the README.
+GOOGLE_CALENDAR_API_KEY=

@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": "2ek16ernknsvai0hpqo35dedg1",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MmVrMTZlcm5rbnN2YWkwaHBxbzM1ZGVkZzEgY185MDJiNWU1YTdkMmQ2OThlMTc0MTg2ZGUwODlkOWMzNjg0NjE2ZTExM2I4MjdhMTU0YmQyYmRjOWQzMjA2ZmQ3QGc",
+      "summary": "Board Meeting",
+      "location": "G1 Climbing + Fitness, 8845 W 116th Cir, Broomfield, CO 80021, USA",
+      "start": {
+        "dateTime": "2026-11-12T18:30:00-07:00",
+        "timeZone": "America/Denver"
+      },
+      "end": {
+        "dateTime": "2026-11-12T19:30:00-07:00",
+        "timeZone": "America/Denver"
+      }
+    },
+    {
+      "id": "02p3u13ibvir411ohuur2vh668",
+      "status": "confirmed",
+      "htmlLink": "https://www.google.com/calendar/event?eid=MDJwM3UxM2lidmlyNDExb2h1dXIydmg2NjggY185MDJiNWU1YTdkMmQ2OThlMTc0MTg2ZGUwODlkOWMzNjg0NjE2ZTExM2I4MjdhMTU0YmQyYmRjOWQzMjA2ZmQ3QGc",
+      "summary": "Board Meeting",
+      "location": "Lake Arbor Police Station, 8110 Vance Dr, Arvada, CO 80003, USA",
+      "start": {
+        "dateTime": "2026-12-10T18:30:00-07:00",
+        "timeZone": "America/Denver"
+      },
+      "end": {
+        "dateTime": "2026-12-10T19:30:00-07:00",
+        "timeZone": "America/Denver"
+      }
+    }
+  ]
+}
