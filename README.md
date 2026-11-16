@@ -142,7 +142,10 @@ images` job in CI runs `bun run images:upload`, which lists each photo's folder 
 missing. Deploys wait for it. Fork and Dependabot PRs can't read the secrets, so their
 photos are uploaded when they merge to `main`. Objects are never overwritten or
 deleted: a changed photo gets new keys, so they're cached as immutable and old
-previews keep working.
+previews keep working. The script only adds files, but the token's Object Read &
+Write permission can also overwrite and delete them, and same-repository PRs run the
+PR's own copy of the script. So the guarantee relies on trusting people with push
+access, as previews already do.
 
 `bun run dev` serves the originals from `/content-assets/` instead, with no AVIF or
 WebP versions, so it needs no network or encoding. `CONTENT_IMAGES=local bun run build`

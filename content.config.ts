@@ -97,6 +97,9 @@ export interface ImagePlan {
 
 // Part of every key. Bump it when the encoding below changes (formats, widths,
 // quality), so the new files get new URLs instead of replacing cached ones.
+// Nothing else changes a key: after a Sharp or libavif upgrade, existing files
+// stay as they were encoded and only new photos use the new encoder. Bump it
+// too if the upgrade's output should replace them.
 const encodingVersion = 'v1'
 const sourceWidths = [320, 640, 960, 1440]
 const extensions: Record<ImageFormat, string> = {

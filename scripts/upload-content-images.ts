@@ -55,6 +55,8 @@ export function bucket(env: NodeJS.ProcessEnv, fetcher: typeof fetch = fetch) {
       const xml = await (await send(`${base}?${query.toString()}`)).text()
       if (xml.includes('<IsTruncated>true</IsTruncated>'))
         throw new Error(`More than 1,000 objects under ${prefix}`)
+      // Our keys are only hex digits, digits, letters, `.` and `/`, so they need no
+      // XML unescaping. Parse the XML properly if keys could ever contain `&`.
       return new Set([...xml.matchAll(/<Key>([^<]*)<\/Key>/g)].map(([, key]) => key))
     },
     async put(variant: ImageVariant, body: Buffer) {
