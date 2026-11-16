@@ -1,6 +1,6 @@
 import type { HealthResponse } from '../shared/api'
 import { calendars } from './calendars'
-import { readEvents } from './events/store'
+import { logSafe, readEvents } from './events/store'
 
 type Handler = (request: Request, env: Env) => Response | Promise<Response>
 
@@ -23,7 +23,7 @@ const routes: Partial<Record<string, { GET: Handler }>> = {
       try {
         body = await readEvents({ kv: env.EVENTS, apiKey: env.GOOGLE_CALENDAR_API_KEY }, calendars)
       } catch (error) {
-        console.error('Events: reading them failed.', error)
+        console.error('Events: reading them failed.', logSafe(error))
         return json({ ok: false, error: 'Events are unavailable' }, { status: 503 })
       }
       return json(body, {

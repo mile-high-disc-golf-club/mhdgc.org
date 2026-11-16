@@ -119,6 +119,19 @@ test('a calendar with no data at all makes the response partial', async () => {
   expect(body).toEqual({ events: [], updatedAt: now.toISOString(), partial: true })
 })
 
+test('logs a failed fetch without the API key', async () => {
+  const { env } = memoryKv()
+  vi.mocked(fetch).mockImplementation((url: RequestInfo | URL) =>
+    Promise.reject(
+      new TypeError(`fetch failed for ${url instanceof Request ? url.url : url.toString()}`),
+    ),
+  )
+  await refreshEvents({ ...env, apiKey: 'SECRET-KEY' }, calendars, now)
+  const logged = JSON.stringify(vi.mocked(console.error).mock.calls)
+  expect(logged).toContain('TypeError: fetch failed for https://www.googleapis.com/')
+  expect(logged).not.toContain('SECRET-KEY')
+})
+
 test('a missing API key fails before fetching anything', async () => {
   const { env } = memoryKv()
   await expect(refreshEvents({ ...env, apiKey: '' }, calendars, now)).rejects.toThrow(

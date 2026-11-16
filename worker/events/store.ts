@@ -54,11 +54,20 @@ export async function refreshEvents(
     if (kept) snapshot.calendars[id] = kept
     console.error(
       `Events: fetching the ${slug} calendar failed${kept ? `, keeping its data from ${kept.updatedAt}` : ''}.`,
-      result.reason,
+      logSafe(result.reason),
     )
   })
   if (Object.keys(snapshot.calendars).length) await kv.put(SNAPSHOT_KEY, JSON.stringify(snapshot))
   return snapshot
+}
+
+/**
+ * An error's message for the logs, never the error object: a fetch error can
+ * carry the request URL, which holds the API key, so any `key=` is masked too.
+ */
+export function logSafe(error: unknown): string {
+  const message = error instanceof Error ? `${error.name}: ${error.message}` : String(error)
+  return message.replace(/([?&]key=)[^&\s]+/g, '$1…')
 }
 
 /** The `/api/events` body. Reads KV, and refreshes inline once if it's empty. */
