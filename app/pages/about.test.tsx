@@ -28,4 +28,6 @@ test('provides a lazy contact embed and an accessible fallback link', () => {
   const fallback = screen.getByRole('link', { name: 'Open the contact form opens in a new tab' })
   expect(fallback).toHaveAttribute('target', '_blank')
   expect(form.getAttribute('src')).toBe(`${fallback.getAttribute('href')}?embedded=true`)
+  // The embedded form comes first, with the new-tab link below it as the fallback.
+  expect(form.compareDocumentPosition(fallback) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
 })
