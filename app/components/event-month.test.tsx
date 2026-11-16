@@ -55,3 +55,48 @@ it('collects a busy day behind "+N more", in a popover with every event', () => 
   // Closed until the button opens it.
   expect(within(popover as HTMLElement).getAllByRole('listitem', { hidden: true })).toHaveLength(4)
 })
+
+it("opens an event's details in a dialog, and puts focus back when it closes", () => {
+  render(<Default />)
+  // The first Friday round, on November 6.
+  const event = screen.getAllByTitle(/Johnny Robert's Tags \(Glow\)/)[0]
+  event.focus()
+  fireEvent.click(event)
+  const dialog = screen.getByRole('dialog', { name: "Johnny Robert's Tags (Glow)" })
+  expect(dialog).toHaveAttribute('open')
+  expect(within(dialog).getByText('Friday, November 6')).toBeInTheDocument()
+  expect(within(dialog).getByText('Rotating Tags League')).toBeInTheDocument()
+  expect(within(dialog).getByRole('link', { name: /Memorial Park/ })).toHaveAttribute(
+    'href',
+    expect.stringContaining('https://www.google.com/maps/search/'),
+  )
+  expect(within(dialog).getByRole('link', { name: /Open in Google Calendar/ })).toBeInTheDocument()
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Close' }))
+  expect(dialog).not.toHaveAttribute('open')
+  expect(event).toHaveFocus()
+})
+
+it('shows a tournament link and a multi-day event in the dialog', () => {
+  render(<Default />)
+  const next = screen.getByRole('button', { name: 'Next month' })
+  for (let click = 0; click < 7; click++) fireEvent.click(next)
+  fireEvent.click(screen.getAllByTitle(/High Plains Challenge/)[0])
+  const dialog = screen.getByRole('dialog', { name: 'High Plains Challenge' })
+  expect(dialog).toHaveTextContent(/Fri, Jun 25\s–\sSun, Jun 27/)
+  expect(within(dialog).getByRole('link', { name: /High_Plains_Challenge_2027/ })).toHaveAttribute(
+    'target',
+    '_blank',
+  )
+})
+
+it('opens an event from a busy day\'s popover, then focuses "+N more" again', () => {
+  render(<BusyDay />)
+  const more = screen.getByRole('button', { name: '+2 more on Saturday, November 21' })
+  const popover = document.getElementById(more.getAttribute('popovertarget') ?? '') as HTMLElement
+  fireEvent.click(
+    within(popover).getByRole('button', { name: /Example Approach Clinic/, hidden: true }),
+  )
+  const dialog = screen.getByRole('dialog', { name: 'Example Approach Clinic' })
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Close' }))
+  expect(more).toHaveFocus()
+})
