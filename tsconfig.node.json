@@ -23,6 +23,7 @@
     "app/site.ts",
     "shared/security-headers.ts",
     "*.config.ts",
+    "*.config.test.ts",
     ".storybook/**/*.ts"
   ],
   "exclude": [".storybook/vitest.setup.ts"]

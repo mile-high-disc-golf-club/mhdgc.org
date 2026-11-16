@@ -1,25 +1,9 @@
 import type { Config } from '@react-router/dev/config'
-import { createHash } from 'node:crypto'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { type DefaultTreeAdapterTypes, parse } from 'parse5'
 
 import { siteUrl } from './app/site'
-import { documentPolicy, securityHeaders } from './shared/security-headers'
-
-function* inlineScriptHashes(node: DefaultTreeAdapterTypes.Node): Generator<string> {
-  if (
-    'tagName' in node &&
-    node.tagName === 'script' &&
-    !node.attrs.some(({ name }) => name === 'src')
-  ) {
-    const script = node.childNodes.map((child) => ('value' in child ? child.value : '')).join('')
-    yield `'sha256-${createHash('sha256').update(script).digest('base64')}'`
-  }
-  if ('childNodes' in node) {
-    for (const child of node.childNodes) yield* inlineScriptHashes(child)
-  }
-}
+import { buildStaticHeaders } from './security-headers.config'
 
 const config: Config = {
   // The Worker can render pages, but every page is prerendered to static HTML at
@@ -44,24 +28,17 @@ const config: Config = {
       `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(({ path }) => `  <url><loc>${siteUrl}${path}</loc></url>`).join('\n')}\n</urlset>\n`,
     )
 
-    // Hash the text the HTML parser will hand to the browser, including the
-    // route-specific hydration scripts. The hashes change with the build.
-    const documentRules = await Promise.all(
-      pages.map(async ({ file, path }) => {
-        const html = await readFile(join(client, file), 'utf8')
-        const hashes = [...new Set(inlineScriptHashes(parse(html, { scriptingEnabled: true })))]
-        return `${path}\n  Cache-Control: public, max-age=300\n  Content-Security-Policy: ${documentPolicy(hashes)}`
-      }),
-    )
-    const commonRule = [
-      '/*',
-      ...Object.entries(securityHeaders).map(([name, value]) => `  ${name}: ${value}`),
-    ].join('\n')
-    const staticRules = await readFile(join(client, '_headers'), 'utf8')
-    await writeFile(
-      join(client, '_headers'),
-      `${staticRules.trimEnd()}\n\n${[commonRule, ...documentRules].join('\n\n')}\n`,
-    )
+    const headersFile = join(client, '_headers')
+    const [staticRules, documents] = await Promise.all([
+      readFile(headersFile, 'utf8'),
+      Promise.all(
+        pages.map(async ({ file, path }) => ({
+          path,
+          html: await readFile(join(client, file), 'utf8'),
+        })),
+      ),
+    ])
+    await writeFile(headersFile, buildStaticHeaders(staticRules, documents))
   },
   // Put the whole route manifest in the page instead of fetching /__manifest on
   // navigation, so moving between pages never runs the Worker. Fine while the

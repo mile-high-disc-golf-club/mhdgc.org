@@ -7,7 +7,7 @@ export default defineConfig({
     projects: [
       {
         extends: true,
-        test: { name: 'server', include: ['{app,worker,shared}/**/*.test.ts'] },
+        test: { name: 'server', include: ['*.config.test.ts', '{app,worker,shared}/**/*.test.ts'] },
       },
       {
         extends: true,
