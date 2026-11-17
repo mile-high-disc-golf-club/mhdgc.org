@@ -4,21 +4,25 @@ import { noContentPolicy, securityHeaders } from '../shared/security-headers'
 import { handleApi } from './api'
 import { calendars } from './calendars'
 import { refreshEvents } from './events/store'
+import { isUnindexedHost, serveRobots } from './robots'
 
 const handleDocument = createRequestHandler(
   () => import('virtual:react-router/server-build'),
   import.meta.env.MODE,
 )
 
-// Runs only for /api/* and for paths that match no static file. Prerendered
-// pages and built assets are served before the Worker (see wrangler.jsonc).
+async function route(request: Request, url: URL, env: Env): Promise<Response> {
+  if (url.pathname === '/api' || url.pathname.startsWith('/api/')) return handleApi(request, env)
+  if (url.pathname === '/robots.txt') return serveRobots(request, url.hostname, env.ASSETS)
+  return handleDocument(request)
+}
+
+// Runs only for /api/*, /robots.txt and paths that match no static file.
+// Prerendered pages and built assets are served before the Worker (see wrangler.jsonc).
 export default {
   async fetch(request, env) {
     const url = new URL(request.url)
-    const response =
-      url.pathname === '/api' || url.pathname.startsWith('/api/')
-        ? await handleApi(request, env)
-        : await handleDocument(request)
+    const response = await route(request, url, env)
 
     const headers = new Headers(response.headers)
     for (const [name, value] of Object.entries(securityHeaders)) headers.set(name, value)
@@ -27,8 +31,8 @@ export default {
     if (import.meta.env.PROD && !headers.has('Content-Security-Policy')) {
       headers.set('Content-Security-Policy', noContentPolicy)
     }
-    // The production workers.dev route is disabled, so Workers hostnames are version URLs.
-    if (url.hostname.endsWith('.workers.dev')) {
+    // public/_headers sets the same header on the review host's static files.
+    if (isUnindexedHost(url.hostname)) {
       headers.set('X-Robots-Tag', 'noindex')
     }
     return new Response(response.body, {

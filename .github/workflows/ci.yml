@@ -201,10 +201,9 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           WRANGLER_OUTPUT_FILE_PATH: ${{ runner.temp }}/wrangler-preview.jsonl
         run: |
-          # Static assets bypass the Worker. Apply these only to the preview build:
-          # noindex on every file, and a robots.txt that disallows crawling.
+          # Static assets bypass the Worker, so add noindex to every file in the
+          # preview build only. The Worker serves the disallowing robots.txt.
           printf '\n/*\n  X-Robots-Tag: noindex\n' >> build/client/_headers
-          printf 'User-agent: *\nDisallow: /\n' > build/client/robots.txt
           bun run wrangler versions upload --preview-alias "pr-$PR_NUMBER"
           url=$(jq -ser '[.[] | select(.type == "version-upload") | .preview_alias_url] | last | select(type == "string" and startswith("https://"))' "$WRANGLER_OUTPUT_FILE_PATH")
           printf 'Checking preview URL %s\n' "$url"
