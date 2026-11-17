@@ -4,7 +4,7 @@ import { noContentPolicy, securityHeaders } from '../shared/security-headers'
 import { handleApi } from './api'
 import { calendars } from './calendars'
 import { refreshEvents } from './events/store'
-import { disallowAllRobots, isUnindexedHost } from './robots'
+import { isUnindexedHost, serveRobots } from './robots'
 
 const handleDocument = createRequestHandler(
   () => import('virtual:react-router/server-build'),
@@ -13,9 +13,7 @@ const handleDocument = createRequestHandler(
 
 async function route(request: Request, url: URL, env: Env): Promise<Response> {
   if (url.pathname === '/api' || url.pathname.startsWith('/api/')) return handleApi(request, env)
-  if (url.pathname === '/robots.txt') {
-    return isUnindexedHost(url.hostname) ? disallowAllRobots() : env.ASSETS.fetch(request)
-  }
+  if (url.pathname === '/robots.txt') return serveRobots(request, url.hostname, env.ASSETS)
   return handleDocument(request)
 }
 
