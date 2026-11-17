@@ -4,3 +4,8 @@
 
 /content-assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# The board's review host stays out of search results (#23). The Worker sets
+# the same header on its own responses there (worker/robots.ts).
+https://beta.mhdgc.org/*
+  X-Robots-Tag: noindex
