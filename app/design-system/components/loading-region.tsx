@@ -10,7 +10,8 @@ import { Text } from './text'
 // dimmed and inert while loading. While busy the region is at least tall
 // enough for the spinner, so an empty first load has somewhere to show it,
 // and the spinner stays on screen however far the page is scrolled. An empty
-// first load reserves a screen's height, so whatever follows the region starts
+// first load (children that render no nodes at all, not even whitespace text)
+// reserves a screen's height, so whatever follows the region starts
 // below the fold and doesn't jump when the content arrives. That jump counts
 // as a layout shift. While idle, the status region shrinks to nothing, so it
 // doesn't sit over the content, where axe can't tell the text's background.
