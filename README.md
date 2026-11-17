@@ -125,7 +125,15 @@ Previews and the review host stay out of search results. The CI preview step add
 
 ### Custom domains
 
-Production is served on `beta.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then on `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)). Each is a Workers **Custom Domain**, added once in the Cloudflare dashboard, on the Worker's **Domains** tab (**Workers & Pages → mhdgc-org → Domains**), rather than in `wrangler.jsonc`. Cloudflare creates the DNS record and certificate, so don't add a CNAME by hand. Keeping domains out of `wrangler.jsonc` means the deploy token needs no permissions on the `mhdgc.org` zone, which also holds the club's email records. `wrangler deploy` only changes custom domains when `wrangler.jsonc` lists some, so deploys leave the dashboard's alone. To take the review host down, remove the custom domain there.
+Production is served on `beta.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then on `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)). Each is a Workers **Custom Domain**, added once in the Cloudflare dashboard rather than in `wrangler.jsonc`. Keeping domains out of `wrangler.jsonc` means the deploy token needs no permissions on the `mhdgc.org` zone, which also holds the club's email records. `wrangler deploy` only changes custom domains when `wrangler.jsonc` lists some, so deploys leave the dashboard's alone.
+
+To add one, merge and deploy the code that host needs first, since the domain serves whatever version is live. Then:
+
+1. In the club's account, open **Workers & Pages → mhdgc-org → Domains** and connect a domain.
+2. Choose the `mhdgc.org` zone from the list. Don't type the full hostname and choose **Onboard domain**, which would add `mhdgc.org` again as a new zone with new nameservers.
+3. Enter the subdomain, such as `beta` or `www`. Leave **Enable for** on **Production**, then choose **Add domain**.
+
+Cloudflare creates the DNS record and certificate, so don't add a CNAME by hand. It can't add a custom domain on a hostname that already has a CNAME, which is why the cutover deletes `www`'s first. Check the new host with `curl -I`, and on `beta.mhdgc.org` that `/robots.txt` disallows crawling. To take a host down, remove its custom domain on the same tab. That leaves its certificate behind, under **SSL/TLS → Edge Certificates** on the zone.
 
 ### Analytics
 
