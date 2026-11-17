@@ -5,12 +5,16 @@ export function ResponsiveImage({
   alt,
   sizes,
   loading = 'lazy',
+  fetchPriority,
   className,
 }: {
   image: ContentImage
   alt: string
   sizes: string
   loading?: 'lazy' | 'eager'
+  // `high` for the page's main photo near the top, usually its largest paint,
+  // so the browser fetches it before other images.
+  fetchPriority?: 'high'
   className?: string
 }) {
   return (
@@ -24,6 +28,7 @@ export function ResponsiveImage({
         height={image.height}
         alt={alt}
         loading={loading}
+        fetchPriority={fetchPriority}
         decoding="async"
         // Keeps the image inside its container whatever classes the caller adds.
         className={className ? `h-auto max-w-full ${className}` : 'h-auto max-w-full'}

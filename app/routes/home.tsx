@@ -1,8 +1,13 @@
+import { contentAssetsOrigin } from '~/../shared/content-assets'
 import { readImage, readPage } from '~/.server'
 import { HomePage } from '~/pages/home'
 import { pageMeta } from '~/seo'
 
 import type { Route } from './+types/home'
+
+// The page's photos come from the image host, so connect to it before the HTML
+// reaches them.
+export const links: Route.LinksFunction = () => [{ rel: 'preconnect', href: contentAssetsOrigin }]
 
 export function loader() {
   return {

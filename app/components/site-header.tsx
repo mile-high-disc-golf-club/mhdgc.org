@@ -17,7 +17,8 @@ export function SiteHeader() {
   const nav = useRef<HTMLElement>(null)
 
   // While the menu is open, Escape closes it and puts focus back on its button.
-  // A click or tap outside the nav closes it, leaving focus where it lands.
+  // A click or tap outside the nav closes it, leaving focus where it lands. So
+  // does tabbing out of it, or the panel would cover whatever gets focus next.
   // Widening the window to tablet width closes it too, so narrowing it again
   // doesn't bring back a panel that's already open.
   useEffect(() => {
@@ -32,17 +33,36 @@ export function SiteHeader() {
       if (event.target instanceof Node && nav.current?.contains(event.target)) return
       setOpen(false)
     }
+    // Focus moving into an iframe, such as the contact form, has no `relatedTarget`
+    // and fires no `focusin` here, so check where it landed once it has moved. If
+    // the whole window lost focus, the menu stays open for when it comes back.
+    // Focus on the body doesn't count as leaving: Safari doesn't focus a button
+    // on click, so clicking the menu button or the panel's padding drops focus
+    // there, and the click itself decides. Tabbing out always lands on an element.
+    let focusCheck: ReturnType<typeof setTimeout> | undefined
+    function onFocusOut() {
+      clearTimeout(focusCheck)
+      focusCheck = setTimeout(() => {
+        const landed = document.activeElement
+        if (!document.hasFocus() || !landed || landed === document.body) return
+        if (!nav.current?.contains(landed)) setOpen(false)
+      })
+    }
     // Tailwind's `md` breakpoint, where the links move into the header.
     const tablet = window.matchMedia('(min-width: 48rem)')
     function onResize() {
       if (tablet.matches) setOpen(false)
     }
+    const navElement = nav.current
     document.addEventListener('keydown', onKeyDown)
     document.addEventListener('pointerdown', onPointerDown)
+    navElement?.addEventListener('focusout', onFocusOut)
     tablet.addEventListener('change', onResize)
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.removeEventListener('pointerdown', onPointerDown)
+      navElement?.removeEventListener('focusout', onFocusOut)
+      clearTimeout(focusCheck)
       tablet.removeEventListener('change', onResize)
     }
   }, [open])
