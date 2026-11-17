@@ -155,6 +155,31 @@ it('closes the menu when focus leaves the nav, and not while it moves inside it'
   }
 })
 
+it('leaves the menu to the click when focus drops to the body, as Safari does', () => {
+  vi.useFakeTimers()
+  try {
+    render(<Desktop />)
+    const button = screen.getByRole('button', { name: 'Menu' })
+    fireEvent.click(button)
+    const nav = screen.getByRole('navigation', { name: 'Main' })
+    act(() => {
+      within(nav).getByRole('link', { name: 'About' }).focus()
+    })
+
+    // Safari's mousedown on the menu button blurs the link without focusing the
+    // button, before the click closes the menu.
+    act(() => {
+      ;(document.activeElement as HTMLElement).blur()
+      vi.runAllTimers()
+    })
+    expect(button).toHaveAttribute('aria-expanded', 'true')
+    fireEvent.click(button)
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+  } finally {
+    vi.useRealTimers()
+  }
+})
+
 it('keeps the menu open when the window loses focus', () => {
   vi.useFakeTimers()
   const hasFocus = vi.spyOn(document, 'hasFocus')

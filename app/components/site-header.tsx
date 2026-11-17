@@ -36,11 +36,16 @@ export function SiteHeader() {
     // Focus moving into an iframe, such as the contact form, has no `relatedTarget`
     // and fires no `focusin` here, so check where it landed once it has moved. If
     // the whole window lost focus, the menu stays open for when it comes back.
+    // Focus on the body doesn't count as leaving: Safari doesn't focus a button
+    // on click, so clicking the menu button or the panel's padding drops focus
+    // there, and the click itself decides. Tabbing out always lands on an element.
     let focusCheck: ReturnType<typeof setTimeout> | undefined
     function onFocusOut() {
       clearTimeout(focusCheck)
       focusCheck = setTimeout(() => {
-        if (document.hasFocus() && !nav.current?.contains(document.activeElement)) setOpen(false)
+        const landed = document.activeElement
+        if (!document.hasFocus() || !landed || landed === document.body) return
+        if (!nav.current?.contains(landed)) setOpen(false)
       })
     }
     // Tailwind's `md` breakpoint, where the links move into the header.
