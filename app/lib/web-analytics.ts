@@ -6,9 +6,9 @@ const beaconSrc = 'https://static.cloudflareinsights.com/beacon.min.js'
 export type Beacon = { src: string; cfBeacon: string }
 
 // Every host serves the same prerendered HTML, so the browser decides whether
-// to count the page. Only the production host loads the beacon. PR previews,
-// the board review host and local servers don't. The beacon tracks client-side
-// route changes on its own, so loading it once per page load is enough.
+// to count the page. Only the production host loads the beacon. PR previews
+// and local servers don't. The beacon tracks client-side route changes on its
+// own, so loading it once per page load is enough.
 export function webAnalyticsBeacon(
   hostname: string,
   { token, productionHost }: { token: string; productionHost: string },
