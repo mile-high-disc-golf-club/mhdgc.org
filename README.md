@@ -139,7 +139,7 @@ Cloudflare creates the DNS record and certificate, so don't add a CNAME by hand.
 
 The Google Site stays published as a fallback for a few weeks after the cutover. Until it's unpublished, `www` can go back to it in about five minutes:
 
-1. In **Workers & Pages → mhdgc-org → Settings → Domains & Routes**, remove the `www.mhdgc.org` custom domain.
+1. In **Workers & Pages → mhdgc-org → Settings → Domains & Routes**, remove the `www.mhdgc.org` custom domain. That also deletes its DNS record, which leaves room for the CNAME in the next step.
 2. In the `mhdgc.org` zone's **DNS → Records**, add a `CNAME` named `www` with target `ghs.googlehosted.com`, **DNS only** (grey cloud), TTL **Auto**.
 3. Check that `dig +short www.mhdgc.org` returns `ghs.googlehosted.com.`. The record's TTL is 5 minutes, so browsers follow within about that long.
 
