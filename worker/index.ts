@@ -31,7 +31,7 @@ export default {
     if (import.meta.env.PROD && !headers.has('Content-Security-Policy')) {
       headers.set('Content-Security-Policy', noContentPolicy)
     }
-    // public/_headers sets the same header on the review host's static files.
+    // CI's preview build sets the same header on static files (build/client/_headers).
     if (isUnindexedHost(url.hostname)) {
       headers.set('X-Robots-Tag', 'noindex')
     }

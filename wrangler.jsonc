@@ -20,7 +20,7 @@
     // Paths that match nothing go to the Worker, which renders the 404 page with a 404 status.
     "not_found_handling": "none",
     // API paths always run the Worker first. So does robots.txt, which
-    // disallows crawling on beta.mhdgc.org and preview hosts (worker/robots.ts).
+    // disallows crawling on preview hosts (worker/robots.ts).
     "run_worker_first": ["/api/*", "/robots.txt"],
   },
   // Request logs and metrics in the dashboard (Workers > mhdgc-org > Observability).
