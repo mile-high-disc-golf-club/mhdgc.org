@@ -1,10 +1,8 @@
 import { expect, test, vi } from 'vitest'
 
-import staticHeaders from '../public/_headers?raw'
-import { isUnindexedHost, reviewHost, serveRobots } from './robots'
+import { isUnindexedHost, serveRobots } from './robots'
 
-test('keeps the review host and Workers preview hosts out of search results', () => {
-  expect(isUnindexedHost('beta.mhdgc.org')).toBe(true)
+test('keeps Workers preview hosts out of search results', () => {
   expect(isUnindexedHost('pr-23-mhdgc-org.club.workers.dev')).toBe(true)
 })
 
@@ -16,8 +14,8 @@ test('lets search engines index the production hosts', () => {
 test('serves a robots.txt that disallows crawling on unindexed hosts', async () => {
   const assets = { fetch: vi.fn() }
   const response = await serveRobots(
-    new Request('https://beta.mhdgc.org/robots.txt'),
-    'beta.mhdgc.org',
+    new Request('https://pr-23-mhdgc-org.club.workers.dev/robots.txt'),
+    'pr-23-mhdgc-org.club.workers.dev',
     assets,
   )
 
@@ -33,8 +31,4 @@ test('serves the static robots.txt on production hosts', async () => {
 
   expect(await serveRobots(request, 'www.mhdgc.org', assets)).toBe(staticFile)
   expect(assets.fetch).toHaveBeenCalledWith(request)
-})
-
-test('sets noindex on the review host static files in public/_headers', () => {
-  expect(staticHeaders).toContain(`https://${reviewHost}/*\n  X-Robots-Tag: noindex\n`)
 })

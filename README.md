@@ -121,25 +121,39 @@ Events need two one-time setups, both already done for the club:
 
 Before the first PR preview, set up the account's `workers.dev` subdomain in Cloudflare's Workers & Pages dashboard and deploy the Worker once with `preview_urls: true`. The first successful deploy from `main` creates the Worker. PR preview uploads fail until that deployment exists. [Deployment setup tracking issue](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/4)
 
-Previews and the review host stay out of search results. The CI preview step adds `X-Robots-Tag: noindex` for every static file to `build/client/_headers`. On `beta.mhdgc.org`, a host rule in [`public/_headers`](public/_headers) does the same for production's static files. The Worker runs first for `/robots.txt` and, on `beta.mhdgc.org` and `*.workers.dev`, serves one that disallows crawling and adds the noindex header to its own responses ([`worker/robots.ts`](worker/robots.ts)). Every other host gets production's static `public/robots.txt`, which allows crawling and points to `sitemap.xml`. `buildEnd` in `react-router.config.ts` writes the sitemap from the prerendered pages, so it leaves out the 404 page and the `/home` redirect. The production `workers.dev` route stays off, so production is reached only through its custom domains. Every merge to `main` still deploys, which keeps the Worker's active version in step with `main`, and PR previews need that.
+Previews stay out of search results. The CI preview step adds `X-Robots-Tag: noindex` for every static file to `build/client/_headers`. The Worker runs first for `/robots.txt` and, on `*.workers.dev`, serves one that disallows crawling and adds the noindex header to its own responses ([`worker/robots.ts`](worker/robots.ts)). Every other host gets production's static `public/robots.txt`, which allows crawling and points to `sitemap.xml`. `buildEnd` in `react-router.config.ts` writes the sitemap from the prerendered pages, so it leaves out the 404 page and the `/home` redirect. The production `workers.dev` route stays off, so production is reached only through its custom domains. Every merge to `main` still deploys, which keeps the Worker's active version in step with `main`, and PR previews need that.
 
 ### Custom domains
 
-Production is served on `beta.mhdgc.org` for board review ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), then on `www.mhdgc.org` at cutover ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)). Each is a Workers **Custom Domain**, added once in the Cloudflare dashboard rather than in `wrangler.jsonc`. Keeping domains out of `wrangler.jsonc` means the deploy token needs no permissions on the `mhdgc.org` zone, which also holds the club's email records. `wrangler deploy` only changes custom domains when `wrangler.jsonc` lists some, so deploys leave the dashboard's alone.
+Production is served on `www.mhdgc.org`, which moved over from the Google Site on November 18, 2026 ([#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)). The board reviewed it first on `beta.mhdgc.org` ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23)), which was removed after the cutover. The apex `mhdgc.org` isn't a custom domain: Cloudflare redirects it to `www` with a 301, keeping the path and query. `www` is a Workers **Custom Domain**, added once in the Cloudflare dashboard rather than in `wrangler.jsonc`. Keeping domains out of `wrangler.jsonc` means the deploy token needs no permissions on the `mhdgc.org` zone, which also holds the club's email records. `wrangler deploy` only changes custom domains when `wrangler.jsonc` lists some, so deploys leave the dashboard's alone.
 
 To add one, merge and deploy the code that host needs first, since the domain serves whatever version is live. Then:
 
 1. In the club's account, open **Workers & Pages → mhdgc-org → Domains** and connect a domain.
 2. Choose the `mhdgc.org` zone from the list. Don't type the full hostname and choose **Onboard domain**, which would add `mhdgc.org` again as a new zone with new nameservers.
-3. Enter the subdomain, such as `beta` or `www`. Leave **Enable for** on **Production**, then choose **Add domain**.
+3. Enter the subdomain, such as `www`. Leave **Enable for** on **Production**, then choose **Add domain**.
 
-Cloudflare creates the DNS record and certificate, so don't add a CNAME by hand. It can't add a custom domain on a hostname that already has a CNAME, which is why the cutover deletes `www`'s first. Check the new host with `curl -I`, and on `beta.mhdgc.org` that `/robots.txt` disallows crawling. To take a host down, remove its custom domain on the same tab. That leaves its certificate behind, under **SSL/TLS → Edge Certificates** on the zone.
+Cloudflare creates the DNS record and certificate, so don't add a CNAME by hand. It can't add a custom domain on a hostname that already has a CNAME, so delete any existing record for that hostname first. Check the new host with `curl -I`. To take a host down, remove its custom domain on the same tab. That leaves its certificate behind, under **SSL/TLS → Edge Certificates** on the zone.
+
+#### Rolling back to the Google Site
+
+The Google Site stays published as a fallback for a few weeks after the cutover. Until it's unpublished, `www` can go back to it in about five minutes:
+
+1. In **Workers & Pages → mhdgc-org → Settings → Domains & Routes**, remove the `www.mhdgc.org` custom domain.
+2. In the `mhdgc.org` zone's **DNS → Records**, add a `CNAME` named `www` with target `ghs.googlehosted.com`, **DNS only** (grey cloud), TTL **Auto**.
+3. Check that `dig +short www.mhdgc.org` returns `ghs.googlehosted.com.`. The record's TTL is 5 minutes, so browsers follow within about that long.
+
+The apex redirect and the email records don't change either way. To come back to the Worker, delete that CNAME and add the custom domain again as above.
+
+### Search Console
+
+The club's [Google Search Console](https://search.google.com/search-console) has a **Domain** property for `mhdgc.org`, which covers every host and protocol. It's verified by a `google-site-verification` TXT record on the zone's apex, next to the SPF record. Keep that record: deleting it removes verification for every owner. Anyone who can edit the zone can verify again with their own Google account and add other owners under **Settings → Users and permissions**. The sitemap is submitted as `https://www.mhdgc.org/sitemap.xml`. A Domain property needs the full URL.
 
 ### Analytics
 
 Page views go to [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/), which sets no cookies, so the site needs no consent banner. See the stats in the club's Cloudflare dashboard under **Web Analytics**, on the `www.mhdgc.org` site.
 
-The beacon is added by the site's own code rather than Cloudflare's automatic injection. Every host serves the same prerendered HTML, so after hydration [`app/root.tsx`](app/root.tsx) loads the beacon only when the page is on `www.mhdgc.org` ([`app/lib/web-analytics.ts`](app/lib/web-analytics.ts)). PR previews, `beta.mhdgc.org` and local servers aren't counted. The beacon counts client-side route changes itself, so React Router navigations show up as page views. The Content Security Policy in [`shared/security-headers.ts`](shared/security-headers.ts) allows its script from `static.cloudflareinsights.com` and its reports to `cloudflareinsights.com`.
+The beacon is added by the site's own code rather than Cloudflare's automatic injection. Every host serves the same prerendered HTML, so after hydration [`app/root.tsx`](app/root.tsx) loads the beacon only when the page is on `www.mhdgc.org` ([`app/lib/web-analytics.ts`](app/lib/web-analytics.ts)). PR previews and local servers aren't counted. The beacon counts client-side route changes itself, so React Router navigations show up as page views. The Content Security Policy in [`shared/security-headers.ts`](shared/security-headers.ts) allows its script from `static.cloudflareinsights.com` and its reports to `cloudflareinsights.com`.
 
 To set it up, add `www.mhdgc.org` as a site in **Web Analytics**. If the dashboard sets it up automatically, choose **Manage site** and change it to **Enable with JS Snippet installation**, since a page can only have one beacon. Copy the token from the site's JS snippet into `webAnalyticsToken` in [`app/site.ts`](app/site.ts). The token is public, since it's in every page. Setting it to `''` turns analytics off.
 
@@ -218,4 +232,4 @@ The PNG and ICO icons were rendered from those SVGs with [sharp](https://sharp.p
 - **One font, Outfit,** for headings and body text. Headings stand apart by size and weight. The club's logos carry the display lettering, and a second font needs a clear job, such as monospace for code.
 - **The contact form stays a Google Form** for the MVP ([#13](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/13)), and moves to our own form later ([#25](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/25)).
 - **Tooling matches dgtags:** Bun, ESLint, Prettier, Vitest, Storybook and lefthook ([#2](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/2)).
-- **Launch is staged:** first on `beta.mhdgc.org` for board review, then `www` moves over from the Google Site ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23), [#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
+- **Launch was staged:** first on `beta.mhdgc.org` for board review, then `www` moved over from the Google Site ([#23](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/23), [#24](https://github.com/mile-high-disc-golf-club/mhdgc.org/issues/24)).
