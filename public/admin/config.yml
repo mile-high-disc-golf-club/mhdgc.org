@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=../../node_modules/@sveltia/cms/schema/sveltia-cms.json
+# Sveltia CMS, at /admin (issue #60). Docs: https://sveltiacms.app/en/docs
+# Each collection edits a file in content/, so its fields must match that file's
+# schema in content.config.ts. cms.config.test.ts checks they do.
+
+backend:
+  name: github
+  repo: mile-high-disc-golf-club/mhdgc.org
+  branch: main
+  # A fine-grained token with Contents and Pull requests set to read and write.
+  # "Sign in with GitHub" needs an OAuth proxy, such as sveltia-cms-auth, and a
+  # base_url here; until then it's hidden.
+  auth_methods: [token]
+# The first save of an entry opens a pull request from a cms/<collection>/<entry>
+# branch. Later saves add commits to it, and Publish merges it once CI passes.
+publish_mode: editorial_workflow
+
+# Uploads land in content/images/, where the image pipeline and the R2 upload
+# job find them. Fields store a photo's path in the repository, such as
+# /content/images/board/jane-doe.jpg.
+media_folder: content/images
+public_folder: /content/images
+media_libraries:
+  default:
+    config:
+      # Jane Doe.JPG becomes jane-doe.jpg.
+      slugify_filename: true
+
+output:
+  # Leaves out an optional field left blank, such as a board member's photo,
+  # instead of saving "". The content schemas reject empty strings.
+  omit_empty_optional_fields: true
+
+collections:
+  - name: board
+    label: Board
+    icon: groups
+    files:
+      - name: members
+        label: Board members
+        file: content/board.json
+        format: json
+        fields:
+          - name: members
+            label: Board members
+            label_singular: Board member
+            widget: list
+            # board.json is a bare array, not an object with a members key.
+            root: true
+            summary: '{{name}}'
+            collapsed: true
+            hint: Shown on the About page in this order. Drag to reorder.
+            fields:
+              - name: name
+                label: Name
+                widget: string
+              - name: roles
+                label: Roles
+                widget: list
+                required: false
+                hint: One role per line, such as President. Leave empty for none.
+              - name: tenure
+                label: Tenure
+                widget: list
+                min: 1
+                hint: One or more lines, such as Board Member '22–Present.
+              - name: photo
+                label: Photo
+                widget: image
+                required: false
+                media_folder: /content/images/board
+                public_folder: /content/images/board
+                # The formats the image pipeline accepts (content.config.ts).
+                accept: image/jpeg,image/png,image/webp,image/avif
+                hint: A JPEG, PNG, WebP or AVIF original that the club has permission to publish.

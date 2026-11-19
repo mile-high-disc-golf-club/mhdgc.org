@@ -18,6 +18,8 @@ const config: Config = {
     const files = await readdir(client, { recursive: true })
     const pages = files
       .filter((file) => file === 'index.html' || file.endsWith('/index.html'))
+      // The CMS editor isn't a page: it gets its own headers and no sitemap entry.
+      .filter((file) => !file.startsWith('admin/'))
       .map((file) => ({
         file,
         path: file === 'index.html' ? '/' : '/' + file.slice(0, -'/index.html'.length),

@@ -42,7 +42,7 @@ test('compiles images, metadata, Markdown and board references; rejects bad edit
     await writeFile(pagePath, page)
     await writeFile(
       boardPath,
-      '[{"name":"Test name","roles":[],"tenure":["Test tenure"],"photo":"board/logo.png"}]',
+      '[{"name":"Test name","roles":[],"tenure":["Test tenure"],"photo":"/content/images/board/logo.png"}]',
     )
     const calendarsPath = join(root, 'calendars.json')
     const calendar = {
@@ -94,10 +94,19 @@ test('compiles images, metadata, Markdown and board references; rejects bad edit
     expect(local.data.pages.test.ogImage).toEqual(localPhoto)
     await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":["T"],"typo":true}]')
     await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
-    await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":["T"],"photo":"missing.png"}]')
+    await writeFile(
+      boardPath,
+      '[{"name":"Test","roles":[],"tenure":["T"],"photo":"/content/images/missing.png"}]',
+    )
     await expect(compileContent(root, { images: 'remote' })).rejects.toThrow(
       'Unknown content image',
     )
+    // A board photo is a repository path, as the CMS writes it.
+    await writeFile(
+      boardPath,
+      '[{"name":"Test","roles":[],"tenure":["T"],"photo":"board/logo.png"}]',
+    )
+    await expect(compileContent(root, { images: 'remote' })).rejects.toThrow('/content/images/')
     await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":[]}]')
     await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     await writeFile(boardPath, '[]')

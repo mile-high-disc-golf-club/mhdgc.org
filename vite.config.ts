@@ -3,6 +3,7 @@ import { reactRouter } from '@react-router/dev/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig, type Plugin } from 'vite'
 
+import { cmsPlugin } from './cms.config.ts'
 import { contentPlugin } from './content.config.ts'
 
 // Chrome requests this whenever DevTools is open. Answering here keeps React
@@ -24,6 +25,7 @@ export default defineConfig({
   plugins: [
     quietChromeDevtoolsProbe,
     contentPlugin(),
+    cmsPlugin(),
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
     tailwindcss(),
     reactRouter(),

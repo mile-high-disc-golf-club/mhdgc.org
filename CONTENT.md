@@ -38,12 +38,30 @@ alone doesn't create a URL: a developer must connect the page's route loader.
 
 ## Edit the board list
 
-Open `content/board.json` and use the pencil button. It is a JSON array, in display
-order. Each entry needs `name`, `roles` (a list, which can be empty: `[]`) and
-`tenure` (a list of one or more lines). Optional `photo` is the path of an image
-inside `content/images/`, such as `board/jane-doe.jpg`. Use double quotes around
-keys and values, put commas between entries, and don't put a comma after the last
-entry. For example, the shape is:
+Edit the board in the content editor at <https://www.mhdgc.org/admin>.
+
+1. Choose **Sign In Using Access Token** and paste a fine-grained GitHub token
+   for `mile-high-disc-golf-club/mhdgc.org`, with **Contents** and **Pull
+   requests** set to read and write. Your GitHub account needs Write access to
+   the repository. The editor keeps the token in this browser only.
+2. Open **Board**, then **Board members**. Members are listed in the order the
+   About page shows them; drag one to move it.
+3. Each member has a **Name**, **Roles** (one per line, or none), **Tenure** (one
+   or more lines) and an optional **Photo**. Upload a JPEG, PNG, WebP or AVIF
+   original the club has permission to publish. It's saved in
+   `content/images/board/` with a lowercase, hyphenated name.
+4. Select **Save**. The first save opens a pull request from a
+   `cms/board/members` branch. Later saves add to the same PR, so its checks and
+   preview update (see [Check the preview and publish](#check-the-preview-and-publish)).
+5. When the preview looks right, ask a maintainer to review and merge the PR.
+
+You can still edit `content/board.json` in GitHub's web editor. It is a JSON
+array, in display order. Each entry needs `name`, `roles` (a list, which can be
+empty: `[]`) and `tenure` (a list of one or more lines). Optional `photo` is the
+photo's path in the repository, starting `/content/images/`, such as
+`/content/images/board/jane-doe.jpg`. Use double quotes around keys and values,
+put commas between entries, and don't put a comma after the last entry. For
+example, the shape is:
 
 ```json
 [
@@ -51,15 +69,15 @@ entry. For example, the shape is:
     "name": "<verified name>",
     "roles": ["<verified role>"],
     "tenure": ["<verified tenure line>"],
-    "photo": "board/<filename.jpg>"
+    "photo": "/content/images/board/<filename.jpg>"
   }
 ]
 ```
 
 Replace the angle-bracket values with verified information, or leave out `photo`
-when there isn't one. Don't paste the example into the live list. The list starts
-empty; issue #13 fills it in and shows it on the About page. It is checked on
-every build.
+when there isn't one. Don't paste the example into the live list. It is checked on
+every build. Prettier doesn't format this file, so the editor's saves and yours
+can differ in layout without failing the checks.
 
 ## Events and calendars
 
@@ -123,7 +141,10 @@ link in the event's description in Google Calendar, so the page links to it.
    Keep originals here, rather than uploading pre-sized variants. Use photos the
    club has permission to publish; don't link to an external image host.
 3. Commit to the same branch as your content changes. Refer to the photo by its
-   path inside `content/images/` in `ogImage` or a board entry's `photo`.
+   path inside `content/images/` in `ogImage`, such as `board/jane-doe.jpg`, or
+   by its path in the repository in a board entry's `photo`, such as
+   `/content/images/board/jane-doe.jpg`. The content editor uploads board
+   photos for you.
 4. For a photo in a page's body, ask a developer to place `ResponsiveImage` in
    the page component with useful alt text (or empty alt text for decoration).
    Describe what the photo shows and where it should go in the PR.

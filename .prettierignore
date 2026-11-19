@@ -6,3 +6,7 @@ build/
 .wrangler/
 storybook-static/
 .claude/worktrees/
+
+# Sveltia CMS writes these files with JSON.stringify's formatting, which differs
+# from Prettier's. Ignoring them keeps CMS saves passing the format check.
+content/board.json

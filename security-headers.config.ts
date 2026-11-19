@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 import { type DefaultTreeAdapterTypes, parse } from 'parse5'
 
-import { documentPolicy, securityHeaders } from './shared/security-headers'
+import { adminPolicy, documentPolicy, securityHeaders } from './shared/security-headers'
 
 function* inlineScriptHashes(node: DefaultTreeAdapterTypes.Node): Generator<string> {
   if (
@@ -31,7 +31,9 @@ export function buildStaticHeaders(
     const hashes = [...new Set(inlineScriptHashes(parse(html, { scriptingEnabled: true })))]
     return `${path}\n  Cache-Control: public, max-age=300\n  Content-Security-Policy: ${documentPolicy(hashes)}`
   })
-  const output = `${[staticRules.trimEnd(), commonRule, ...documentRules].join('\n\n')}\n`
+  // The CMS editor (public/admin), which stays out of search results.
+  const adminRule = `/admin\n  Cache-Control: public, max-age=300\n  Content-Security-Policy: ${adminPolicy}\n  X-Robots-Tag: noindex`
+  const output = `${[staticRules.trimEnd(), commonRule, adminRule, ...documentRules].join('\n\n')}\n`
 
   // https://developers.cloudflare.com/workers/static-assets/headers/#attach-a-header
   const lines = output.split(/\r?\n/)

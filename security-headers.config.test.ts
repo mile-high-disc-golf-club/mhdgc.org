@@ -7,7 +7,7 @@ const assetRules = '/assets/*\n  Cache-Control: public, max-age=31536000, immuta
 test('preserves asset rules and emits common headers and page-specific script hashes', () => {
   const readyHash = "'sha256-WMz/uUkpIfD429MH2BChUqXwHFQvIdkIACRP3tkkdQM='"
   const otherHash = "'sha256-JBhVtqxMI5bGCm+B75BrV/uAYCSqbqTWPUyX/kLgvc0='"
-  const [assets, common, home, about] = buildStaticHeaders(assetRules, [
+  const [assets, common, admin, home, about] = buildStaticHeaders(assetRules, [
     {
       path: '/',
       html: [
@@ -31,6 +31,10 @@ test('preserves asset rules and emits common headers and page-specific script ha
       '  Permissions-Policy: camera=(), geolocation=(), microphone=()',
     ].join('\n'),
   )
+  expect(admin).toMatch(
+    /^\/admin\n {2}Cache-Control: public, max-age=300\n {2}Content-Security-Policy: .*\n {2}X-Robots-Tag: noindex$/,
+  )
+  expect(admin).toContain('https://api.github.com')
   expect(home).toMatch(/^\/\n {2}Cache-Control: public, max-age=300\n {2}Content-Security-Policy: /)
   expect(home.match(/'sha256-[^']+'/g)).toEqual([readyHash])
   expect(about).toMatch(
@@ -40,7 +44,8 @@ test('preserves asset rules and emits common headers and page-specific script ha
 })
 
 test('reserves a rule for the preview noindex header', () => {
-  const pages = Array.from({ length: 98 }, (_, index) => ({ path: `/page-${index}`, html: '' }))
+  // With the asset, common and /admin rules, 97 pages make 100 rules.
+  const pages = Array.from({ length: 97 }, (_, index) => ({ path: `/page-${index}`, html: '' }))
 
   expect(() => buildStaticHeaders(assetRules, pages.slice(1))).not.toThrow()
   expect(() => buildStaticHeaders(assetRules, pages)).toThrow(/100 rules.*PR previews/)
