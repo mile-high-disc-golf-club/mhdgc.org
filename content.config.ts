@@ -18,13 +18,25 @@ const pageSchema = z.strictObject({
   description: text,
   ogImage: text.optional(),
 })
-// The fields #13 needs: roles may be empty; tenure is one or more lines.
-const boardSchema = z.array(
+// A photo's path in the repository, as the CMS stores it (public/admin/config.yml),
+// such as /content/images/board/jane-doe.jpg. Parsed to its path inside
+// content/images, such as board/jane-doe.jpg, the key in `images`.
+const imagesFolder = '/content/images/'
+const repositoryImage = z
+  .string()
+  .startsWith(
+    imagesFolder,
+    `Use a path in ${imagesFolder}, such as ${imagesFolder}board/jane-doe.jpg`,
+  )
+  .transform((path) => path.slice(imagesFolder.length))
+// The fields #13 needs: roles may be empty; tenure is one or more lines. The CMS
+// edits this file too, so its fields in public/admin/config.yml must match.
+export const boardSchema = z.array(
   z.strictObject({
     name: text,
     roles: z.array(text),
     tenure: z.array(text).min(1),
-    photo: text.optional(),
+    photo: repositoryImage.optional(),
   }),
 )
 

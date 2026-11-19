@@ -24,3 +24,25 @@ export function documentPolicy(inlineScriptSources: readonly string[]) {
     "object-src 'none'",
   ].join('; ')
 }
+
+// /admin runs Sveltia CMS (public/admin, cms.config.ts), served from this site.
+// It calls GitHub's API, shows the photos being edited as blob: URLs and GitHub
+// avatars, and loads its fonts from jsDelivr. Sveltia's own guidance:
+// https://sveltiacms.app/en/docs/security#setting-up-content-security-policy
+export const adminPolicy = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self' https://cdn.jsdelivr.net",
+  "img-src 'self' blob: data: https://avatars.githubusercontent.com",
+  "media-src 'self' blob:",
+  'frame-src blob:',
+  'manifest-src blob:',
+  // unpkg.com is only fetched, never run: Sveltia's version check and its
+  // translations for languages other than English.
+  "connect-src 'self' blob: data: https://api.github.com https://www.githubstatus.com https://unpkg.com",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "base-uri 'none'",
+  "object-src 'none'",
+].join('; ')
