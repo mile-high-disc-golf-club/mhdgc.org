@@ -16,6 +16,10 @@ const config: Config = {
   async buildEnd({ reactRouterConfig }) {
     const client = join(reactRouterConfig.buildDirectory, 'client')
     const files = await readdir(client, { recursive: true })
+    // cms.config.ts copies the CMS script into the client build. Without it,
+    // /admin would deploy as a blank page.
+    if (!files.includes('admin/sveltia-cms.js'))
+      throw new Error('The client build is missing admin/sveltia-cms.js (see cms.config.ts)')
     const pages = files
       .filter((file) => file === 'index.html' || file.endsWith('/index.html'))
       // The CMS editor isn't a page: it gets its own headers and no sitemap entry.
