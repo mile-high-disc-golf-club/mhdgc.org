@@ -27,8 +27,9 @@ media_libraries:
       slugify_filename: true
 
 output:
-  # Leaves out an optional field left blank, such as a board member's photo,
-  # instead of saving "". The content schemas reject empty strings.
+  # Leaves out an optional field left blank instead of saving "": a board
+  # member's photo, and also an empty roles list. The content schemas reject
+  # empty strings and read a missing roles list as none.
   omit_empty_optional_fields: true
 
 collections:

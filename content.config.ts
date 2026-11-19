@@ -30,11 +30,12 @@ const repositoryImage = z
   )
   .transform((path) => path.slice(imagesFolder.length))
 // The fields #13 needs: roles may be empty; tenure is one or more lines. The CMS
-// edits this file too, so its fields in public/admin/config.yml must match.
+// edits this file too, so its fields in public/admin/config.yml must match. It
+// leaves out an empty roles list, so a missing one means no roles.
 export const boardSchema = z.array(
   z.strictObject({
     name: text,
-    roles: z.array(text),
+    roles: z.array(text).default([]),
     tenure: z.array(text).min(1),
     photo: repositoryImage.optional(),
   }),
