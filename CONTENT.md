@@ -56,8 +56,9 @@ Edit the board in the content editor at <https://www.mhdgc.org/admin>.
 5. When the preview looks right, ask a maintainer to review and merge the PR.
 
 You can still edit `content/board.json` in GitHub's web editor. It is a JSON
-array, in display order. Each entry needs `name`, `roles` (a list, which can be
-empty: `[]`) and `tenure` (a list of one or more lines). Optional `photo` is the
+array, in display order. Each entry needs `name` and `tenure` (a list of one or
+more lines). `roles` is a list, which can be empty (`[]`) or left out when the
+member has none; the editor leaves it out. Optional `photo` is the
 photo's path in the repository, starting `/content/images/`, such as
 `/content/images/board/jane-doe.jpg`. Use double quotes around keys and values,
 put commas between entries, and don't put a comma after the last entry. For

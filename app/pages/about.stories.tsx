@@ -1,8 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import board from '~/../content/board.json'
+import boardJson from '~/../content/board.json'
+import type { BoardMember } from '~/content'
 
 import { AboutPage } from './about'
+
+// The raw file, as the CMS writes it: it leaves out an empty roles list, which
+// content.config.ts reads as no roles.
+const board = (boardJson as (Omit<BoardMember, 'roles'> & { roles?: string[] })[]).map(
+  ({ roles = [], ...member }) => ({ ...member, roles }),
+)
 
 const photos = import.meta.glob<{ default: string }>('~/../content/images/board/*.jpg', {
   eager: true,

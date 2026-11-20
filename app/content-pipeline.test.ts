@@ -107,6 +107,11 @@ test('compiles images, metadata, Markdown and board references; rejects bad edit
       '[{"name":"Test","roles":[],"tenure":["T"],"photo":"board/logo.png"}]',
     )
     await expect(compileContent(root, { images: 'remote' })).rejects.toThrow('/content/images/')
+    // The CMS leaves out an empty roles list.
+    await writeFile(boardPath, '[{"name":"Test","tenure":["T"]}]')
+    expect((await compileContent(root, { images: 'remote' })).data.board).toEqual([
+      { name: 'Test', roles: [], tenure: ['T'] },
+    ])
     await writeFile(boardPath, '[{"name":"Test","roles":[],"tenure":[]}]')
     await expect(compileContent(root, { images: 'remote' })).rejects.toThrow()
     await writeFile(boardPath, '[]')
