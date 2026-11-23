@@ -62,6 +62,11 @@ export function HomePage({
       <section aria-labelledby="involved" className="flex flex-col gap-4">
         <Text.H2 id="involved">{involved.title}</Text.H2>
         <Prose html={involved.html} />
+        <div>
+          <ButtonLink to="/donate" variant="secondary">
+            Donate
+          </ButtonLink>
+        </div>
       </section>
       <div className="grid gap-6 md:grid-cols-2">
         <YouTubeEmbed

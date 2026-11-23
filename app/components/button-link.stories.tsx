@@ -29,3 +29,8 @@ export const WithIcon: Story = {
     ),
   },
 }
+
+// An action on another site, which opens in a new tab and says so.
+export const NewTab: Story = {
+  args: { to: 'https://www.example.com/', newTab: true, children: 'Donate Now' },
+}

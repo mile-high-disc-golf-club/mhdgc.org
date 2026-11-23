@@ -6,6 +6,7 @@ export default [
   route('events', 'routes/events.tsx'),
   route('membership', 'routes/membership.tsx'),
   route('about', 'routes/about.tsx'),
+  route('donate', 'routes/donate.tsx'),
   // Anything else: rendered by the Worker with a 404 status.
   route('*', 'routes/not-found.tsx'),
 ] satisfies RouteConfig

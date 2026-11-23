@@ -62,7 +62,13 @@ it('lists the nav links in order and marks the current page', () => {
   render(<Desktop />)
   const nav = screen.getByRole('navigation', { name: 'Main' })
   const links = within(nav).getAllByRole('link')
-  expect(links.map((link) => link.textContent)).toEqual(['Home', 'Events', 'Membership', 'About'])
+  expect(links.map((link) => link.textContent)).toEqual([
+    'Home',
+    'Events',
+    'Membership',
+    'About',
+    'Donate',
+  ])
   expect(within(nav).getByRole('link', { name: 'Events' })).toHaveAttribute('aria-current', 'page')
   expect(within(nav).getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current')
 })
