@@ -33,6 +33,9 @@ Membership reads `membership.md` for the bag tag explainer and pools,
 `membership-join.md` for the How to Join card, and `membership-matches.md` for
 the ordered match steps and scoring note. Keep the steps as an ordered list, and
 start each step with its name in bold; the page shows that name on its own line.
+Donate reads `donate.md` for the text above the Donate Now button and
+`donate-club.md` for the section on donating to the club directly. The button's
+link to the Food Bank of the Rockies fundraiser is in `app/pages/donate.tsx`.
 Other placeholder routes have not yet been connected to Markdown. Adding a file
 alone doesn't create a URL: a developer must connect the page's route loader.
 

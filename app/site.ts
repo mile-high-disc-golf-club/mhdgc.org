@@ -18,6 +18,7 @@ export const navLinks = [
   { to: '/events', label: 'Events' },
   { to: '/membership', label: 'Membership' },
   { to: '/about', label: 'About' },
+  { to: '/donate', label: 'Donate' },
 ] as const
 
 // Linked straight to the sites, not through the Google Site's redirect wrapper.

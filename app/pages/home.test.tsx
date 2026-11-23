@@ -39,6 +39,7 @@ test('links visitors to events, membership anchors and the Facebook group', () =
   )
   expect(screen.getAllByRole('link', { name: 'Events' })).toHaveLength(2)
   expect(screen.getByRole('link', { name: 'Membership' })).toHaveAttribute('href', '/membership')
+  expect(screen.getByRole('link', { name: 'Donate' })).toHaveAttribute('href', '/donate')
   expect(screen.getAllByRole('button', { name: /^Play:/ })).toHaveLength(2)
   expect(document.querySelector('iframe')).toBeNull()
 })
