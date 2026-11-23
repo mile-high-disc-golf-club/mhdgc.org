@@ -30,5 +30,26 @@ jobs:
         with:
           fetch-depth: 1
       - uses: anthropics/claude-code-action@v1
+        id: claude
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      # The action edits its "Claude Code is working…" comment in place with the
+      # result. An edit doesn't notify anything watching for new comments, such as
+      # the Claude desktop app's Auto-fix, so post a new comment pointing to it.
+      # GITHUB_TOKEN's comments don't trigger workflows, so this can't start a run.
+      - name: Comment that Claude has finished
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUMBER: ${{ github.event.issue.number || github.event.pull_request.number }}
+          OUTCOME: ${{ steps.claude.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          reply=$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$NUMBER/comments" \
+            --jq '.[] | select(.user.login == "claude[bot]") | .html_url' | tail -n 1)
+          if [ "$OUTCOME" = success ] && [ -n "$reply" ]; then
+            body="Claude has finished: [read its reply]($reply)."
+          else
+            body="Claude's run didn't finish: [see the job log]($RUN_URL)."
+          fi
+          gh issue comment "$NUMBER" --repo "$GITHUB_REPOSITORY" --body "$body"
